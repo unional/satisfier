@@ -1,5 +1,5 @@
+import { createSatisfier } from './createSatisfier'
 import { Expecter, Struct, SatisfierExec } from './interfaces'
-import { createSatisfier } from './createSatisfier';
 
 export class Satisfier<T extends Struct> {
   private satisfier
