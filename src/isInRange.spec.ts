@@ -8,3 +8,7 @@ test('check number in range', t => {
   t.true(createSatisfier(isInRange(1, 3)).test(3))
   t.false(createSatisfier(isInRange(1, 3)).test(4))
 })
+
+test('nicer toString()', t => {
+  t.is(isInRange(1, 3).toString(), '[1...3]')
+})
