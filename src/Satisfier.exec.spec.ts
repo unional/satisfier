@@ -14,7 +14,7 @@ test('can use generic to specify the data structure', t => {
   t.is(new Satisfier<{ a: number }>({ a: /1/ }).exec({ a: 1 }), null)
 })
 
-test('empty expecter passes everything', t => {
+test('empty object expecter passes all objects', t => {
   t.is(new Satisfier({}).exec({}), null)
   t.is(new Satisfier({}).exec({ a: 1 }), null)
   t.is(new Satisfier({}).exec({ a: { b: 'a' } }), null)
