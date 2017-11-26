@@ -1,5 +1,6 @@
 import { test } from 'ava'
-import { createSatisfier } from './createSatisfier';
+
+import { createSatisfier } from './index'
 
 test('support generics', t => {
   const s = createSatisfier<{ a: number }>({ a: 1 })
