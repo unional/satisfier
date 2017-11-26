@@ -1,5 +1,3 @@
-import { formatFunction } from 'function-formatter'
-
 import { Struct, Expecter, SatisfierExec } from './interfaces'
 
 /**
@@ -47,7 +45,7 @@ function detectDiff(actual, expected, path: string[] = []) {
     if (!(expected as Function)(actual)) {
       diff.push({
         path,
-        expected: formatFunction(expected as Function),
+        expected,
         actual
       })
     }
@@ -75,9 +73,19 @@ function detectDiff(actual, expected, path: string[] = []) {
       diff.push(...detectDiff(actualValue, e, path.concat([`[${i}]`])))
     })
   }
-  else
-    Object.keys(expected).forEach(k => {
-      diff.push(...detectDiff(actual[k], expected[k], path.concat([k])))
-    })
+  else {
+    // expected is object. If actual is not, then it is diff.
+    const actualType = typeof actual
+    if (actualType === 'boolean' || actualType === 'string' || actualType === 'number')
+      diff.push({
+        path,
+        expected,
+        actual
+      })
+    else
+      Object.keys(expected).forEach(k => {
+        diff.push(...detectDiff(actual[k], expected[k], path.concat([k])))
+      })
+  }
   return diff
 }
