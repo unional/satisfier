@@ -3,8 +3,9 @@ import { Expecter, Struct, SatisfierExec } from './interfaces'
 
 export class Satisfier<T extends Struct> {
   private satisfier: {
-    test: (actual: T) => boolean;
-    exec: (actual: T) => SatisfierExec[] | null;
+    test(actual: T): boolean;
+    exec(actual: T): SatisfierExec[] | null;
+    generate(): T
   }
   /**
    * creates a Satisfier instance
@@ -22,5 +23,9 @@ export class Satisfier<T extends Struct> {
    */
   exec(actual: T): SatisfierExec[] | null {
     return this.satisfier.exec(actual)
+  }
+
+  generate() {
+    return this.satisfier.generate()
   }
 }
