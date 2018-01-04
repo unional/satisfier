@@ -80,6 +80,7 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
+    "clone-deep": "^2.0.1",
     "tersify": "^0.3.0"
   }
 }
