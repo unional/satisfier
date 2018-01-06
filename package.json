@@ -70,7 +70,6 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "is-promise": "^2.1.0",
     "tersify": "^0.3.0"
   }
 }
