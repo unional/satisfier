@@ -57,12 +57,14 @@ const resolve = x => Promise.resolve(x)
 
 test('then() will receive result from promise', t => {
   const spied = spyAsync(resolve)
+  // tslint:disable-next-line
   spied(1)
   return spied.calls[0].then(x => t.is(x, 1))
 })
 
 test('result from promise can be retrieved from await on the call', async t => {
   const spied = spyAsync(resolve)
+  // tslint:disable-next-line
   spied(1)
   t.is(await spied.calls[0], 1)
 })
@@ -71,6 +73,7 @@ const reject = x => Promise.reject(x)
 
 test('throws() will receive error thrown by promise', t => {
   const spied = spyAsync(reject)
+  // tslint:disable-next-line
   spied(1)
   return spied.calls[0].throws(x => t.is(x, 1))
 })
