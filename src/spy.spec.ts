@@ -69,7 +69,7 @@ test('result from promise can be retrieved from await on the call', async t => {
 
 const reject = x => Promise.reject(x)
 
-test('throws() will receive error thrown by promise', async t => {
+test('throws() will receive error thrown by promise', t => {
   const spied = spyAsync(reject)
   spied(1)
   return spied.calls[0].throws(x => t.is(x, 1))
