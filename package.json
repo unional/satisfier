@@ -12,7 +12,7 @@
     "src"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build-es5 && npm run build-es2015",
+    "build": "npm run clean && npm run build-es5",
     "build-es5": "tsc -p tsconfig.es5.json",
     "build-es2015": "tsc -p tsconfig.es2015.json",
     "clean": "rimraf dist dist-es5 && rimraf dist-es2015",
@@ -24,17 +24,18 @@
     "test": "npm run clean && tsc && ava",
     "verify": "npm run lint && npm run coverage && npm run build && npm run dependency-check",
     "watch": "npm run clean && node scripts/watch.js",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unional/assertron.git"
+    "url": "https://github.com/unional/satisfier.git"
   },
   "bugs": {
-    "url": "https://github.com/unional/assertron/issues"
+    "url": "https://github.com/unional/satisfier/issues"
   },
-  "homepage": "https://github.com/unional/assertron",
+  "homepage": "https://github.com/unional/satisfier",
   "ava": {
     "files": [
       "dist-es5/**/*.spec.js"
@@ -57,17 +58,18 @@
     "email": "homawong@gmail.com"
   },
   "devDependencies": {
-    "@types/node": "^8.0.47",
+    "@types/node": "^8.5.8",
     "ava": "^0.24.0",
-    "dependency-check": "^2.9.1",
-    "eslint": "^4.10.0",
+    "dependency-check": "^2.9.2",
+    "eslint": "^4.15.0",
     "eslint-config-unional": "^0.2.3",
-    "nyc": "^11.3.0",
+    "nyc": "^11.4.1",
     "rimraf": "^2.6.2",
-    "semantic-release": "^11.0.2",
+    "semantic-release": "^11.2.0",
+    "travis-deploy-once": "^4.3.0",
     "tslint": "^5.8.0",
     "tslint-config-unional": "^0.9.0",
-    "typescript": "^2.6.1"
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "tersify": "^0.3.0"

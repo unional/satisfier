@@ -1,15 +1,15 @@
-import { Struct, Expecter, SatisfierExec } from './interfaces'
+import { Struct, Expectation, SatisfierExec } from './interfaces'
 
 /**
  * creates a satisfier
- * @param expected All properties can be a value which will be compared to the same property in `actual`, RegExp, or a predicate function that will be used to check against the property.
+ * @param expectation All properties can be a value which will be compared to the same property in `actual`, RegExp, or a predicate function that will be used to check against the property.
  */
-export function createSatisfier<T extends Struct>(expected: Expecter<T>): {
+export function createSatisfier<T extends Struct>(expectation: Expectation<T>): {
   test: (actual: T) => boolean;
-  exec: (actual: T) => SatisfierExec[] | null;
+  exec: (actual: T) => SatisfierExec[] | undefined;
 } {
   function test(actual: T) {
-    return exec(actual) === null
+    return exec(actual) === undefined
   }
   /**
    * Check if `actual` satisfies the expected criteria.
@@ -17,20 +17,20 @@ export function createSatisfier<T extends Struct>(expected: Expecter<T>): {
   function exec(actual: T) {
     if (Array.isArray(actual)) {
       const diff: SatisfierExec[] = []
-      if (Array.isArray(expected)) {
-        expected.forEach((e, i) => {
+      if (Array.isArray(expectation)) {
+        expectation.forEach((e, i) => {
           diff.push(...detectDiff(actual[i], e, [`[${i}]`]))
         })
       }
       else {
         actual.forEach((a, i) => {
-          diff.push(...detectDiff(a, expected, [`[${i}]`]))
+          diff.push(...detectDiff(a, expectation, [`[${i}]`]))
         })
       }
-      return diff.length === 0 ? null : diff
+      return diff.length === 0 ? undefined : diff
     }
-    const diff = detectDiff(actual, expected)
-    return diff.length === 0 ? null : diff
+    const diff = detectDiff(actual, expectation)
+    return diff.length === 0 ? undefined : diff
   }
   return {
     test,
