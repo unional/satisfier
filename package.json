@@ -70,7 +70,6 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "tersify": "^0.3.0",
-    "unpartial": "^0.4.1"
+    "tersify": "^0.3.0"
   }
 }
