@@ -79,21 +79,14 @@ test('result from promise can be retrieved from await on the call', async t => {
   t.is(await calls[0], 1)
 })
 
-const reject = x => Promise.reject(x)
+const reject = x => Promise.reject(new Error(x))
 
-test('catch() will receive error thrown by promise', t => {
+test('catch() will receive error thrown by promise', async t => {
   const { fn, calls } = spy(reject)
   // tslint:disable-next-line
-  fn(1)
-  return calls[0].catch(x => t.is(x, 1))
-})
-
-test('error result is received on catch block', async t => {
-  const { fn } = spy(reject)
-  try {
-    await fn(1)
-  }
-  catch (x) {
-    t.is(x, 1)
-  }
+  return fn(1).catch(actualError => {
+    return calls[0].catch(err => {
+      t.is(err, actualError)
+    })
+  })
 })
