@@ -12,7 +12,7 @@
     "src"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build-es5 && npm run build-es2015",
+    "build": "npm run clean && npm run build-es5",
     "build-es5": "tsc -p tsconfig.es5.json",
     "build-es2015": "tsc -p tsconfig.es2015.json",
     "clean": "rimraf dist dist-es5 && rimraf dist-es2015",
@@ -29,12 +29,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unional/assertron.git"
+    "url": "https://github.com/unional/satisfier.git"
   },
   "bugs": {
-    "url": "https://github.com/unional/assertron/issues"
+    "url": "https://github.com/unional/satisfier/issues"
   },
-  "homepage": "https://github.com/unional/assertron",
+  "homepage": "https://github.com/unional/satisfier",
   "ava": {
     "files": [
       "dist-es5/**/*.spec.js"
@@ -70,6 +70,7 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "tersify": "^0.3.0"
+    "tersify": "^0.3.0",
+    "unpartial": "^0.4.1"
   }
 }

@@ -1,22 +1,16 @@
 import { test } from 'ava'
 
-import { spy, spyAsync } from './index'
+import { spy } from './index'
 
 function increment(x: number) { return ++x }
 
-test('spy on function returns a working function', t => {
-  const spyFoo = spy(increment)
-
-  t.is(spyFoo(1), 2)
-})
-
 test('record argument and result', t => {
-  const actual = spy(increment)
+  const { fn, calls } = spy(increment)
 
-  actual(1)
+  t.is(fn(1), 2)
 
-  t.is(actual.calls.length, 1)
-  const cr = actual.calls[0]
+  t.is(calls.length, 1)
+  const cr = calls[0]
   t.is(cr.arguments[0], 1)
   t.is(cr.result, 2)
 })
@@ -24,64 +18,80 @@ test('record argument and result', t => {
 function throws() { throw new Error('thrown') }
 
 test('capture error', t => {
-  const actual = spy(throws)
+  const { fn, calls } = spy(throws)
 
-  t.throws(() => actual())
+  const err = t.throws(fn)
 
-  t.is(actual.calls.length, 1)
-  const cr = actual.calls[0]
-  t.truthy(cr.error)
+  t.is(calls.length, 1)
+  t.is(calls[0].error, err)
 })
 
 // this is not a valid test as the package is used for boundary testing.
 // Boundary function are not expected to make changes to the arguments
 test.skip('argument should be immutable', t => {
   function mutate(x) { x.a++ }
-  const actual = spy(mutate)
-  actual({ a: 1 })
-  const cr = actual.calls[0]
+  const { fn, calls } = spy(mutate)
+  fn({ a: 1 })
+  const cr = calls[0]
   t.is(cr.arguments[0].a, 1)
 })
 
 function invoke(x, cb) { cb(x) }
 
 test('callback are spied', t => {
-  const actual = spy(invoke)
-  actual(1, x => t.is(x, 1))
-  const cr = actual.calls[0]
+  const { fn, calls } = spy(invoke)
+  fn(1, x => t.is(x, 1))
+  const cr = calls[0]
   t.is(cr.arguments[0], 1)
-  t.is(cr.arguments[1].calls[0].arguments[0], 1)
+  return cr.then(r => t.deepEqual(r, [1]))
 })
+
+function callbackOnLiterial(options) {
+  options.success(++options.data)
+}
+test('spec on jquery style callback', t => {
+  const { fn, calls } = spy(callbackOnLiterial)
+  fn({
+    data: 1,
+    success: (result) => {
+      t.is(result, 2)
+    }
+  })
+
+  const call = calls[0]
+  return call.then(response => t.is(response[0], 2))
+})
+
 
 const resolve = x => Promise.resolve(x)
 
 test('then() will receive result from promise', t => {
-  const spied = spyAsync(resolve)
+  const { fn, calls } = spy(resolve)
   // tslint:disable-next-line
-  spied(1)
-  return spied.calls[0].then(x => t.is(x, 1))
+  fn(1)
+  return calls[0].then(x => t.is(x, 1))
 })
 
 test('result from promise can be retrieved from await on the call', async t => {
-  const spied = spyAsync(resolve)
+  const { fn, calls } = spy(resolve)
   // tslint:disable-next-line
-  spied(1)
-  t.is(await spied.calls[0], 1)
+  fn(1)
+  t.is(await calls[0], 1)
 })
 
 const reject = x => Promise.reject(x)
 
-test('throws() will receive error thrown by promise', t => {
-  const spied = spyAsync(reject)
+test('catch() will receive error thrown by promise', t => {
+  const { fn, calls } = spy(reject)
   // tslint:disable-next-line
-  spied(1)
-  return spied.calls[0].throws(x => t.is(x, 1))
+  fn(1)
+  return calls[0].catch(x => t.is(x, 1))
 })
 
 test('error result is received on catch block', async t => {
-  const spied = spyAsync(reject)
+  const { fn } = spy(reject)
   try {
-    await spied(1)
+    await fn(1)
   }
   catch (x) {
     t.is(x, 1)

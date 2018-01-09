@@ -1,66 +1,83 @@
-export interface CallRecord {
-  arguments: any[],
-  result: any,
-  error: Error
+import { CallRecord } from './interfaces'
+import { createCallRecordCreator } from './createCallRecordCreator';
+
+export interface Spy<T> {
+  calls: ReadonlyArray<CallRecord>,
+  /**
+   * the spied function.
+   */
+  fn: T
 }
 
-export interface Spy {
-  calls: ReadonlyArray<CallRecord>
+function spyOnCallback(fn) {
+  let callback
+  return Object.assign(
+    (...args) => {
+      if (callback)
+        callback(...args)
+      fn(...args)
+    }, {
+      called(cb) {
+        callback = cb
+      }
+    })
 }
 
 /**
  * Spy on function that uses callback.
  */
-export function spy<T extends Function>(fn: T): T & Spy {
+export function spy<T extends Function>(fn: T): Spy<T> {
   const calls: CallRecord[] = []
-  const spiedFn: T = function (...args) {
-    const spiedArgs = args.map(a => {
-      return typeof a === 'function' ? spy(a) : a
+  const spied: T = function (...args) {
+    const creator = createCallRecordCreator(args)
+    calls.push(creator.callRecord)
+
+    const spiedCallbacks: any[] = []
+    const spiedArgs = args.map(arg => {
+      if (typeof arg === 'function') {
+        const spied = spyOnCallback(arg)
+        spiedCallbacks.push(spied)
+        return spied
+      }
+      if (typeof arg === 'object') {
+        Object.keys(arg).forEach(key => {
+          if (typeof arg[key] === 'function') {
+            const spied = spyOnCallback(arg[key])
+            spiedCallbacks.push(spied)
+            arg[key] = spied
+          }
+        })
+      }
+      return arg
     })
-    const call = { arguments: spiedArgs } as CallRecord
-    calls.push(call)
-    try {
-      const result = fn(...spiedArgs)
-      call.result = result
-      return result
+    if (spiedCallbacks.length > 0) {
+      new Promise(a => {
+        spiedCallbacks.forEach(s => {
+          s.called((...results) => {
+            a(results)
+          })
+        })
+      }).then(creator.resolve, creator.reject)
+
+      return fn(...spiedArgs)
     }
-    catch (err) {
-      call.error = err
-      throw err
+    else {
+      try {
+        const result = fn(...args)
+        if (result && typeof result.then === 'function')
+          result.then(creator.resolve, creator.reject)
+        creator.callRecord.result = result
+        return result
+      }
+      catch (error) {
+        creator.callRecord.error = error
+        throw error
+      }
     }
   } as any
 
-  return Object.assign(spiedFn, {
-    calls
-  })
-}
-
-
-export interface AsyncCallRecord extends Promise<any> {
-  arguments: any[],
-  throws(errback: any): Promise<any>
-}
-
-export interface AsyncSpy {
-  calls: ReadonlyArray<AsyncCallRecord>
-}
-
-/**
- * Spy on function that returns a promise.
- */
-export function spyAsync<T extends Function>(fn: T): T & AsyncSpy {
-  const calls: AsyncCallRecord[] = []
-  const spiedFn: T = function (...args) {
-    const call = { arguments: args } as AsyncCallRecord
-    calls.push(call)
-    const result = fn(...args)
-    call.then = (cb, eb) => result.then(cb, eb)
-    call.catch = cb => (result.catch(cb))
-    call.throws = call.catch
-    return result
-  } as any
-
-  return Object.assign(spiedFn, {
-    calls
-  })
+  return {
+    calls,
+    fn: spied
+  }
 }

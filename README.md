@@ -9,13 +9,13 @@
 
 Manage and generate artifacts to test data across boundaries.
 
-## createSatisfier(expecter)
+## createSatisfier(expectation)
 
-Each property in `expecter` can be a value, a `RegExp`, or a predicate function.
+Each property in `expectation` can be a value, a `RegExp`, or a predicate function.
 
 ### test(actual)
 
-test `actual` against `expecter`.
+test `actual` against `expectation`.
 
 ```ts
 import { createSatisfier } from 'satisfier'
@@ -32,42 +32,30 @@ createSatisfier({ a: /boo/ }).test({ a: 'foo' })
 createSatisfier({ a: () => false }).test({ a: 1 })
 ```
 
-## exec(actual)
+### exec(actual)
 
-check `actual` against `expecter` and returns the checking result.
+check `actual` against `expectation` and returns the checking result.
 If `actual` meets the criteria, returns `null`.
 
 ```ts
 import { createSatisfier } from 'satisfier'
 
-// these returns null
+// returns undefined
 createSatisfier({ a: 1 }).exec({ a: 1, b: 2 })
 createSatisfier({ a: /foo/ }).exec({ a: 'foo', b: 'boo' })
 createSatisfier({ a: n => n === 1 }).exec({ a: 1, b, 2 })
 
-// [{ path: ['a'], expected: 1, actual: 2}]
+// returns [{ path: ['a'], expected: 1, actual: 2}]
 createSatisfier({ a: 1 }).exec({ a: 2 })
 
-// [{ path: ['b'], expected: 2, actual: undefined}]
+// returns [{ path: ['b'], expected: 2, actual: undefined}]
 createSatisfier({ a: 1, b: 2 }).exec({ a: 1 })
 
-// [{ path: ['a'], expected: /boo/, actual: 'foo'}]
+// returns [{ path: ['a'], expected: /boo/, actual: 'foo'}]
 createSatisfier({ a: /boo/ }).exec({ a: 'foo' })
 
-// [{ path: ['a'], expected: 'a => a === 1', actual: 2}]
+// returns [{ path: ['a'], expected: 'a => a === 1', actual: 2}]
 createSatisfier({ a: a => a === 1 }).exec({ a: 2 })
-```
-
-## Satisfier
-
-This is identical to `createSatisfier()`, but as a class.
-
-```ts
-import { Satisfier } from 'satisfier'
-
-const s = new Satisfier({...})
-s.test(...)
-s.exec(...)
 ```
 
 ## Build in predicates
@@ -85,6 +73,24 @@ const results = createSatisfier(isInRange(1, 3)).exec(0)
 results[0].expected.tersify()
 // { path: [], expected: [1...3], actual: 0 }
 tersify(results[0])
+```
+
+## spy(fn)
+
+You can use `spy(fn)` to spy on function and record the calls.
+It support 3 main case of async functions.
+They are all converted to Promise syntax so you can get the result using `call[n].then(...)`
+
+```ts
+import { spy } from 'satisfier'
+
+spy((a, b, cb) => { cb(a + 1, b - 1) })
+spy((options) => { options.success() })
+const spied = spy((a) => Promise.resolve(a + 1))
+await spied.fn(1)
+const callRecord = spied.calls[0]
+t.is(callRecord.arguments[0], 1)
+callRecord.then(result => t.is(result, 2))
 ```
 
 ## Contribute
