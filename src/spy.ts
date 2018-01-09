@@ -13,8 +13,8 @@ function spyOnCallback(fn) {
   let callback
   return Object.assign(
     (...args) => {
-      if (callback)
-        callback(...args)
+      // callback is always assigned as it is used internally.
+      callback(...args)
       fn(...args)
     }, {
       called(cb) {
