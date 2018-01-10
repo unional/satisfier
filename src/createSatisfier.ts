@@ -4,7 +4,7 @@ import { Struct, Expectation, SatisfierExec } from './interfaces'
  * creates a satisfier
  * @param expectation All properties can be a value which will be compared to the same property in `actual`, RegExp, or a predicate function that will be used to check against the property.
  */
-export function createSatisfier<T extends Struct>(expectation: Expectation<T>): {
+export function createSatisfier<T extends Struct = Struct>(expectation: Expectation<T>): {
   test: (actual: T) => boolean;
   exec: (actual: T) => SatisfierExec[] | undefined;
 } {
@@ -50,6 +50,14 @@ function detectDiff(actual, expected, path: string[] = []) {
       })
     }
   }
+  else if (expected === null) {
+    if (expected !== actual)
+      diff.push({
+        path,
+        expected,
+        actual
+      })
+  }
   else if (expectedType === 'boolean' || expectedType === 'number' || expectedType === 'string' || actual === undefined) {
     if (expected !== actual)
       diff.push({
@@ -82,10 +90,11 @@ function detectDiff(actual, expected, path: string[] = []) {
         expected,
         actual
       })
-    else
+    else {
       Object.keys(expected).forEach(k => {
         diff.push(...detectDiff(actual[k], expected[k], path.concat([k])))
       })
+    }
   }
   return diff
 }

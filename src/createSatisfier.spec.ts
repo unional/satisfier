@@ -31,3 +31,15 @@ test('actual should be a complete struct', t => {
   // t.true(s.test({ a: 1 }))
   t.true(s.test({ a: 1, b: 'b' }))
 })
+
+test('expect null', t => {
+  t.true(createSatisfier(null).test(null))
+})
+test('array with number', t => {
+  t.true(createSatisfier([1, 2]).test([1, 2]))
+})
+
+test('array with null', t => {
+  t.true(createSatisfier([null]).test([null]))
+  t.false(createSatisfier([null]).test([1]))
+})

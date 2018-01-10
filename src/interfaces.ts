@@ -28,7 +28,7 @@ export type ExpectationHash<T extends Struct = Struct> = {
   [P in keyof T]: ExpectationNode<T[P]> | ExpectationNode<T[P]>[];
 }
 
-export type Struct = StructNode | StructHash | (StructNode | StructHash)[]
+export type Struct = null | StructNode | StructHash | (StructNode | StructHash)[]
 
 export type StructNode = boolean | number | string | object
 
