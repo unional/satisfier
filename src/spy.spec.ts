@@ -1,6 +1,7 @@
 import { test } from 'ava'
 
 import { spy } from './index'
+import { tersify } from 'tersify';
 
 function increment(x: number) { return ++x }
 
@@ -99,3 +100,17 @@ test('catch() will receive error thrown by promise', async t => {
     })
   })
 })
+
+test('tersify for sync call', async t => {
+  const { fn, calls } = spy(reject)
+
+
+  return fn(1).catch(actualError => {
+    console.log(tersify(actualError))
+    return calls[0].getCallRecord()
+      .then(record => {
+        t.is(record.tersify(), `{ inputs: [1], output: {}, error: undefined, asyncError: { message: '1' } }`)
+      })
+  })
+})
+

@@ -25,3 +25,4 @@ after_script: greenkeeper-lockfile-upload
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
   - npm install --no-save coveralls && npm run coveralls
+  - npm install --no-save codecov && npm run codecov
