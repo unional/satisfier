@@ -152,3 +152,20 @@ test('failing array in hash', t => {
   t.is(actual.length, 1)
   assertExec(t, actual[0], ['a', '[2]'], 'a', 'b')
 })
+
+test('apply expectation function to each element in array', t => {
+  const satisfier = createSatisfier(e => e.login)
+  t.is(satisfier.exec([{ login: 'a' }]), undefined)
+  t.not(satisfier.exec([{ foo: 'a' }]), undefined)
+})
+
+test('apply property predicate to each element in array', t => {
+  const satisfier = createSatisfier({ data: e => e && e.login });
+
+  t.is(satisfier.exec({ data: { login: 'a' } }), undefined)
+  t.is(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
+  const actual = satisfier.exec({ data: [{ login: 'a' }, {}] })!
+  t.true(createSatisfier({ path: ['data', '[1]'], actual: {} }).test(actual[0]))
+  t.not(satisfier.exec([{ data: { foo: 'a' } }]), undefined)
+  t.not(satisfier.exec([{ foo: 'b' }]), undefined)
+})

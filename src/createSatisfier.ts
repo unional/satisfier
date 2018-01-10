@@ -42,7 +42,12 @@ function detectDiff(actual, expected, path: string[] = []) {
   const diff: SatisfierExec[] = []
   const expectedType = typeof expected
   if (expectedType === 'function') {
-    if (!(expected as Function)(actual)) {
+    if (Array.isArray(actual)) {
+      actual.forEach((a, i) => {
+        diff.push(...detectDiff(a, expected, path.concat([`[${i}]`])))
+      })
+    }
+    else if (!(expected as Function)(actual)) {
       diff.push({
         path,
         expected,
