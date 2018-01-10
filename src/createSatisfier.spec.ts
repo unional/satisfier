@@ -41,4 +41,5 @@ test('array with number', t => {
 
 test('array with null', t => {
   t.true(createSatisfier([null]).test([null]))
+  t.false(createSatisfier([null]).test([1]))
 })
