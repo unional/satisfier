@@ -1,8 +1,8 @@
 import { createCallRecordCreator } from './createCallRecordCreator'
-import { CallRecord } from './interfaces'
+import { CallEntry } from './interfaces'
 
 export interface Spy<T> {
-  calls: ReadonlyArray<CallRecord>,
+  calls: ReadonlyArray<CallEntry>,
   /**
    * the spied function.
    */
@@ -27,10 +27,10 @@ function spyOnCallback(fn) {
  * Spy on function that uses callback.
  */
 export function spy<T extends Function>(fn: T): Spy<T> {
-  const calls: CallRecord[] = []
+  const calls: CallEntry[] = []
   const spied: T = function (...args) {
     const creator = createCallRecordCreator(args)
-    calls.push(creator.callRecord)
+    calls.push(creator.callEntry)
 
     const spiedCallbacks: any[] = []
     const spiedArgs = args.map(arg => {
@@ -64,13 +64,19 @@ export function spy<T extends Function>(fn: T): Spy<T> {
     else {
       try {
         const result = fn(...args)
+        creator.callEntry.output = result
         if (result && typeof result.then === 'function')
           result.then(creator.resolve, creator.reject)
-        creator.callRecord.result = result
+        else {
+          creator.resolve()
+        }
         return result
       }
       catch (error) {
-        creator.callRecord.error = error
+        creator.callEntry.error = error
+        // just resolve, no need to reject,
+        // the error is on `error` property.
+        creator.resolve()
         throw error
       }
     }

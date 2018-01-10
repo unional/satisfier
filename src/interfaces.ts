@@ -1,20 +1,30 @@
 import { Tersible } from 'tersify'
 
-export interface CallRecord extends Promise<any> {
-  arguments: any[],
+export interface CallRecord {
+  inputs: any[],
+  output: any,
+  error: any,
+  asyncOutput: any,
+  asyncError: any,
+  tersify(): string
+}
+
+export interface CallEntry extends Promise<any> {
+  inputs: any[],
   /**
    * Synchronous result.
    */
-  result: any,
+  output: any,
   /**
    * Synchronous error got thrown.
    */
-  error: any
+  error: any,
+  getCallRecord(): Promise<CallRecord>
 }
 
 export interface Spec<T extends Function> {
   spiedFn: T,
-  calls: CallRecord[],
+  calls: CallEntry[],
   save(): void,
 }
 
