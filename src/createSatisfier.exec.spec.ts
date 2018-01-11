@@ -1,7 +1,7 @@
 import { test } from 'ava'
 
 import { createSatisfier } from './index'
-import { assertExec, assertRegExp } from './testUtil';
+import { assertExec, assertRegExp } from './testUtil'
 
 test('primitive types without specifing generic will work without issue.', t => {
   t.is(createSatisfier(1).exec(1), undefined)

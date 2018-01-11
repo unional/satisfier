@@ -1,6 +1,5 @@
-import { tersify, tersible } from 'tersify'
-
-import { CallEntry } from './interfaces'
+import { CallRecord } from './CallRecord'
+import { CallEntry } from './CallEntry'
 
 export function createCallRecordCreator(args: any[]) {
   let resolve
@@ -13,31 +12,13 @@ export function createCallRecordCreator(args: any[]) {
     inputs: args,
     getCallRecord() {
       return callEntry.then(asyncOutput => {
-        const { inputs, output, error } = callEntry
-        return tersible({
-          inputs,
-          output,
-          error,
-          asyncOutput
-        }, () => tersify({
-          inputs,
-          output,
-          error,
-          asyncOutput
-        }, { maxLength: Infinity }))
+        return CallRecord.create({
+          ...callEntry, asyncOutput
+        })
       }, asyncError => {
-        const { inputs, output, error } = callEntry
-        return tersible({
-          inputs,
-          output,
-          error,
-          asyncError
-        }, () => tersify({
-          inputs,
-          output,
-          error,
-          asyncError
-        }, { maxLength: Infinity }))
+        return CallRecord.create({
+          ...callEntry, asyncError
+        })
       })
     }
   }) as CallEntry

@@ -1,5 +1,5 @@
+import { CallEntry } from './CallEntry'
 import { createCallRecordCreator } from './createCallRecordCreator'
-import { CallEntry } from './interfaces'
 
 export interface Spy<T> {
   calls: ReadonlyArray<CallEntry>,
