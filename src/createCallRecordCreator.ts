@@ -11,13 +11,15 @@ export function createCallRecordCreator(args: any[]) {
   const callEntry = Object.assign(p, {
     inputs: args,
     getCallRecord() {
+      const inputs = trimCallbacks(callEntry.inputs)
+      const { output, error } = callEntry
       return callEntry.then(asyncOutput => {
         return CallRecord.create({
-          ...callEntry, asyncOutput
+          inputs, output, error, asyncOutput
         })
       }, asyncError => {
         return CallRecord.create({
-          ...callEntry, asyncError
+          inputs, output, error, asyncError
         })
       })
     }
@@ -28,4 +30,22 @@ export function createCallRecordCreator(args: any[]) {
     reject,
     callEntry
   }
+}
+
+const callbackLiteral = { tersify() { return 'callback' } }
+
+function trimCallbacks(inputs: any[]) {
+  return inputs.map(arg => {
+    if (typeof arg === 'function') {
+      return callbackLiteral
+    }
+    if (typeof arg === 'object') {
+      Object.keys(arg).forEach(key => {
+        if (typeof arg[key] === 'function') {
+          arg[key] = callbackLiteral
+        }
+      })
+    }
+    return arg
+  })
 }

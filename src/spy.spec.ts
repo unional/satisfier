@@ -15,6 +15,14 @@ test('record argument and result', t => {
   t.is(cr.output, 2)
 })
 
+test('tersify for sync call', async t => {
+  const { fn, calls } = spy(increment)
+
+  t.is(fn(1), 2)
+  const record = await calls[0].getCallRecord()
+  t.is(record.tersify(), `{ inputs: [1], output: 2, error: undefined }`)
+})
+
 function throws() { throw new Error('thrown') }
 
 test('capture error', t => {
@@ -26,12 +34,13 @@ test('capture error', t => {
   t.is(calls[0].error, err)
 })
 
-test('tersify for sync call', async t => {
-  const { fn, calls } = spy(increment)
+test('tersify for throws call', async t => {
+  const { fn, calls } = spy(throws)
 
-  t.is(fn(1), 2)
+  t.throws(fn)
+
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [1], output: 2, error: undefined }`)
+  t.is(record.tersify(), `{ inputs: [], output: undefined, error: { message: 'thrown' } }`)
 })
 
 // this is not a valid test as the package is used for boundary testing.
@@ -44,22 +53,31 @@ test.skip('argument should be immutable', t => {
   t.is(entry.inputs[0].a, 1)
 })
 
-function invoke(x, cb) { cb(x) }
+function callback(x, cb) { cb(x) }
 
 test('callback are spied', async t => {
-  const { fn, calls } = spy(invoke)
+  const { fn, calls } = spy(callback)
   fn(1, x => t.is(x, 1))
   const entry = calls[0]
   t.is(entry.inputs[0], 1)
   return entry.then(x => t.deepEqual(x, [1]))
 })
 
-function callbackOnLiterial(options) {
-  options.success(++options.data)
+test('tersify for callback', async t => {
+  const { fn, calls } = spy(callback)
+
+  fn(1, x => t.is(x, 1))
+
+  const record = await calls[0].getCallRecord()
+  t.is(record.tersify(), `{ inputs: [1, callback], output: undefined, error: undefined, asyncOutput: [1] }`)
+})
+
+function callbackLiteral(options) {
+  options.success(options.data + 1)
 }
 
 test('spec on jquery style callback', async t => {
-  const { fn, calls } = spy(callbackOnLiterial)
+  const { fn, calls } = spy(callbackLiteral)
   fn({
     data: 1,
     success: (result) => {
@@ -71,6 +89,18 @@ test('spec on jquery style callback', async t => {
   t.is(output[0], 2)
 })
 
+test('tersify for callback', async t => {
+  const { fn, calls } = spy(callbackLiteral)
+  fn({
+    data: 1,
+    success: (result) => {
+      t.is(result, 2)
+    }
+  })
+
+  const record = await calls[0].getCallRecord()
+  t.is(record.tersify(), `{ inputs: [{ data: 1, success: callback }], output: undefined, error: undefined, asyncOutput: [2] }`)
+})
 
 const resolve = x => Promise.resolve(x)
 

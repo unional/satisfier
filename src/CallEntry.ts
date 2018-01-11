@@ -12,9 +12,3 @@ export interface CallEntry extends Promise<any> {
   error: any,
   getCallRecord(): Promise<CallRecord>
 }
-
-// export const CallEntry = {
-//   create(callRecord: CallRecord) {
-//     return {}
-//   }
-// }
