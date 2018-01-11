@@ -1,5 +1,13 @@
 import { tersible, tersify } from 'tersify'
 
+export interface CallRecordData {
+  inputs: any[],
+  output: any,
+  error: any,
+  asyncOutput?: any,
+  asyncError?: any
+}
+
 export interface CallRecord {
   inputs: any[],
   output: any,
@@ -13,7 +21,7 @@ export const CallRecord = {
   /**
    * Creates a call record object.
    */
-  create({ inputs, output, error, asyncOutput, asyncError }: CallRecord) {
+  create({ inputs, output, error, asyncOutput, asyncError }: CallRecordData) {
     return tersible({ inputs, output, error, asyncOutput, asyncError },
       () => {
         const obj = { inputs, output, error } as CallRecord
