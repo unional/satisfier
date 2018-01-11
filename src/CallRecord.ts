@@ -1,4 +1,11 @@
-import { tersible, tersify } from 'tersify'
+import {
+  tersible,
+  tersify,
+  // @ts-ignore
+  Tersify,
+  // @ts-ignore
+  TersifyOptions
+} from 'tersify'
 
 export interface CallRecordData {
   inputs: any[],
