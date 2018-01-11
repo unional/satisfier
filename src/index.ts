@@ -1,3 +1,4 @@
+export * from './createCallRecord'
 export * from './createSatisfier'
 export * from './interfaces'
 export * from './isInRange'
