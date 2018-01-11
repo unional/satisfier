@@ -1,7 +1,6 @@
 import { test } from 'ava'
 
 import { spy } from './index'
-import { tersify } from 'tersify';
 
 function increment(x: number) { return ++x }
 
@@ -32,7 +31,7 @@ test('tersify for sync call', async t => {
 
   t.is(fn(1), 2)
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [1], output: 2, error: undefined, asyncOutput: undefined }`)
+  t.is(record.tersify(), `{ inputs: [1], output: 2, error: undefined }`)
 })
 
 // this is not a valid test as the package is used for boundary testing.
@@ -79,7 +78,9 @@ test('then() will receive result from promise', async t => {
   const { fn, calls } = spy(resolve)
   // tslint:disable-next-line
   fn(1)
-  t.is(await calls[0], 1)
+  return calls[0].then(actual => {
+    t.is(actual, 1)
+  })
 })
 
 test('result from promise can be retrieved from await on the call', async t => {
@@ -101,16 +102,23 @@ test('catch() will receive error thrown by promise', async t => {
   })
 })
 
-test('tersify for sync call', async t => {
+test('tersify for resolve call', async t => {
+  const { fn, calls } = spy(resolve)
+  // tslint:disable-next-line
+  fn(1)
+  return calls[0].getCallRecord()
+    .then(record => {
+      t.is(record.tersify(), `{ inputs: [1], output: {}, error: undefined, asyncOutput: 1 }`)
+    })
+})
+
+
+test('tersify for reject call', async t => {
   const { fn, calls } = spy(reject)
-
-
-  return fn(1).catch(actualError => {
-    console.log(tersify(actualError))
+  return fn(1).catch(() => {
     return calls[0].getCallRecord()
       .then(record => {
         t.is(record.tersify(), `{ inputs: [1], output: {}, error: undefined, asyncError: { message: '1' } }`)
       })
   })
 })
-

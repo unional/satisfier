@@ -1,5 +1,5 @@
-import { createCallRecord } from './createCallRecord'
-import { CallEntry } from './interfaces'
+import { CallRecord } from './CallRecord'
+import { CallEntry } from './CallEntry'
 
 export function createCallRecordCreator(args: any[]) {
   let resolve
@@ -12,11 +12,11 @@ export function createCallRecordCreator(args: any[]) {
     inputs: args,
     getCallRecord() {
       return callEntry.then(asyncOutput => {
-        return createCallRecord({
+        return CallRecord.create({
           ...callEntry, asyncOutput
         })
       }, asyncError => {
-        return createCallRecord({
+        return CallRecord.create({
           ...callEntry, asyncError
         })
       })
