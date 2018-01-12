@@ -20,7 +20,7 @@ test('tersify for sync call', async t => {
 
   t.is(fn(1), 2)
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [1], output: 2, error: undefined }`)
+  t.is(record.tersify(), `{ inputs: [1], output: 2 }`)
 })
 
 function throws() { throw new Error('thrown') }
@@ -40,7 +40,7 @@ test('tersify for throws call', async t => {
   t.throws(fn)
 
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [], output: undefined, error: { message: 'thrown' } }`)
+  t.is(record.tersify(), `{ inputs: [], error: { message: 'thrown' } }`)
 })
 
 // this is not a valid test as the package is used for boundary testing.
@@ -69,7 +69,7 @@ test('tersify for callback', async t => {
   fn(1, x => t.is(x, 1))
 
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [1, callback], output: undefined, error: undefined, asyncOutput: [1] }`)
+  t.is(record.tersify(), `{ inputs: [1, callback], asyncOutput: [1] }`)
 })
 
 function callbackLiteral(options) {
@@ -97,9 +97,8 @@ test('tersify for callback', async t => {
       t.is(result, 2)
     }
   })
-
   const record = await calls[0].getCallRecord()
-  t.is(record.tersify(), `{ inputs: [{ data: 1, success: callback }], output: undefined, error: undefined, asyncOutput: [2] }`)
+  t.is(record.tersify(), `{ inputs: [{ data: 1, success: callback }], asyncOutput: [2] }`)
 })
 
 const resolve = x => Promise.resolve(x)
@@ -138,7 +137,7 @@ test('tersify for resolve call', async t => {
   fn(1)
   return calls[0].getCallRecord()
     .then(record => {
-      t.is(record.tersify(), `{ inputs: [1], output: {}, error: undefined, asyncOutput: 1 }`)
+      t.is(record.tersify(), `{ inputs: [1], output: {}, asyncOutput: 1 }`)
     })
 })
 
@@ -148,7 +147,7 @@ test('tersify for reject call', async t => {
   return fn(1).catch(() => {
     return calls[0].getCallRecord()
       .then(record => {
-        t.is(record.tersify(), `{ inputs: [1], output: {}, error: undefined, asyncError: { message: '1' } }`)
+        t.is(record.tersify(), `{ inputs: [1], output: {}, asyncError: { message: '1' } }`)
       })
   })
 })
