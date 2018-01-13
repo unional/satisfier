@@ -1,13 +1,5 @@
 import { Tersible } from 'tersify'
 
-import { CallEntry } from './CallEntry'
-
-export interface Spec<T extends Function> {
-  spiedFn: T,
-  calls: CallEntry[],
-  save(): void,
-}
-
 export type Predicate = (value: any) => boolean
 
 export type TersiblePredicate = Tersible<Predicate>
