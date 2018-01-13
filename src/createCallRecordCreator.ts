@@ -4,8 +4,17 @@ import { CallEntry } from './CallEntry'
 export function createCallRecordCreator(args: any[]) {
   let resolve
   let reject
+  let invokedCallback
   const p = new Promise((a, r) => {
-    resolve = a
+    resolve = (resolved) => {
+      if (resolved) {
+        invokedCallback = resolved.key
+        a(resolved.results)
+      }
+      else {
+        a()
+      }
+    }
     reject = r
   })
   const callEntry = Object.assign(p, {
@@ -14,13 +23,13 @@ export function createCallRecordCreator(args: any[]) {
       const inputs = trimCallbacks(callEntry.inputs)
       const { output, error } = callEntry
       return callEntry.then(asyncOutput => {
-        return CallRecord.create({
-          inputs, output, error, asyncOutput
-        })
+        const record: any = { inputs, output, error, asyncOutput }
+        if (invokedCallback) record.invokedCallback = invokedCallback
+        return CallRecord.create(record)
       }, asyncError => {
-        return CallRecord.create({
-          inputs, output, error, asyncError
-        })
+        const record: any = { inputs, output, error, asyncError }
+        if (invokedCallback) record.invokedCallback = invokedCallback
+        return CallRecord.create(record)
       })
     }
   }) as CallEntry

@@ -9,7 +9,7 @@ export interface Spy<T> {
   fn: T
 }
 
-function spyOnCallback(fn) {
+function spyOnCallback(fn, key) {
   let callback
   return Object.assign(
     (...args) => {
@@ -17,6 +17,7 @@ function spyOnCallback(fn) {
       callback(...args)
       fn(...args)
     }, {
+      key,
       called(cb) {
         callback = cb
       }
@@ -35,14 +36,14 @@ export function spy<T extends Function>(fn: T): Spy<T> {
     const spiedCallbacks: any[] = []
     const spiedArgs = args.map(arg => {
       if (typeof arg === 'function') {
-        const spied = spyOnCallback(arg)
+        const spied = spyOnCallback(arg, undefined)
         spiedCallbacks.push(spied)
         return spied
       }
       if (typeof arg === 'object') {
         Object.keys(arg).forEach(key => {
           if (typeof arg[key] === 'function') {
-            const spied = spyOnCallback(arg[key])
+            const spied = spyOnCallback(arg[key], key)
             spiedCallbacks.push(spied)
             arg[key] = spied
           }
@@ -54,7 +55,7 @@ export function spy<T extends Function>(fn: T): Spy<T> {
       new Promise(a => {
         spiedCallbacks.forEach(s => {
           s.called((...results) => {
-            a(results)
+            a({ results, key: s.key })
           })
         })
       }).then(creator.resolve, creator.reject)
@@ -66,7 +67,7 @@ export function spy<T extends Function>(fn: T): Spy<T> {
         const result = fn(...args)
         creator.callEntry.output = result
         if (result && typeof result.then === 'function')
-          result.then(creator.resolve, creator.reject)
+          result.then(results => ({ results })).then(creator.resolve, creator.reject)
         else {
           creator.resolve()
         }
