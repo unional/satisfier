@@ -32,10 +32,6 @@ test('actual should be a complete struct', t => {
   t.true(s.test({ a: 1, b: 'b' }))
 })
 
-test('expect null', t => {
-  t.true(createSatisfier(null).test(null))
-})
-
 test('expect [undefined]', t => {
   t.true(createSatisfier([undefined]).test([undefined]))
 })
