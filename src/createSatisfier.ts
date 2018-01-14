@@ -18,7 +18,7 @@ export function createSatisfier<T extends Struct = Struct>(expectation: Expectat
     if (Array.isArray(actual)) {
       const diff: SatisfierExec[] = []
       if (Array.isArray(expectation)) {
-        expectation.forEach((e, i) => {
+        expectation.forEach((e: any, i) => {
           if (e === undefined)
             return
           diff.push(...detectDiff(actual[i], e, [`[${i}]`], i))
