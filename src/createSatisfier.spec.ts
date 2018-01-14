@@ -40,6 +40,19 @@ test('expect [undefined]', t => {
   t.true(createSatisfier([undefined]).test([undefined]))
 })
 
+test('expect [undefined] should work with [null]', t => {
+  t.false(createSatisfier([undefined]).test([null]))
+})
+
+test('expect array and test against non-array', t => {
+  const s = createSatisfier([1])
+  t.false(s.test(null))
+  t.false(s.test(1))
+  t.false(s.test('a'))
+  t.false(s.test(true))
+  t.false(s.test(undefined as any))
+})
+
 test('array with number', t => {
   t.true(createSatisfier([1, 2]).test([1, 2]))
 })
