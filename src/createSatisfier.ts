@@ -98,7 +98,7 @@ function detectDiff(actual, expected, path: string[] = []) {
   else {
     // expected is object. If actual is not, then it is diff.
     const actualType = typeof actual
-    if (actualType === 'boolean' || actualType === 'string' || actualType === 'number')
+    if (actualType === 'boolean' || actualType === 'string' || actualType === 'number' || actual === undefined || actual === null)
       diff.push({
         path,
         expected,
