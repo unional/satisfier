@@ -1,4 +1,5 @@
 import { test } from 'ava'
+import { AssertOrder } from 'assertron'
 
 import { createSatisfier } from './index'
 
@@ -32,4 +33,30 @@ test('mismatch value fails', t => {
   t.false(createSatisfier([{ a: 1 }, { b: 2 }]).test([{ a: true }, { b: 'b' }, { c: 3 }]))
   t.false(createSatisfier({ a: [1, true, 'a'] }).test({ a: [1, true, 'b'] }))
   t.false(createSatisfier({ a: { b: 1 } }).test({ a: { b: 2 } }))
+})
+
+test('undefined expectation are ignored', t => {
+  const s = createSatisfier([undefined, 1])
+  t.true(s.test([undefined, 1]))
+  t.true(s.test([null, 1]))
+  t.true(s.test([1, 1]))
+  t.true(s.test(['a', 1]))
+  t.true(s.test([true, 1]))
+  t.true(s.test([{ a: 1 }, 1]))
+  t.true(s.test([[1, 2], 1]))
+})
+
+test('index', t => {
+  const order = new AssertOrder()
+  createSatisfier((e, i) => {
+    const step = order.any([1, 2])
+    if (step === 1) {
+      t.is(e, 'a')
+      t.is(i, 0)
+    }
+    if (step === 2) {
+      t.is(e, 'b')
+      t.is(i, 1)
+    }
+  }).test(['a', 'b'])
 })
