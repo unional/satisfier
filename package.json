@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@types/node": "^8.5.8",
+    "assertron": "^3.3.10",
     "ava": "^0.24.0",
     "dependency-check": "^2.10.0",
     "eslint": "^4.15.0",
