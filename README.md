@@ -60,6 +60,18 @@ createSatisfier({ a: /boo/ }).exec({ a: 'foo' })
 createSatisfier({ a: a => a === 1 }).exec({ a: 2 })
 ```
 
+## test against array
+
+When testing against array, you can use `undefined` to skip over entries that you don't care.
+
+If you want to test against undefined explicitly, use predicate function.
+
+```ts
+import { createSatisfier } from 'satisfier'
+
+createSatisfier([undefined, 1]).test(['...anything...', 1])
+```
+
 ## Build in predicates
 
 There are a few predicates shipped in the package for convenience.
