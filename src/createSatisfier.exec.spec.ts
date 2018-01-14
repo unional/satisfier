@@ -147,7 +147,6 @@ test('expect array in hash', t => {
 })
 
 test('failing array in hash', t => {
-  // console.log(Object.keys(['a', 'b', 'c']))
   const actual = createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'b'] })!
   t.is(actual.length, 1)
   assertExec(t, actual[0], ['a', '[2]'], 'a', 'b')
