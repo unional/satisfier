@@ -45,8 +45,18 @@ test('undefined expectation are ignored', t => {
   t.true(s.test([{ a: 1 }, 1]))
   t.true(s.test([[1, 2], 1]))
 })
+test('undefined expectation are ignored', t => {
+  const s = createSatisfier({ a: [undefined, 1] })
+  t.true(s.test({ a: [undefined, 1] }))
+  t.true(s.test({ a: [null, 1] }))
+  t.true(s.test({ a: [1, 1] }))
+  t.true(s.test({ a: ['a', 1] }))
+  t.true(s.test({ a: [true, 1] }))
+  t.true(s.test({ a: [{ a: 1 }, 1] }))
+  t.true(s.test({ a: [[1, 2], 1] }))
+})
 
-test('index', t => {
+test('when processing array entry, index will be available to predicate function', t => {
   const order = new AssertOrder()
   createSatisfier((e, i) => {
     const step = order.any([1, 2])
