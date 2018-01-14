@@ -46,7 +46,7 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
   if (expectedType === 'function') {
     if (Array.isArray(actual)) {
       actual.forEach((a, i) => {
-        diff.push(...detectDiff(a, expected, path.concat([`[${i}]`])))
+        diff.push(...detectDiff(a, expected, path.concat([`[${i}]`]), i))
       })
     }
     else if (!(expected as Function)(actual, index)) {
@@ -91,9 +91,11 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
       })
     }
     else {
-      expected.forEach((e, i) => {
+      expected.forEach((e: any, i) => {
+        if (e === undefined)
+          return
         const actualValue = actual[i]
-        diff.push(...detectDiff(actualValue, e, path.concat([`[${i}]`])))
+        diff.push(...detectDiff(actualValue, e, path.concat([`[${i}]`]), i))
       })
     }
   }
