@@ -55,7 +55,7 @@ function detectDiff(actual, expected, path: string[] = []) {
       })
     }
   }
-  else if (expected === null) {
+  else if (expected === null || expected === undefined) {
     if (expected !== actual)
       diff.push({
         path,
@@ -81,10 +81,19 @@ function detectDiff(actual, expected, path: string[] = []) {
     }
   }
   else if (Array.isArray(expected)) {
-    expected.forEach((e, i) => {
-      const actualValue = actual[i]
-      diff.push(...detectDiff(actualValue, e, path.concat([`[${i}]`])))
-    })
+    if (!Array.isArray(actual)) {
+      diff.push({
+        path,
+        expected,
+        actual
+      })
+    }
+    else {
+      expected.forEach((e, i) => {
+        const actualValue = actual[i]
+        diff.push(...detectDiff(actualValue, e, path.concat([`[${i}]`])))
+      })
+    }
   }
   else {
     // expected is object. If actual is not, then it is diff.
