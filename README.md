@@ -72,6 +72,16 @@ import { createSatisfier } from 'satisfier'
 createSatisfier([undefined, 1]).test(['...anything...', 1])
 ```
 
+When you use a predicate to check against values in an array,
+you will get the index of the array in the second parameter:
+
+```ts
+import { createSatisfier } from 'satisfier'
+
+createSatisfier((e, i) => i === 0 ? e === '...anything...' : e === 1)
+  .test(['...anything...', 1])
+```
+
 ## Build in predicates
 
 There are a few predicates shipped in the package for convenience.
