@@ -1,5 +1,4 @@
 import { test } from 'ava'
-import { AssertOrder } from 'assertron'
 
 import { createSatisfier } from './index'
 
