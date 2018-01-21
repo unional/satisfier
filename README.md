@@ -62,31 +62,72 @@ createSatisfier({ a: a => a === 1 }).exec({ a: 2 })
 
 ## test against array
 
-When testing against array, you can use `undefined` to skip over entries that you don't care.
+There are several ways to test against array:
 
-If you want to test against undefined explicitly, use predicate function.
+### using array expectation
+
+When you use an array expectation to test against array,
+each entry in the expectation will be used to test against the corresponding entry in the array.
+
+If the subject array is longer than the expectation array,
+the extra entries are not tested.
+
+You can also skip over entries by putting in `undefined`.
+If you want to test against `undefined` explicitely, use a predicate function.
 
 ```ts
 import { createSatisfier } from 'satisfier'
 
+// all true
+createSatisfier([1]).test([1, 2, 3])
 createSatisfier([undefined, 1]).test(['...anything...', 1])
+createSatisfier([e => e === undefined, 1]).test([undefined, 1])
 ```
 
-When you use a predicate to check against values in an array,
-you will get the index of the array in the second parameter:
+### using predicate expectation
+
+You can test against the array using a predicate function.
+The predicate function will receive the whole array.
+
+This is useful if you want to check the relationship within the array.
 
 ```ts
 import { createSatisfier } from 'satisfier'
 
-createSatisfier((e, i) => i === 0 ? e === '...anything...' : e === 1)
-  .test(['...anything...', 1])
+createSatisfier(
+  a =>
+    Array.isArray(a) &&
+    a.length === 2 &&
+    a[0] === 1 &&
+    a[1] === 2)
+  .test([1, 2])
+```
+
+### using primitive and object expectation
+
+When the expectation is a primitive value or an object,
+it will be used to check against each element in the array.
+
+```ts
+import { createSatisfier } from 'satisfier'
+
+// true
+createSatisfier(1).test([1, 1])
+createSatisfier(false).test([false, false])
+createSatisfier('a').test(['a', 'a'])
+createSatisfier({ a: e => typeof e === 'string' })
+  .test([{ a: 'a' }, { a: 'b' }]))
+
 ```
 
 ## Build in predicates
 
 There are a few predicates shipped in the package for convenience.
 They all support [`tersify`](https://github.com/unional/tersify).
-This means if you use `tersify` to print the predicate (e.g. for logging purpose), you will get a terse string representing the predicates.
+This means if you use `tersify` to print the predicate (e.g. for logging purpose),
+you will get a terse string representing the predicates.
+
+For example:
 
 ```ts
 import { createSatisfier, isInRange } from 'satisfier'

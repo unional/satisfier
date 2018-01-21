@@ -1,5 +1,4 @@
 import { test } from 'ava'
-import { AssertOrder } from 'assertron'
 
 import { createSatisfier } from './index'
 
@@ -23,7 +22,6 @@ test('expect null to pass only null', t => {
   t.false(createSatisfier(null).test(''))
 })
 
-
 test('mismatch value fails', t => {
   t.false(createSatisfier({ a: 1 }).test({ a: 2 }))
   t.false(createSatisfier({ a: true }).test({ a: false }))
@@ -45,6 +43,7 @@ test('undefined expectation are ignored', t => {
   t.true(s.test([{ a: 1 }, 1]))
   t.true(s.test([[1, 2], 1]))
 })
+
 test('undefined expectation are ignored', t => {
   const s = createSatisfier({ a: [undefined, 1] })
   t.true(s.test({ a: [undefined, 1] }))
@@ -56,17 +55,24 @@ test('undefined expectation are ignored', t => {
   t.true(s.test({ a: [[1, 2], 1] }))
 })
 
-test('when processing array entry, index will be available to predicate function', t => {
-  const order = new AssertOrder()
-  createSatisfier((e, i) => {
-    const step = order.any([1, 2])
-    if (step === 1) {
-      t.is(e, 'a')
-      t.is(i, 0)
-    }
-    if (step === 2) {
-      t.is(e, 'b')
-      t.is(i, 1)
-    }
-  }).test(['a', 'b'])
+test('predicate receives array', t => {
+  t.true(createSatisfier(e => {
+    return e[0] === 'a' && e[1] === 'b'
+  }).test(['a', 'b']))
+})
+
+test('primitive predicate will check against element in array', t => {
+  t.true(createSatisfier(1).test([1, 1]))
+  t.false(createSatisfier(1).test([1, 2]))
+  t.true(createSatisfier(false).test([false, false]))
+  t.false(createSatisfier(false).test([false, true]))
+  t.true(createSatisfier('a').test(['a', 'a']))
+  t.false(createSatisfier('a').test(['a', 'b']))
+})
+
+
+test('object predicate will check against element in array', t => {
+  t.true(createSatisfier({ a: 1 }).test([{ a: 1 }, { a: 1 }]))
+  t.true(createSatisfier({ a: e => typeof e === 'string' })
+    .test([{ a: 'a' }, { a: 'b' }]))
 })

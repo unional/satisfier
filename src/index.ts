@@ -1,4 +1,5 @@
 export * from './createSatisfier'
+export * from './has'
 export * from './interfaces'
 export * from './isInRange'
 export * from './isInInterval'

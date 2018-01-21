@@ -14,7 +14,7 @@ test('can use generic to specify the data structure', t => {
   t.is(createSatisfier<{ a: number }>({ a: /1/ }).exec({ a: 1 }), undefined)
 })
 
-test('empty object expecter passes all objects', t => {
+test('empty object expectation passes all objects', t => {
   t.is(createSatisfier({}).exec({}), undefined)
   t.is(createSatisfier({}).exec({ a: 1 }), undefined)
   t.is(createSatisfier({}).exec({ a: { b: 'a' } }), undefined)
@@ -22,7 +22,7 @@ test('empty object expecter passes all objects', t => {
   t.is(createSatisfier({}).exec({ a: [1] }), undefined)
 })
 
-test('empty object expecter fails primitive', t => {
+test('empty object expectation fails primitive', t => {
   assertExec(t, createSatisfier({}).exec(1)![0], [], {}, 1)
   assertExec(t, createSatisfier({}).exec(true)![0], [], {}, true)
   assertExec(t, createSatisfier({}).exec('a')![0], [], {}, 'a')
@@ -107,7 +107,7 @@ test('when apply against array, will have indices in the path', t => {
   assertExec(t, actual[0], ['[1]', 'a'], 1, undefined)
 })
 
-test('when Expecter is an array, will apply to each entry in the actual array', t => {
+test('when expectation is an array, apply to each entry in the actual array', t => {
   t.is(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }, { c: 3 }]), undefined)
   const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: true }, { b: 'b' }, { c: 3 }])!
   t.is(actual.length, 2)
@@ -115,7 +115,7 @@ test('when Expecter is an array, will apply to each entry in the actual array', 
   assertExec(t, actual[1], ['[1]', 'b'], 2, 'b')
 })
 
-test.skip('when Expecter is an array and actual is not, the behavior is not defined yet', t => {
+test.skip('when expectation is an array and actual is not, the behavior is not defined yet', t => {
   const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec({ a: 1 })!
   t.is(actual.length, 1)
 })
@@ -152,19 +152,12 @@ test('failing array in hash', t => {
   assertExec(t, actual[0], ['a', '[2]'], 'a', 'b')
 })
 
-test('apply expectation function to each element in array', t => {
-  const satisfier = createSatisfier(e => e.login)
-  t.is(satisfier.exec([{ login: 'a' }]), undefined)
-  t.not(satisfier.exec([{ foo: 'a' }]), undefined)
-})
+test('apply property predicate to array', t => {
+  const satisfier = createSatisfier({
+    data: e => e && e.every(x => x.login)
+  });
 
-test('apply property predicate to each element in array', t => {
-  const satisfier = createSatisfier({ data: e => e && e.login });
-
-  t.is(satisfier.exec({ data: { login: 'a' } }), undefined)
   t.is(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
-  const actual = satisfier.exec({ data: [{ login: 'a' }, {}] })!
-  t.true(createSatisfier({ path: ['data', '[1]'], actual: {} }).test(actual[0]))
-  t.not(satisfier.exec([{ data: { foo: 'a' } }]), undefined)
+  t.not(satisfier.exec([{ data: [{ foo: 'a' }] }]), undefined)
   t.not(satisfier.exec([{ foo: 'b' }]), undefined)
 })

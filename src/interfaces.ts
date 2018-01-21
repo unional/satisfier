@@ -4,7 +4,7 @@ export type Predicate = (value: any) => boolean
 
 export type TersiblePredicate = Tersible<Predicate>
 
-export type Expectation<T extends Struct = Struct> = Partial<ExpectationHash<T>> | Partial<ExpectationHash<T>>[]
+export type Expectation<T extends Struct = Struct> = Function | Partial<ExpectationHash<T>> | Partial<ExpectationHash<T>>[]
 export type ExpectationNode<T extends Struct = Struct> = undefined | null | boolean | number | string | RegExp | Predicate | Partial<ExpectationHash<T>>
 export type ExpectationHash<T extends Struct = Struct> = {
   [P in keyof T]: ExpectationNode<T[P]> | ExpectationNode<T[P]>[];
