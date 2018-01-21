@@ -124,7 +124,10 @@ createSatisfier({ a: e => typeof e === 'string' })
 
 There are a few predicates shipped in the package for convenience.
 They all support [`tersify`](https://github.com/unional/tersify).
-This means if you use `tersify` to print the predicate (e.g. for logging purpose), you will get a terse string representing the predicates.
+This means if you use `tersify` to print the predicate (e.g. for logging purpose),
+you will get a terse string representing the predicates.
+
+For example:
 
 ```ts
 import { createSatisfier, isInRange } from 'satisfier'
