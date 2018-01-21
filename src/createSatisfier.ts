@@ -47,12 +47,6 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
   const diff: SatisfierExec[] = []
   const expectedType = typeof expected
   if (expectedType === 'function') {
-    // if (Array.isArray(actual)) {
-    //   actual.forEach((a, i) => {
-    //     diff.push(...detectDiff(a, expected, path.concat([`[${i}]`]), i))
-    //   })
-    // }
-    // else
     if (!(expected as Function)(actual, index)) {
       diff.push({
         path,

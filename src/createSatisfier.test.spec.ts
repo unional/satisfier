@@ -61,3 +61,19 @@ test('predicate receives array', t => {
     return e[0] === 'a' && e[1] === 'b'
   }).test(['a', 'b']))
 })
+
+test('primitive predicate will check against element in array', t => {
+  t.true(createSatisfier(1).test([1, 1]))
+  t.false(createSatisfier(1).test([1, 2]))
+  t.true(createSatisfier(false).test([false, false]))
+  t.false(createSatisfier(false).test([false, true]))
+  t.true(createSatisfier('a').test(['a', 'a']))
+  t.false(createSatisfier('a').test(['a', 'b']))
+})
+
+
+test('object predicate will check against element in array', t => {
+  t.true(createSatisfier({ a: 1 }).test([{ a: 1 }, { a: 1 }]))
+  t.true(createSatisfier({ a: e => typeof e === 'string' })
+    .test([{ a: 'a' }, { a: 'b' }]))
+})
