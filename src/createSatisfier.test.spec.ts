@@ -23,7 +23,6 @@ test('expect null to pass only null', t => {
   t.false(createSatisfier(null).test(''))
 })
 
-
 test('mismatch value fails', t => {
   t.false(createSatisfier({ a: 1 }).test({ a: 2 }))
   t.false(createSatisfier({ a: true }).test({ a: false }))
@@ -45,6 +44,7 @@ test('undefined expectation are ignored', t => {
   t.true(s.test([{ a: 1 }, 1]))
   t.true(s.test([[1, 2], 1]))
 })
+
 test('undefined expectation are ignored', t => {
   const s = createSatisfier({ a: [undefined, 1] })
   t.true(s.test({ a: [undefined, 1] }))
@@ -56,17 +56,8 @@ test('undefined expectation are ignored', t => {
   t.true(s.test({ a: [[1, 2], 1] }))
 })
 
-test('when processing array entry, index will be available to predicate function', t => {
-  const order = new AssertOrder()
-  createSatisfier((e, i) => {
-    const step = order.any([1, 2])
-    if (step === 1) {
-      t.is(e, 'a')
-      t.is(i, 0)
-    }
-    if (step === 2) {
-      t.is(e, 'b')
-      t.is(i, 1)
-    }
-  }).test(['a', 'b'])
+test('predicate receives array', t => {
+  t.true(createSatisfier(e => {
+    return e[0] === 'a' && e[1] === 'b'
+  }).test(['a', 'b']))
 })

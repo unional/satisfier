@@ -24,6 +24,9 @@ export function createSatisfier<T extends Struct = Struct>(expectation: Expectat
           diff.push(...detectDiff(actual[i], e, [`[${i}]`], i))
         })
       }
+      else if (typeof expectation === 'function') {
+        diff.push(...detectDiff(actual, expectation))
+      }
       else {
         actual.forEach((a, i) => {
           diff.push(...detectDiff(a, expectation, [`[${i}]`], i))
@@ -44,12 +47,13 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
   const diff: SatisfierExec[] = []
   const expectedType = typeof expected
   if (expectedType === 'function') {
-    if (Array.isArray(actual)) {
-      actual.forEach((a, i) => {
-        diff.push(...detectDiff(a, expected, path.concat([`[${i}]`]), i))
-      })
-    }
-    else if (!(expected as Function)(actual, index)) {
+    // if (Array.isArray(actual)) {
+    //   actual.forEach((a, i) => {
+    //     diff.push(...detectDiff(a, expected, path.concat([`[${i}]`]), i))
+    //   })
+    // }
+    // else
+    if (!(expected as Function)(actual, index)) {
       diff.push({
         path,
         expected,
