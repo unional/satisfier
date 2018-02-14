@@ -1,5 +1,5 @@
 {
-  "extends": "unional",
+  "extends": "plugin:unional/latest",
   "root": true,
   "env": {
     "node": true,
