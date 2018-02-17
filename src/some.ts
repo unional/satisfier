@@ -9,6 +9,7 @@ import { createSatisfier } from './createSatisfier'
 
 /**
  * Check if an array have at least one entry satisfying the expectation.
+ * @deprecated please use `has()` instead
  * @param expectation expectation
  */
 export function some(expectation) {
