@@ -1,7 +1,6 @@
 import { test } from 'ava'
 
-import { createSatisfier } from './createSatisfier'
-import { has } from './has'
+import { createSatisfier, has } from './index'
 
 test('non array returns false', t => {
   t.false(createSatisfier(has(1)).test(undefined))

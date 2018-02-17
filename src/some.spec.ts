@@ -18,7 +18,6 @@ test('array with one match returns true', t => {
   t.true(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }]))
 })
 
-
 test('array with more than one match returns true', t => {
   t.true(createSatisfier(some({ a: 1 })).test([{ a: 1 }, { a: 1 }]))
   t.true(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }, { a: 1 }, 'x']))
