@@ -3,6 +3,13 @@ import { test } from 'ava'
 import { createSatisfier } from './index'
 import { assertExec, assertRegExp } from './testUtil'
 
+test('undefined should match anything', t => {
+  t.is(createSatisfier(undefined).exec(undefined), undefined)
+  t.is(createSatisfier(undefined).exec({}), undefined)
+  t.is(createSatisfier({ a: undefined }).exec({}), undefined)
+  t.is(createSatisfier([undefined]).exec([]), undefined)
+})
+
 test('primitive types without specifing generic will work without issue.', t => {
   t.is(createSatisfier(1).exec(1), undefined)
   t.is(createSatisfier(true).exec(true), undefined)

@@ -55,7 +55,10 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
       })
     }
   }
-  else if (expected === null || expected === undefined) {
+  else if (expected === undefined) {
+    return diff
+  }
+  else if (expected === null) {
     if (expected !== actual)
       diff.push({
         path,

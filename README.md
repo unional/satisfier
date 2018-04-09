@@ -60,6 +60,16 @@ createSatisfier({ a: /boo/ }).exec({ a: 'foo' })
 createSatisfier({ a: a => a === 1 }).exec({ a: 2 })
 ```
 
+## Meaning of undefined
+
+If `undefined` is used in expectation, it will match anything.
+
+```ts
+createSatisfier(underfined).test({})
+createSatisfier({ a: undefined }).test({})
+createSatisfier([undefined, 1]).test(['x', 1])
+```
+
 ## test against array
 
 There are several ways to test against array:
