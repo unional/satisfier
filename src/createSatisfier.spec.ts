@@ -21,7 +21,7 @@ test('nested {} checks for non undefined', () => {
   const s = createSatisfier<{ a: { c: number, d: string }, b: string }>({ a: {} })
   const actual = s.exec({} as any)!
   t.equal(actual.length, 1)
-  assertExec(t, actual[0], ['a'], {}, undefined)
+  assertExec(actual[0], ['a'], {}, undefined)
 })
 
 test('actual should be a complete struct', () => {
