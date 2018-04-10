@@ -1,23 +1,21 @@
-module.exports = function (wallaby) {
+module.exports = () => {
   return {
-    "files": [
+    'files': [
+      { pattern: 'package.json', instrument: false },
       { pattern: 'tsconfig.*', instrument: false },
-      "src/**/*.ts",
-      "!src/**/*.spec.ts"
+      'src/**/*.ts',
+      '!src/**/*.spec.ts'
     ],
-    "tests": [
-      "src/**/*.spec.ts"
+    'tests': [
+      'src/**/*.spec.ts'
     ],
-    "env": {
-      "type": "node"
-    },
-    compilers: {
-      'src/**/*.ts': wallaby.compilers.typeScript({ module: 'commonjs' }),
+    'env': {
+      'type': 'node'
     },
     hints: {
       allowIgnoringCoverageInTests: true,
       ignoreCoverage: /istanbul ignore next/
     },
-    testFramework: 'ava'
+    'testFramework': 'jest'
   }
 }

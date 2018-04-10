@@ -1,139 +1,139 @@
-import { test } from 'ava'
+import t from 'assert'
 
 import { createSatisfier } from './index'
 import { assertExec, assertRegExp } from './testUtil'
 
-test('undefined should match anything', t => {
-  t.is(createSatisfier(undefined).exec(undefined), undefined)
-  t.is(createSatisfier(undefined).exec({}), undefined)
-  t.is(createSatisfier({ a: undefined }).exec({}), undefined)
-  t.is(createSatisfier([undefined]).exec([]), undefined)
+test('undefined should match anything', () => {
+  t.equal(createSatisfier(undefined).exec(undefined), undefined)
+  t.equal(createSatisfier(undefined).exec({}), undefined)
+  t.equal(createSatisfier({ a: undefined }).exec({}), undefined)
+  t.equal(createSatisfier([undefined]).exec([]), undefined)
 })
 
-test('primitive types without specifing generic will work without issue.', t => {
-  t.is(createSatisfier(1).exec(1), undefined)
-  t.is(createSatisfier(true).exec(true), undefined)
-  t.is(createSatisfier('a').exec('a'), undefined)
+test('primitive types without specifing generic will work without issue.', () => {
+  t.equal(createSatisfier(1).exec(1), undefined)
+  t.equal(createSatisfier(true).exec(true), undefined)
+  t.equal(createSatisfier('a').exec('a'), undefined)
 })
 
-test('can use generic to specify the data structure', t => {
-  t.is(createSatisfier<number>(1).exec(1), undefined)
-  t.is(createSatisfier<{ a: number }>({ a: /1/ }).exec({ a: 1 }), undefined)
+test('can use generic to specify the data structure', () => {
+  t.equal(createSatisfier<number>(1).exec(1), undefined)
+  t.equal(createSatisfier<{ a: number }>({ a: /1/ }).exec({ a: 1 }), undefined)
 })
 
-test('empty object expectation passes all objects', t => {
-  t.is(createSatisfier({}).exec({}), undefined)
-  t.is(createSatisfier({}).exec({ a: 1 }), undefined)
-  t.is(createSatisfier({}).exec({ a: { b: 'a' } }), undefined)
-  t.is(createSatisfier({}).exec({ a: true }), undefined)
-  t.is(createSatisfier({}).exec({ a: [1] }), undefined)
+test('empty object expectation passes all objects', () => {
+  t.equal(createSatisfier({}).exec({}), undefined)
+  t.equal(createSatisfier({}).exec({ a: 1 }), undefined)
+  t.equal(createSatisfier({}).exec({ a: { b: 'a' } }), undefined)
+  t.equal(createSatisfier({}).exec({ a: true }), undefined)
+  t.equal(createSatisfier({}).exec({ a: [1] }), undefined)
 })
 
-test('empty object expectation fails primitive', t => {
+test('empty object expectation fails primitive', () => {
   assertExec(t, createSatisfier({}).exec(1)![0], [], {}, 1)
   assertExec(t, createSatisfier({}).exec(true)![0], [], {}, true)
   assertExec(t, createSatisfier({}).exec('a')![0], [], {}, 'a')
 })
 
-test('mismatch value gets path, expected, and actual', t => {
+test('mismatch value gets path, expected, and actual', () => {
   const actual = createSatisfier({ a: 1 }).exec({ a: 2 })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a'], 1, 2)
 })
 
-test('missing property get actual as undefined', t => {
+test('missing property get actual as undefined', () => {
   const actual = createSatisfier({ a: 1 }).exec({})!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a'], 1, undefined)
 })
 
-test('missing property get deeper level', t => {
+test('missing property get deeper level', () => {
   const actual = createSatisfier({ a: { b: 1 } }).exec({ a: {} })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a', 'b'], 1, undefined)
 })
 
-test('passing regex gets undefined', t => {
-  t.is(createSatisfier({ foo: /foo/ }).exec({ foo: 'foo' }), undefined)
+test('passing regex gets undefined', () => {
+  t.equal(createSatisfier({ foo: /foo/ }).exec({ foo: 'foo' }), undefined)
 })
 
-test('failed regex will be in expected property', t => {
+test('failed regex will be in expected property', () => {
   const actual = createSatisfier({ foo: /foo/ }).exec({ foo: 'boo' })!
-  assertRegExp(t, actual, ['foo'], /foo/, 'boo')
+  assertRegExp(actual, ['foo'], /foo/, 'boo')
 })
 
-test('regex on missing property gets actual as undefined', t => {
+test('regex on missing property gets actual as undefined', () => {
   const actual = createSatisfier({ foo: /foo/ }).exec({})!
-  assertRegExp(t, actual, ['foo'], /foo/, undefined)
+  assertRegExp(actual, ['foo'], /foo/, undefined)
 })
 
-test('regex on non-string will fail as normal', t => {
+test('regex on non-string will fail as normal', () => {
   let actual = createSatisfier({ foo: /foo/ }).exec({ foo: 1 })!
-  assertRegExp(t, actual, ['foo'], /foo/, 1)
+  assertRegExp(actual, ['foo'], /foo/, 1)
 
   actual = createSatisfier({ foo: /foo/ }).exec({ foo: true })!
-  assertRegExp(t, actual, ['foo'], /foo/, true)
+  assertRegExp(actual, ['foo'], /foo/, true)
 
   actual = createSatisfier({ foo: /foo/ }).exec({ foo: [1, true, 'a'] })!
-  assertRegExp(t, actual, ['foo'], /foo/, [1, true, 'a'])
+  assertRegExp(actual, ['foo'], /foo/, [1, true, 'a'])
 
   actual = createSatisfier({ foo: /foo/ }).exec({ foo: { a: 1 } })!
-  assertRegExp(t, actual, ['foo'], /foo/, { a: 1 })
+  assertRegExp(actual, ['foo'], /foo/, { a: 1 })
 })
 
-test('predicate receives actual value', t => {
-  t.is(createSatisfier({ a: a => a === 1 }).exec({ a: 1 }), undefined)
+test('predicate receives actual value', () => {
+  t.equal(createSatisfier({ a: a => a === 1 }).exec({ a: 1 }), undefined)
 })
 
-test('passing predicate gets undefined', t => {
-  t.is(createSatisfier({ a: () => true }).exec({}), undefined)
-  t.is(createSatisfier({ a: () => true }).exec({ a: 1 }), undefined)
+test('passing predicate gets undefined', () => {
+  t.equal(createSatisfier({ a: () => true }).exec({}), undefined)
+  t.equal(createSatisfier({ a: () => true }).exec({ a: 1 }), undefined)
 })
 
-test('failing predicate', t => {
+test('failing predicate', () => {
   const actual = createSatisfier({ a: /*istanbul ignore next*/function () { return false } }).exec({ a: 1 })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a'], /*istanbul ignore next*/function () { return false; }, 1)
 })
 
-test('against each element in array', t => {
-  t.is(createSatisfier({ a: 1 }).exec([{ a: 1 }, { b: 1, a: 1 }]), undefined)
+test('against each element in array', () => {
+  t.equal(createSatisfier({ a: 1 }).exec([{ a: 1 }, { b: 1, a: 1 }]), undefined)
 })
 
-test('against each element in array in deep level', t => {
+test('against each element in array in deep level', () => {
   const actual = createSatisfier({ a: { b: { c: /foo/ } } }).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }])!
-  t.is(actual.length, 3)
+  t.equal(actual.length, 3)
   assertExec(t, actual[0], ['[0]', 'a', 'b'], { c: /foo/ }, undefined)
   assertExec(t, actual[1], ['[1]', 'a', 'b', 'c'], /foo/, undefined)
   assertExec(t, actual[2], ['[2]', 'a', 'b', 'c'], /foo/, 'boo')
 })
 
-test('when apply against array, will have indices in the path', t => {
+test('when apply against array, will have indices in the path', () => {
   const actual = createSatisfier({ a: 1 }).exec([{ a: 1 }, {}])!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['[1]', 'a'], 1, undefined)
 })
 
-test('when expectation is an array, apply to each entry in the actual array', t => {
-  t.is(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }, { c: 3 }]), undefined)
+test('when expectation is an array, apply to each entry in the actual array', () => {
+  t.equal(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }, { c: 3 }]), undefined)
   const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: true }, { b: 'b' }, { c: 3 }])!
-  t.is(actual.length, 2)
+  t.equal(actual.length, 2)
   assertExec(t, actual[0], ['[0]', 'a'], 1, true)
   assertExec(t, actual[1], ['[1]', 'b'], 2, 'b')
 })
 
-test.skip('when expectation is an array and actual is not, the behavior is not defined yet', t => {
+test.skip('when expectation is an array and actual is not, the behavior is not defined yet', () => {
   const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec({ a: 1 })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
 })
 
-test('deep object checking', t => {
+test('deep object checking', () => {
   const actual = createSatisfier({ a: { b: 1 } }).exec({ a: { b: 2 } })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a', 'b'], 1, 2)
 })
 
-test('can check parent property', t => {
+test('can check parent property', () => {
   class Foo {
     foo = 'foo'
   }
@@ -141,30 +141,30 @@ test('can check parent property', t => {
     boo = 'boo'
   }
   const boo = new Boo()
-  t.is(createSatisfier({ foo: 'foo' }).exec(boo), undefined)
+  t.equal(createSatisfier({ foo: 'foo' }).exec(boo), undefined)
 })
 
-test('actual of type any should not have type checking error', t => {
+test('actual of type any should not have type checking error', () => {
   let actual: any = { a: 1 }
-  t.is(createSatisfier({ a: 1 }).exec(actual), undefined)
+  t.equal(createSatisfier({ a: 1 }).exec(actual), undefined)
 })
 
-test('expect array in hash', t => {
-  t.is(createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'a'] }), undefined)
+test('expect array in hash', () => {
+  t.equal(createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'a'] }), undefined)
 })
 
-test('failing array in hash', t => {
+test('failing array in hash', () => {
   const actual = createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'b'] })!
-  t.is(actual.length, 1)
+  t.equal(actual.length, 1)
   assertExec(t, actual[0], ['a', '[2]'], 'a', 'b')
 })
 
-test('apply property predicate to array', t => {
+test('apply property predicate to array', () => {
   const satisfier = createSatisfier({
     data: e => e && e.every(x => x.login)
   });
 
-  t.is(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
-  t.not(satisfier.exec([{ data: [{ foo: 'a' }] }]), undefined)
-  t.not(satisfier.exec([{ foo: 'b' }]), undefined)
+  t.equal(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
+  t.notEqual(satisfier.exec([{ data: [{ foo: 'a' }] }]), undefined)
+  t.notEqual(satisfier.exec([{ foo: 'b' }]), undefined)
 })

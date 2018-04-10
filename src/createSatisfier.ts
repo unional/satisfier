@@ -1,13 +1,11 @@
-import { SatisfierExec } from './interfaces'
+import { SatisfierExec, Satisfier } from './interfaces'
+import { ArrayEntryExpectation } from './ArrayEntryExpectation'
 
 /**
  * creates a satisfier
  * @param expectation All properties can be a value which will be compared to the same property in `actual`, RegExp, or a predicate function that will be used to check against the property.
  */
-export function createSatisfier<T = any>(expectation: any): {
-  test: (actual: T) => boolean;
-  exec: (actual: T) => SatisfierExec[] | undefined;
-} {
+export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
   function test(actual: T) {
     return exec(actual) === undefined
   }
@@ -18,10 +16,23 @@ export function createSatisfier<T = any>(expectation: any): {
     if (Array.isArray(actual)) {
       const diff: SatisfierExec[] = []
       if (Array.isArray(expectation)) {
-        expectation.forEach((e: any, i) => {
-          if (e === undefined)
+        let a = 0
+        expectation.forEach((e: any) => {
+          if (e === undefined) {
+            a = a + 1
             return
-          diff.push(...detectDiff(actual[i], e, [`[${i}]`], i))
+          }
+          if (e instanceof ArrayEntryExpectation) {
+            // while (e.active && a <= actual.length) {
+            //   const d = e.exec(actual[a])
+            //   if (d) diff.push(...d)
+            //   a = a + 1
+            // }
+          }
+          else {
+            diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
+            a = a + 1
+          }
         })
       }
       else if (typeof expectation === 'function') {
