@@ -1,5 +1,6 @@
 import { SatisfierExec, Satisfier } from './interfaces'
 import { ArrayEntryExpectation } from './ArrayEntryExpectation'
+import { Or } from './Or'
 
 /**
  * creates a satisfier
@@ -16,23 +17,25 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
     if (Array.isArray(actual)) {
       const diff: SatisfierExec[] = []
       if (Array.isArray(expectation)) {
+        const arrayEntryExps: ArrayEntryExpectation[] = []
+        const exp = expectation.map(e => {
+          if (arrayEntryExps.length >= 1) {
+            return new Or(...arrayEntryExps, e)
+          }
+
+          if (e instanceof ArrayEntryExpectation) {
+            arrayEntryExps.push(e)
+          }
+          return e
+        })
         let a = 0
-        expectation.forEach((e: any) => {
+        exp.forEach((e: any) => {
           if (e === undefined) {
             a = a + 1
             return
           }
-          if (e instanceof ArrayEntryExpectation) {
-            // while (e.active && a <= actual.length) {
-            //   const d = e.exec(actual[a])
-            //   if (d) diff.push(...d)
-            //   a = a + 1
-            // }
-          }
-          else {
-            diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
-            a = a + 1
-          }
+          diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
+          a = a + 1
         })
       }
       else if (typeof expectation === 'function') {
@@ -84,6 +87,10 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
         expected,
         actual
       })
+  }
+  else if (expected instanceof ArrayEntryExpectation) {
+    const d = expected.exec(actual, path)
+    if (d) diff.push(...d)
   }
   else if (expected instanceof RegExp) {
     if (!expected.test(actual)) {

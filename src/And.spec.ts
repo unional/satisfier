@@ -1,12 +1,15 @@
 import t from 'assert'
-import a from 'assertron'
 
-import { And } from './And'
-import { createSatisfier } from 'satisfier';
+import { And, createSatisfier } from '.'
+import { assertExec } from './testUtil'
 
-test.skip('fail when subject is not an array', () => {
-  const subject = new And({ a: 1 }, { b: 2 })
-  const s = createSatisfier([subject])
-  a.false(s.test([{ a: 1 }]))
-  t(s.test([{ a: 1, b: 2 }]))
+test('fail when not passing any expectations', () => {
+  const s = createSatisfier([new And({ a: 1 }, { b: 2 })])
+  const actual = s.exec([{ a: 1 }])!
+  assertExec(actual[0], ['[0]', 'b'], 2, undefined)
+})
+
+test('pass when passing all expectations', () => {
+  const s = createSatisfier([new And({ a: 1 }, { b: 2 })])
+  t.equal(s.exec([{ a: 1, b: 2 }]), undefined)
 })

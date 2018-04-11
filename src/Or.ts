@@ -5,22 +5,21 @@ import { Satisfier, SatisfierExec } from './interfaces';
 /**
  * Check if an array has entries satisfy the expectations in order.
  */
-export class And extends ArrayEntryExpectation {
+export class Or extends ArrayEntryExpectation {
   satisfiers: Satisfier<any>[]
   constructor(...expectations: any[]) {
     super()
     this.satisfiers = expectations.map(createSatisfier)
   }
   exec(actual, path) {
-    let diff: SatisfierExec[] | undefined
-    this.satisfiers.some(s => {
-      diff = s.exec(actual)
-      if (diff) {
-        diff.forEach(d => d.path = [...path, ...d.path])
-      }
-
-      return !!diff
-    })
+    let diff: SatisfierExec[] = []
+    for (let i = 0; i < this.satisfiers.length; i++) {
+      const s = this.satisfiers[i]
+      const eachDiff = s.exec(actual)
+      if (!eachDiff) return undefined
+      eachDiff.forEach(d => d.path = [...path, ...d.path])
+      diff.push(...eachDiff)
+    }
     return diff
   }
 }
