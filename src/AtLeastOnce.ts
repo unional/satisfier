@@ -3,9 +3,9 @@ import { createSatisfier } from './createSatisfier'
 import { SatisfierExec, Satisfier } from './interfaces'
 
 export class AtLeastOnce extends ArrayEntryExpectation {
-  pass = false
-  satisfier: Satisfier<any>
-  constructor(public expectation: any) {
+  private pass = false
+  private satisfier: Satisfier<any>
+  constructor(expectation: any) {
     super()
     this.satisfier = createSatisfier(expectation)
   }
