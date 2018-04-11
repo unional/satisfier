@@ -1,28 +1,29 @@
-import { test } from 'ava'
+import t from 'assert'
+import a from 'assertron'
 
 import { createSatisfier, some } from './index'
 
-test('non array returns false', t => {
-  t.false(createSatisfier(some({ a: 1 })).test(true))
-  t.false(createSatisfier(some({ a: 1 })).test(1))
-  t.false(createSatisfier(some({ a: 1 })).test('{ a: 1 }'))
-  t.false(createSatisfier(some({ a: 1 })).test({ a: 1 }))
+test('non array returns false', () => {
+  a.false(createSatisfier(some({ a: 1 })).test(true))
+  a.false(createSatisfier(some({ a: 1 })).test(1))
+  a.false(createSatisfier(some({ a: 1 })).test('{ a: 1 }'))
+  a.false(createSatisfier(some({ a: 1 })).test({ a: 1 }))
 })
 
-test('array with no match returns false', t => {
-  t.false(createSatisfier(some({ a: 1 })).test([{ b: 1 }]))
+test('array with no match returns false', () => {
+  a.false(createSatisfier(some({ a: 1 })).test([{ b: 1 }]))
 })
 
-test('array with one match returns true', t => {
-  t.true(createSatisfier(some({ a: 1 })).test([{ a: 1 }]))
-  t.true(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }]))
+test('array with one match returns true', () => {
+  t(createSatisfier(some({ a: 1 })).test([{ a: 1 }]))
+  t(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }]))
 })
 
-test('array with more than one match returns true', t => {
-  t.true(createSatisfier(some({ a: 1 })).test([{ a: 1 }, { a: 1 }]))
-  t.true(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }, { a: 1 }, 'x']))
+test('array with more than one match returns true', () => {
+  t(createSatisfier(some({ a: 1 })).test([{ a: 1 }, { a: 1 }]))
+  t(createSatisfier(some({ a: 1 })).test([{ b: 1 }, { a: 1 }, { a: 1 }, 'x']))
 })
 
-test('tersify()', t => {
-  t.is(some({ a: 1 }).tersify(), 'some({ a: 1 })')
+test('tersify()', () => {
+  t.equal(some({ a: 1 }).tersify(), 'some({ a: 1 })')
 })

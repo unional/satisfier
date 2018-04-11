@@ -2,14 +2,14 @@
 
 const cp = require('child_process');
 
-let ava;
+let runner;
 cp.spawn('tsc', ['-w'], { shell: true })
   .stdout.on('data', (data) => {
     const text = data.toString()
     process.stdout.write(text)
     if (/.*Compilation complete/.test(text)) {
-      if (!ava) {
-        ava = cp.spawn('ava', ['-w'], {
+      if (!runner) {
+        runner = cp.spawn('jest', ['--watch'], {
           stdio: 'inherit',
           shell: true
         })
@@ -19,7 +19,7 @@ cp.spawn('tsc', ['-w'], { shell: true })
         shell: true
       })
       if (lint.status === 0) {
-        cp.spawnSync('npm', ['run', 'build-commonjs'])
+        cp.spawnSync('npm', ['run', 'build-es5'])
       }
     }
   })

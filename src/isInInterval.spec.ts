@@ -1,4 +1,5 @@
-import { test } from 'ava'
+import t from 'assert'
+import a from 'assertron'
 
 import {
   createSatisfier,
@@ -9,37 +10,37 @@ import {
 } from './index'
 
 
-test('open interval', t => {
-  t.false(createSatisfier(isInOpenInterval(1, 3)).test(1))
-  t.true(createSatisfier(isInOpenInterval(1, 3)).test(2))
-  t.false(createSatisfier(isInOpenInterval(1, 3)).test(3))
+test('open interval', () => {
+  a.false(createSatisfier(isInOpenInterval(1, 3)).test(1))
+  t(createSatisfier(isInOpenInterval(1, 3)).test(2))
+  a.false(createSatisfier(isInOpenInterval(1, 3)).test(3))
 })
 
-test('closed interval', t => {
-  t.false(createSatisfier(isInClosedInterval(1, 3)).test(0))
-  t.true(createSatisfier(isInClosedInterval(1, 3)).test(1))
-  t.true(createSatisfier(isInClosedInterval(1, 3)).test(2))
-  t.true(createSatisfier(isInClosedInterval(1, 3)).test(3))
-  t.false(createSatisfier(isInClosedInterval(1, 3)).test(4))
+test('closed interval', () => {
+  a.false(createSatisfier(isInClosedInterval(1, 3)).test(0))
+  t(createSatisfier(isInClosedInterval(1, 3)).test(1))
+  t(createSatisfier(isInClosedInterval(1, 3)).test(2))
+  t(createSatisfier(isInClosedInterval(1, 3)).test(3))
+  a.false(createSatisfier(isInClosedInterval(1, 3)).test(4))
 })
 
-test('left closed', t => {
-  t.false(createSatisfier(isInLeftClosedInterval(1, 3)).test(0))
-  t.true(createSatisfier(isInLeftClosedInterval(1, 3)).test(1))
-  t.true(createSatisfier(isInLeftClosedInterval(1, 3)).test(2))
-  t.false(createSatisfier(isInLeftClosedInterval(1, 3)).test(3))
+test('left closed', () => {
+  a.false(createSatisfier(isInLeftClosedInterval(1, 3)).test(0))
+  t(createSatisfier(isInLeftClosedInterval(1, 3)).test(1))
+  t(createSatisfier(isInLeftClosedInterval(1, 3)).test(2))
+  a.false(createSatisfier(isInLeftClosedInterval(1, 3)).test(3))
 })
 
-test('right closed', t => {
-  t.false(createSatisfier(isInRightClosedInterval(1, 3)).test(1))
-  t.true(createSatisfier(isInRightClosedInterval(1, 3)).test(2))
-  t.true(createSatisfier(isInRightClosedInterval(1, 3)).test(3))
-  t.false(createSatisfier(isInRightClosedInterval(1, 3)).test(4))
+test('right closed', () => {
+  a.false(createSatisfier(isInRightClosedInterval(1, 3)).test(1))
+  t(createSatisfier(isInRightClosedInterval(1, 3)).test(2))
+  t(createSatisfier(isInRightClosedInterval(1, 3)).test(3))
+  a.false(createSatisfier(isInRightClosedInterval(1, 3)).test(4))
 })
 
-test('tersify()', t => {
-  t.is(isInOpenInterval(1, 3).tersify(), '(1...3)')
-  t.is(isInClosedInterval(1, 3).tersify(), '[1...3]')
-  t.is(isInLeftClosedInterval(1, 3).tersify(), '[1...3)')
-  t.is(isInRightClosedInterval(1, 3).tersify(), '(1...3]')
+test('tersify()', () => {
+  t.equal(isInOpenInterval(1, 3).tersify(), '(1...3)')
+  t.equal(isInClosedInterval(1, 3).tersify(), '[1...3]')
+  t.equal(isInLeftClosedInterval(1, 3).tersify(), '[1...3)')
+  t.equal(isInRightClosedInterval(1, 3).tersify(), '(1...3]')
 })

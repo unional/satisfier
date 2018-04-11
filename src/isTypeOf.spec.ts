@@ -1,21 +1,22 @@
-import test from 'ava'
+import t from 'assert'
+import a from 'assertron'
 
-import { createSatisfier, isTypeOf } from './index'
+import { createSatisfier, isTypeOf } from '.'
 
-test('check type of property', t => {
-  t.true(createSatisfier({ a: isTypeOf('number') }).test({ a: 1 }))
-  t.false(createSatisfier({ a: isTypeOf('number') }).test({ a: false }))
-  t.false(createSatisfier({ a: isTypeOf('number') }).test({ a: 'a' }))
+test('check type of property', () => {
+  t(createSatisfier({ a: isTypeOf('number') }).test({ a: 1 }))
+  a.false(createSatisfier({ a: isTypeOf('number') }).test({ a: false }))
+  a.false(createSatisfier({ a: isTypeOf('number') }).test({ a: 'a' }))
 
-  t.false(createSatisfier({ a: isTypeOf('boolean') }).test({ a: 1 }))
-  t.true(createSatisfier({ a: isTypeOf('boolean') }).test({ a: false }))
-  t.false(createSatisfier({ a: isTypeOf('boolean') }).test({ a: 'a' }))
+  a.false(createSatisfier({ a: isTypeOf('boolean') }).test({ a: 1 }))
+  t(createSatisfier({ a: isTypeOf('boolean') }).test({ a: false }))
+  a.false(createSatisfier({ a: isTypeOf('boolean') }).test({ a: 'a' }))
 
-  t.false(createSatisfier({ a: isTypeOf('string') }).test({ a: 1 }))
-  t.false(createSatisfier({ a: isTypeOf('string') }).test({ a: false }))
-  t.true(createSatisfier({ a: isTypeOf('string') }).test({ a: 'a' }))
+  a.false(createSatisfier({ a: isTypeOf('string') }).test({ a: 1 }))
+  a.false(createSatisfier({ a: isTypeOf('string') }).test({ a: false }))
+  t(createSatisfier({ a: isTypeOf('string') }).test({ a: 'a' }))
 })
 
-test('tersify()', t => {
-  t.is(isTypeOf('number').tersify(), 'typeof number')
+test('tersify()', () => {
+  t.equal(isTypeOf('number').tersify(), 'typeof number')
 })

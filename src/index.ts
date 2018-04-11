@@ -1,3 +1,5 @@
+export * from './AtLeastOnce'
+export * from './ArrayEntryExpectation'
 export * from './createSatisfier'
 export * from './every'
 export * from './has'

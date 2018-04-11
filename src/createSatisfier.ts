@@ -1,13 +1,12 @@
-import { SatisfierExec } from './interfaces'
+import { SatisfierExec, Satisfier } from './interfaces'
+import { ArrayEntryExpectation } from './ArrayEntryExpectation'
+import { Or } from './Or'
 
 /**
  * creates a satisfier
  * @param expectation All properties can be a value which will be compared to the same property in `actual`, RegExp, or a predicate function that will be used to check against the property.
  */
-export function createSatisfier<T = any>(expectation: any): {
-  test: (actual: T) => boolean;
-  exec: (actual: T) => SatisfierExec[] | undefined;
-} {
+export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
   function test(actual: T) {
     return exec(actual) === undefined
   }
@@ -18,10 +17,25 @@ export function createSatisfier<T = any>(expectation: any): {
     if (Array.isArray(actual)) {
       const diff: SatisfierExec[] = []
       if (Array.isArray(expectation)) {
-        expectation.forEach((e: any, i) => {
-          if (e === undefined)
+        const arrayEntryExps: ArrayEntryExpectation[] = []
+        const exp = expectation.map(e => {
+          if (arrayEntryExps.length >= 1) {
+            return new Or(...arrayEntryExps, e)
+          }
+
+          if (e instanceof ArrayEntryExpectation) {
+            arrayEntryExps.push(e)
+          }
+          return e
+        })
+        let a = 0
+        exp.forEach((e: any) => {
+          if (e === undefined) {
+            a = a + 1
             return
-          diff.push(...detectDiff(actual[i], e, [`[${i}]`], i))
+          }
+          diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
+          a = a + 1
         })
       }
       else if (typeof expectation === 'function') {
@@ -73,6 +87,10 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
         expected,
         actual
       })
+  }
+  else if (expected instanceof ArrayEntryExpectation) {
+    const d = expected.exec(actual, path)
+    if (d) diff.push(...d)
   }
   else if (expected instanceof RegExp) {
     if (!expected.test(actual)) {
