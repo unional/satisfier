@@ -1,6 +1,7 @@
 import t from 'assert'
 
-import { Or, createSatisfier } from '.'
+import { createSatisfier } from '.'
+import { Or } from './Or'
 import { assertExec } from './testUtil'
 
 test('fail when not passing all expectations', () => {

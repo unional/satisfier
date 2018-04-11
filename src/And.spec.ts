@@ -1,6 +1,7 @@
 import t from 'assert'
 
-import { And, createSatisfier } from '.'
+import { createSatisfier } from '.'
+import { And } from './And'
 import { assertExec } from './testUtil'
 
 test('fail when not passing any expectations', () => {

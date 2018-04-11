@@ -1,8 +1,7 @@
 import t from 'assert'
 import a from 'assertron'
 
-import { createSatisfier } from '.'
-import { AtLeastOnce } from './AtLeastOnce'
+import { AtLeastOnce, createSatisfier } from '.'
 
 test('fail when subject is not an array', () => {
   a.false(createSatisfier([new AtLeastOnce(1)]).test(1))
