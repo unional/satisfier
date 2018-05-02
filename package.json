@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",
-    "@types/node": "^9.6.4",
+    "@types/node": "^10.0.3",
     "assertron": "^4.3.0",
     "dependency-check": "^3.1.0",
     "eslint": "^4.19.1",
