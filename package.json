@@ -58,7 +58,7 @@
     "email": "homawong@gmail.com"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.2",
+    "@types/jest": "^23.0.0",
     "@types/node": "^9.6.4",
     "assertron": "^5.0.0",
     "dependency-check": "^3.1.0",
