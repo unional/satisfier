@@ -3,17 +3,17 @@ import t from 'assert'
 import { tersify } from 'tersify'
 
 export function assertRegExp(actual, path, regex, actualValue) {
-  t.equal(actual.length, 1)
-  t.deepEqual(actual[0].path, path)
-  t.equal(actual[0].expected.source, regex.source)
-  t.deepEqual(actual[0].actual, actualValue)
+  t.strictEqual(actual.length, 1)
+  t.deepStrictEqual(actual[0].path, path)
+  t.strictEqual(actual[0].expected.source, regex.source)
+  t.deepStrictEqual(actual[0].actual, actualValue)
 }
 
 export function assertExec(entry, path, expected, actual) {
-  t.deepEqual(entry.path, path)
+  t.deepStrictEqual(entry.path, path)
   if (typeof entry.expected === 'function')
-    t.equal(tersify(entry.expected), tersify(expected))
+    t.strictEqual(tersify(entry.expected), tersify(expected))
   else
-    t.deepEqual(entry.expected, expected)
-  t.deepEqual(entry.actual, actual)
+    t.deepStrictEqual(entry.expected, expected)
+  t.deepStrictEqual(entry.actual, actual)
 }

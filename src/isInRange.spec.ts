@@ -12,5 +12,5 @@ test('check number in range', () => {
 })
 
 test('tersify()', () => {
-  t.equal(isInRange(1, 3).tersify(), '[1...3]')
+  t.strictEqual(isInRange(1, 3).tersify(), '[1...3]')
 })

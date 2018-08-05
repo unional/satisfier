@@ -50,5 +50,5 @@ test('pass when there are unmatched entry between matched one', () => {
 })
 
 test('tersify()', () => {
-  t.equal(has({ a: 1 }, { b: 2 }).tersify(), 'has({ a: 1 }, { b: 2 })')
+  t.strictEqual(has({ a: 1 }, { b: 2 }).tersify(), 'has({ a: 1 }, { b: 2 })')
 })

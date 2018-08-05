@@ -39,8 +39,8 @@ test('right closed', () => {
 })
 
 test('tersify()', () => {
-  t.equal(isInOpenInterval(1, 3).tersify(), '(1...3)')
-  t.equal(isInClosedInterval(1, 3).tersify(), '[1...3]')
-  t.equal(isInLeftClosedInterval(1, 3).tersify(), '[1...3)')
-  t.equal(isInRightClosedInterval(1, 3).tersify(), '(1...3]')
+  t.strictEqual(isInOpenInterval(1, 3).tersify(), '(1...3)')
+  t.strictEqual(isInClosedInterval(1, 3).tersify(), '[1...3]')
+  t.strictEqual(isInLeftClosedInterval(1, 3).tersify(), '[1...3)')
+  t.strictEqual(isInRightClosedInterval(1, 3).tersify(), '(1...3]')
 })

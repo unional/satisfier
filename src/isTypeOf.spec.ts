@@ -18,5 +18,5 @@ test('check type of property', () => {
 })
 
 test('tersify()', () => {
-  t.equal(isTypeOf('number').tersify(), 'typeof number')
+  t.strictEqual(isTypeOf('number').tersify(), 'typeof number')
 })

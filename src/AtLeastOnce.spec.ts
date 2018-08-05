@@ -21,7 +21,7 @@ test('pass when subject contains at least one element satisfying the expectation
 
 test('match one follow with one miss', () => {
   const actual = createSatisfier([new AtLeastOnce(1), 3]).exec([1, 2, 3])
-  t.equal(actual, undefined)
+  t.strictEqual(actual, undefined)
 })
 
 test('match one follow with two misses', () => {
