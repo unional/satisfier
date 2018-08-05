@@ -150,6 +150,8 @@ results[0].expected.tersify()
 tersify(results[0])
 ```
 
+Examples of predicate: `And`, `AtLeastOnce`, `every`, `has`, `isInInterval`, `isInRange`, `isTypeOf`, `none`, `Or`, `some`
+
 ## Contribute
 
 ```sh
