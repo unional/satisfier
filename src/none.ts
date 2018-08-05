@@ -8,8 +8,7 @@ import {
 import { createSatisfier } from './createSatisfier'
 
 /**
- * Check if an array have at least one entry satisfying the expectation.
- * @deprecated please use `has()` instead
+ * Check if an array have no entry satisfying the expectation.
  * @param expectation expectation
  */
 export function none(expectation) {

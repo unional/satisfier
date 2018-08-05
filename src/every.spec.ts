@@ -26,5 +26,5 @@ test('array with all match returns true', () => {
 })
 
 test('tersify()', () => {
-  t.equal(every({ a: 1 }).tersify(), 'every({ a: 1 })')
+  t.strictEqual(every({ a: 1 }).tersify(), 'every({ a: 1 })')
 })

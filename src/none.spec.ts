@@ -20,5 +20,5 @@ test('array with one match returns false', () => {
 })
 
 test('tersify()', () => {
-  t.equal(none({ a: 1 }).tersify(), 'none({ a: 1 })')
+  t.strictEqual(none({ a: 1 }).tersify(), 'none({ a: 1 })')
 })

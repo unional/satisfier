@@ -13,6 +13,6 @@ test('fail when not passing all expectations', () => {
 
 test('pass when passing any expectations', () => {
   const s = createSatisfier([new Or({ a: 1 }, { b: 2 })])
-  t.equal(s.exec([{ a: 1 }]), undefined)
-  t.equal(s.exec([{ b: 2 }]), undefined)
+  t.strictEqual(s.exec([{ a: 1 }]), undefined)
+  t.strictEqual(s.exec([{ b: 2 }]), undefined)
 })

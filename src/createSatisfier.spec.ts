@@ -20,7 +20,7 @@ test('Expecter can be specify partial of the data structure', () => {
 test('nested {} checks for non undefined', () => {
   const s = createSatisfier<{ a: { c: number, d: string }, b: string }>({ a: {} })
   const actual = s.exec({} as any)!
-  t.equal(actual.length, 1)
+  t.strictEqual(actual.length, 1)
   assertExec(actual[0], ['a'], {}, undefined)
 })
 
