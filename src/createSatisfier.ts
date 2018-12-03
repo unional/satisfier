@@ -37,6 +37,11 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
           diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
           a = a + 1
         })
+        // if (actual.length > exp.length) {
+        //   for (let i = exp.length; i < actual.length; i++) {
+        //     diff.push({ path: [`[${i}]`], expected: undefined, actual: actual[i] })
+        //   }
+        // }
       }
       else if (typeof expectation === 'function') {
         diff.push(...detectDiff(actual, expectation))
