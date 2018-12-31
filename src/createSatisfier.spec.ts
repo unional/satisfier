@@ -3,7 +3,6 @@ import a from 'assertron';
 import { createSatisfier } from './index';
 import { assertExec, assertRegExp } from './testUtil';
 
-
 test('support generics', () => {
   const s = createSatisfier<{ a: number }>({ a: 1 })
   t(s.test({ a: 1 }))
@@ -50,8 +49,24 @@ test('array with null', () => {
   a.false(createSatisfier([null]).test([1]))
 })
 
-describe('exec', () => {
+test('NaN satisfies NaN', () => {
+  t(createSatisfier(NaN).test(NaN))
+})
 
+test('NaN not satisfies others', () => {
+  a.false(createSatisfier(NaN).test(`a`))
+  a.false(createSatisfier(NaN).test(true))
+  a.false(createSatisfier(NaN).test(1))
+  a.false(createSatisfier(NaN).test([]))
+  a.false(createSatisfier(NaN).test({}))
+})
+
+test('array with NaN', () => {
+  t(createSatisfier([NaN]).test([NaN]))
+  a.false(createSatisfier([NaN]).test([1]))
+})
+
+describe('exec', () => {
   test('undefined should match anything', () => {
     t.strictEqual(createSatisfier(undefined).exec(undefined), undefined)
     t.strictEqual(createSatisfier(undefined).exec({}), undefined)
