@@ -46,6 +46,9 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
       else if (typeof expectation === 'function') {
         diff.push(...detectDiff(actual, expectation))
       }
+      else if (actual.length === 0) {
+        diff.push({ path: [], expected: expectation, actual })
+      }
       else {
         actual.forEach((a, i) => {
           diff.push(...detectDiff(a, expectation, [`[${i}]`], i))
@@ -85,13 +88,14 @@ function detectDiff(actual, expected, path: string[] = [], index?: number) {
         actual
       })
   }
+  else if (expectedType === 'number' && typeof actual === 'number') {
+    if (isNaN(expected) && isNaN(actual)) return diff
+    if (expected !== actual)
+      diff.push({ path, expected, actual })
+  }
   else if (expectedType === 'boolean' || expectedType === 'number' || expectedType === 'string' || actual === undefined) {
     if (expected !== actual)
-      diff.push({
-        path,
-        expected,
-        actual
-      })
+      diff.push({ path, expected, actual })
   }
   else if (expected instanceof ArrayEntryExpectation) {
     const d = expected.exec(actual, path)

@@ -27,3 +27,7 @@ test('array with more than one match returns true', () => {
 test('tersify()', () => {
   t.strictEqual(some({ a: 1 }).tersify(), 'some({ a: 1 })')
 })
+
+test('match second', () => {
+  a.satisfy(['first', 'second'], some('second'))
+})
