@@ -70,6 +70,12 @@ createSatisfier({ a: undefined }).test({})
 createSatisfier([undefined, 1]).test(['x', 1])
 ```
 
+If you want to test for `undefined` explicitly, use predicate function.
+
+```ts
+createSatisfier(x => x === undefined).test(undefined)
+```
+
 ## test against array
 
 There are several ways to test against array:
@@ -83,7 +89,6 @@ If the subject array is longer than the expectation array,
 the extra entries are not tested.
 
 You can also skip over entries by putting in `undefined`.
-If you want to test against `undefined` explicitely, use a predicate function.
 
 ```ts
 import { createSatisfier } from 'satisfier'
