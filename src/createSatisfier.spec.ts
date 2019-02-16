@@ -146,7 +146,7 @@ describe('exec', () => {
   })
 
   test('predicate receives actual value', () => {
-    t.strictEqual(createSatisfier({ a: a => a === 1 }).exec({ a: 1 }), undefined)
+    t.strictEqual(createSatisfier({ a: (a: any) => a === 1 }).exec({ a: 1 }), undefined)
   })
 
   test('passing predicate gets undefined', () => {
@@ -225,7 +225,7 @@ describe('exec', () => {
 
   test('apply property predicate to array', () => {
     const satisfier = createSatisfier({
-      data: e => e && e.every(x => x.login)
+      data: (e: any) => e && e.every((x: any) => x.login)
     });
 
     t.strictEqual(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
@@ -289,7 +289,7 @@ describe('test', () => {
   })
 
   test('predicate receives array', () => {
-    t(createSatisfier(e => {
+    t(createSatisfier((e: any) => {
       return e[0] === 'a' && e[1] === 'b'
     }).test(['a', 'b']))
   })
@@ -306,7 +306,7 @@ describe('test', () => {
 
   test('object predicate will check against element in array', () => {
     t(createSatisfier({ a: 1 }).test([{ a: 1 }, { a: 1 }]))
-    t(createSatisfier({ a: e => typeof e === 'string' })
+    t(createSatisfier({ a: (e: any) => typeof e === 'string' })
       .test([{ a: 'a' }, { a: 'b' }]))
   })
 })

@@ -10,7 +10,7 @@ export class AtLeastOnce extends ArrayEntryExpectation {
     this.satisfier = createSatisfier(expectation)
   }
 
-  exec(actual): SatisfierExec[] {
+  exec(actual: any): SatisfierExec[] {
     if (this.pass) return []
 
     const result = this.satisfier.exec(actual)

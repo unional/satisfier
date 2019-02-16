@@ -65,7 +65,7 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
   }
 }
 
-function detectDiff(actual, expected, path: string[] = [], index?: number) {
+function detectDiff(actual: any, expected: any, path: string[] = [], index?: number) {
   const diff: SatisfierExec[] = []
   const expectedType = typeof expected
   if (expectedType === 'function') {

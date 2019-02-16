@@ -29,5 +29,5 @@ test('tersify()', () => {
 })
 
 test('match second', () => {
-  a.satisfy(['first', 'second'], some('second'))
+  a.satisfies(['first', 'second'], some('second'))
 })

@@ -11,7 +11,7 @@ export class Or extends ArrayEntryExpectation {
     super()
     this.satisfiers = expectations.map(createSatisfier)
   }
-  exec(actual, path) {
+  exec(actual: any, path: string[]) {
     let diff: SatisfierExec[] = []
     for (let i = 0; i < this.satisfiers.length; i++) {
       const s = this.satisfiers[i]

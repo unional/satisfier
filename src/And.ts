@@ -11,7 +11,7 @@ export class And extends ArrayEntryExpectation {
     super()
     this.satisfiers = expectations.map(createSatisfier)
   }
-  exec(actual, path) {
+  exec(actual: any, path: string[]) {
     let diff: SatisfierExec[] | undefined
     this.satisfiers.some(s => {
       diff = s.exec(actual)
