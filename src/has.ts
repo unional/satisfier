@@ -5,7 +5,7 @@ import {
   Tersify
 } from 'tersify'
 
-import { createSatisfier } from './createSatisfier'
+import { createSatisfier } from './createSatisfier2'
 
 /**
  * Check if an array has entries satisfy the expectations in order.

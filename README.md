@@ -65,20 +65,16 @@ createSatisfier({ a: /boo/ }).exec({ a: 'foo' })
 createSatisfier({ a: a => a === 1 }).exec({ a: 2 })
 ```
 
-## Meaning of undefined
+## `anything`
 
-If `undefined` is used in expectation, it will match anything.
-
-```ts
-createSatisfier(underfined).test({})
-createSatisfier({ a: undefined }).test({})
-createSatisfier([undefined, 1]).test(['x', 1])
-```
-
-If you want to test for `undefined` explicitly, use predicate function.
+If `anything` is used in expectation, it will match anything.
 
 ```ts
-createSatisfier(x => x === undefined).test(undefined)
+import { anything } from 'satisfier'
+
+createSatisfier(anything).test({})
+createSatisfier({ a: anything }).test({})
+createSatisfier([anything, 1]).test(['x', 1])
 ```
 
 ## test against array
@@ -90,18 +86,14 @@ There are several ways to test against array:
 When you use an array expectation to test against array,
 each entry in the expectation will be used to test against the corresponding entry in the array.
 
-If the subject array is longer than the expectation array,
-the extra entries are not tested.
-
-You can also skip over entries by putting in `undefined`.
+You can also skip over entries by putting in `anything`.
 
 ```ts
 import { createSatisfier } from 'satisfier'
 
 // all true
-createSatisfier([1]).test([1, 2, 3])
-createSatisfier([undefined, 1]).test(['...anything...', 1])
-createSatisfier([e => e === undefined, 1]).test([undefined, 1])
+createSatisfier([anything, 1]).test(['...anything...', 1])
+createSatisfier([e => e === anything, 1]).test([anything, 1])
 ```
 
 ### using predicate expectation
@@ -160,7 +152,7 @@ results[0].expected.tersify()
 tersify(results[0])
 ```
 
-Examples of predicate: `And`, `AtLeastOnce`, `every`, `has`, `isInInterval`, `isInRange`, `isTypeOf`, `none`, `Or`, `some`
+Examples of predicate:  `every`, `has`, `isInInterval`, `isInRange`, `isTypeOf`, `none`, `some`, `startsWith`
 
 ## Contribute
 

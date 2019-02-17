@@ -5,7 +5,7 @@ import {
   Tersible
 } from 'tersify'
 
-import { createSatisfier } from './createSatisfier'
+import { createSatisfier } from './createSatisfier2'
 
 /**
  * Check if every entry in the array satisfies the expectation.

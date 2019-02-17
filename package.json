@@ -21,17 +21,21 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json",
-    "clean": "rimraf lib",
-    "dc": "npm run dependency-check",
+    "clean": "rimraf lib libm",
+    "dc": "yarn dependency-check",
     "dependency-check": "dependency-check . --unused --no-dev && dependency-check . --missing --no-dev",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --reporters=default",
-    "verify": "npm run lint && npm run build && npm run dependency-check && jest --coverage --reporters=default",
-    "watch": "jest --watch"
+    "verify": "yarn lint && yarn build && yarn dependency-check && jest --coverage --reporters=default",
+    "watch": "jest --watch",
+    "watch:type": "tsc --watch"
   },
   "devDependencies": {
     "@unional/devpkg-node": "^1.2.4",
-    "assertron": "^6.1.0"
+    "assertron": "^6.1.0",
+    "codecov": "^3.2.0",
+    "jest-junit": "^6.3.0",
+    "type-plus": "^1.15.0"
   },
   "dependencies": {
     "tersify": "^1.2.6"
