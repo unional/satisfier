@@ -9,7 +9,7 @@ export function assertRegExp(actual: any, path: string[], regex: any, actualValu
   t.deepStrictEqual(actual[0].actual, actualValue)
 }
 
-export function assertExec(entry: any, path: string[], expected: any, actual: any) {
+export function assertDiff(entry: any, path: string[], expected: any, actual: any) {
   t.deepStrictEqual(entry.path, path)
   if (typeof entry.expected === 'function')
     t.strictEqual(tersify(entry.expected), tersify(expected))

@@ -1,7 +1,7 @@
 import t from 'assert';
 import a from 'assertron';
-import { createSatisfier } from './index';
-import { assertExec, assertRegExp } from './testUtil';
+import { createSatisfier } from '.';
+import { assertDiff, assertRegExp } from './testUtil';
 
 test('support generics', () => {
   const s = createSatisfier<{ a: number }>({ a: 1 })
@@ -20,7 +20,7 @@ test('nested {} checks for non undefined', () => {
   const s = createSatisfier<{ a: { c: number, d: string }, b: string }>({ a: {} })
   const actual = s.exec({} as any)!
   t.strictEqual(actual.length, 1)
-  assertExec(actual[0], ['a'], {}, undefined)
+  assertDiff(actual[0], ['a'], {}, undefined)
 })
 
 test('actual should be a complete struct', () => {
@@ -94,27 +94,27 @@ describe('exec', () => {
   })
 
   test('empty object expectation fails primitive', () => {
-    assertExec(createSatisfier({}).exec(1)![0], [], {}, 1)
-    assertExec(createSatisfier({}).exec(true)![0], [], {}, true)
-    assertExec(createSatisfier({}).exec('a')![0], [], {}, 'a')
+    assertDiff(createSatisfier({}).exec(1)![0], [], {}, 1)
+    assertDiff(createSatisfier({}).exec(true)![0], [], {}, true)
+    assertDiff(createSatisfier({}).exec('a')![0], [], {}, 'a')
   })
 
   test('mismatch value gets path, expected, and actual', () => {
     const actual = createSatisfier({ a: 1 }).exec({ a: 2 })!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], 1, 2)
+    assertDiff(actual[0], ['a'], 1, 2)
   })
 
   test('missing property get actual as undefined', () => {
     const actual = createSatisfier({ a: 1 }).exec({})!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], 1, undefined)
+    assertDiff(actual[0], ['a'], 1, undefined)
   })
 
   test('missing property get deeper level', () => {
     const actual = createSatisfier({ a: { b: 1 } }).exec({ a: {} })!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', 'b'], 1, undefined)
+    assertDiff(actual[0], ['a', 'b'], 1, undefined)
   })
 
   test('passing regex gets undefined', () => {
@@ -157,7 +157,7 @@ describe('exec', () => {
   test('failing predicate', () => {
     const actual = createSatisfier({ a: /*istanbul ignore next*/function () { return false } }).exec({ a: 1 })!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], /*istanbul ignore next*/function () { return false; }, 1)
+    assertDiff(actual[0], ['a'], /*istanbul ignore next*/function () { return false; }, 1)
   })
 
   test('against each element in array', () => {
@@ -167,23 +167,23 @@ describe('exec', () => {
   test('against each element in array in deep level', () => {
     const actual = createSatisfier({ a: { b: { c: /foo/ } } }).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }])!
     t.strictEqual(actual.length, 3)
-    assertExec(actual[0], ['[0]', 'a', 'b'], { c: /foo/ }, undefined)
-    assertExec(actual[1], ['[1]', 'a', 'b', 'c'], /foo/, undefined)
-    assertExec(actual[2], ['[2]', 'a', 'b', 'c'], /foo/, 'boo')
+    assertDiff(actual[0], ['[0]', 'a', 'b'], { c: /foo/ }, undefined)
+    assertDiff(actual[1], ['[1]', 'a', 'b', 'c'], /foo/, undefined)
+    assertDiff(actual[2], ['[2]', 'a', 'b', 'c'], /foo/, 'boo')
   })
 
   test('when apply against array, will have indices in the path', () => {
     const actual = createSatisfier({ a: 1 }).exec([{ a: 1 }, {}])!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['[1]', 'a'], 1, undefined)
+    assertDiff(actual[0], ['[1]', 'a'], 1, undefined)
   })
 
   test('when expectation is an array, apply to each entry in the actual array', () => {
-    t.strictEqual(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }, { c: 3 }]), undefined)
-    const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: true }, { b: 'b' }, { c: 3 }])!
+    t.strictEqual(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }]), undefined)
+    const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: true }, { b: 'b' }])!
     t.strictEqual(actual.length, 2)
-    assertExec(actual[0], ['[0]', 'a'], 1, true)
-    assertExec(actual[1], ['[1]', 'b'], 2, 'b')
+    assertDiff(actual[0], ['[0]', 'a'], 1, true)
+    assertDiff(actual[1], ['[1]', 'b'], 2, 'b')
   })
 
   test.skip('when expectation is an array and actual is not, the behavior is not defined yet', () => {
@@ -194,7 +194,7 @@ describe('exec', () => {
   test('deep object checking', () => {
     const actual = createSatisfier({ a: { b: 1 } }).exec({ a: { b: 2 } })!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', 'b'], 1, 2)
+    assertDiff(actual[0], ['a', 'b'], 1, 2)
   })
 
   test('can check parent property', () => {
@@ -220,7 +220,7 @@ describe('exec', () => {
   test('failing array in hash', () => {
     const actual = createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'b'] })!
     t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', '[2]'], 'a', 'b')
+    assertDiff(actual[0], ['a', '[2]'], 'a', 'b')
   })
 
   test('apply property predicate to array', () => {

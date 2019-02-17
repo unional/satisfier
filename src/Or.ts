@@ -1,6 +1,6 @@
 import { createSatisfier } from './createSatisfier'
 import { ArrayEntryExpectation } from './ArrayEntryExpectation';
-import { Satisfier, SatisfierExec } from './interfaces';
+import { Satisfier, Diff } from './interfaces';
 
 /**
  * Check if an array has entries satisfy the expectations in order.
@@ -12,7 +12,7 @@ export class Or extends ArrayEntryExpectation {
     this.satisfiers = expectations.map(createSatisfier)
   }
   exec(actual: any, path: string[]) {
-    let diff: SatisfierExec[] = []
+    let diff: Diff[] = []
     for (let i = 0; i < this.satisfiers.length; i++) {
       const s = this.satisfiers[i]
       const eachDiff = s.exec(actual)

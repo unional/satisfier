@@ -1,4 +1,4 @@
-import { SatisfierExec, Satisfier } from './interfaces'
+import { Diff, Satisfier } from './interfaces'
 import { ArrayEntryExpectation } from './ArrayEntryExpectation'
 import { Or } from './Or'
 
@@ -15,7 +15,7 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
    */
   function exec(actual: T) {
     if (Array.isArray(actual)) {
-      const diff: SatisfierExec[] = []
+      const diff: Diff[] = []
       if (Array.isArray(expectation)) {
         const arrayEntryExps: ArrayEntryExpectation[] = []
         const exp = expectation.map(e => {
@@ -37,11 +37,11 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
           diff.push(...detectDiff(actual[a], e, [`[${a}]`], a))
           a = a + 1
         })
-        // if (actual.length > exp.length) {
-        //   for (let i = exp.length; i < actual.length; i++) {
-        //     diff.push({ path: [`[${i}]`], expected: undefined, actual: actual[i] })
-        //   }
-        // }
+        if (actual.length > exp.length) {
+          for (let i = exp.length; i < actual.length; i++) {
+            diff.push({ path: [`[${i}]`], expected: undefined, actual: actual[i] })
+          }
+        }
       }
       else if (typeof expectation === 'function') {
         diff.push(...detectDiff(actual, expectation))
@@ -66,7 +66,7 @@ export function createSatisfier<T = any>(expectation: any): Satisfier<T> {
 }
 
 function detectDiff(actual: any, expected: any, path: string[] = [], index?: number) {
-  const diff: SatisfierExec[] = []
+  const diff: Diff[] = []
   const expectedType = typeof expected
   if (expectedType === 'function') {
     if (!(expected as Function)(actual, index)) {

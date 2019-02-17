@@ -6,10 +6,10 @@ export type TersiblePredicate = Tersible<Predicate>
 
 export interface Satisfier<T = any> {
   test: (actual: T) => boolean;
-  exec: (actual: T) => SatisfierExec[] | undefined;
+  exec: (actual: T) => Diff[] | undefined;
 }
 
-export interface SatisfierExec {
+export interface Diff {
   path: string[],
   expected: any,
   actual: any

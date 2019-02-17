@@ -2,13 +2,13 @@ import t from 'assert'
 
 import { createSatisfier } from '.'
 import { Or } from './Or'
-import { assertExec } from './testUtil'
+import { assertDiff } from './testUtil'
 
 test('fail when not passing all expectations', () => {
   const s = createSatisfier([new Or({ a: 1 }, { b: 2 })])
   const actual = s.exec([{ c: 1 }])!
-  assertExec(actual[0], ['[0]', 'a'], 1, undefined)
-  assertExec(actual[1], ['[0]', 'b'], 2, undefined)
+  assertDiff(actual[0], ['[0]', 'a'], 1, undefined)
+  assertDiff(actual[1], ['[0]', 'b'], 2, undefined)
 })
 
 test('pass when passing any expectations', () => {
