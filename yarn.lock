@@ -196,6 +196,11 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
+acorn-bigint@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/acorn-bigint/-/acorn-bigint-0.3.1.tgz#edb40a414dcaf5a09c2933db6bed79454b3ff46a"
+  integrity sha512-WT9LheDC4/d/sD/jgC6L5UMq4U9X3KNMy0JrXp/MdJL83ZqcuPQuMkj50beOX0dMub8IoZUYycfN7bIVZuU5zg==
+
 acorn-dynamic-import@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-4.0.0.tgz#482210140582a36b83c3e342e1cfebcaa9240948"
@@ -243,6 +248,11 @@ acorn@^6.0.1, acorn@^6.0.2, acorn@^6.0.7:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.0.tgz#b0a3be31752c97a0f7013c5f4903b71a05db6818"
   integrity sha512-MW/FjM+IvU9CgBzjO3UIPCE2pyEwUsoFl+VGdczOPEdxfGFjuKny/gN54mOuX7Qxmb9Rg9MCn2oKiSUeW+pjrw==
+
+acorn@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
+  integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
 ajv@^6.5.5, ajv@^6.9.1:
   version "6.9.1"
@@ -2621,7 +2631,7 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash.merge@^4.6.0:
+lodash.merge@^4.6.0, lodash.merge@^4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
   integrity sha512-AOYza4+Hf5z1/0Hztxpm2/xiPZgi/cjMqdnKTUWTBSKchJlxXXuUSxCCl8rJlf4g6yww/j6mA8nC8Hw/EZWxKQ==
@@ -3995,6 +4005,15 @@ tersify@^1.2.6:
   dependencies:
     unpartial "^0.4.1"
 
+tersify@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tersify/-/tersify-2.0.0.tgz#b7bd87ffc154327bcb2dca8a2c08cfd89a0ba8bb"
+  integrity sha512-R64EuqW0lRg5xsidDrE/W626wJKZzhXjwPQpM6sUEQn5WLFPhgN41znn/1KIoM4cd0b8mAhaAkKTMWy0xLEvzQ==
+  dependencies:
+    acorn "^6.1.1"
+    acorn-bigint "^0.3.1"
+    unpartial "^0.5.0"
+
 test-exclude@^5.0.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-5.1.0.tgz#6ba6b25179d2d38724824661323b73e03c0c1de1"
@@ -4255,6 +4274,13 @@ unpartial@^0.4.1:
   integrity sha512-0FeUzDmi7b1s5h/inbOFIBOcnTMP549lAjOxsJtAFbUaFYwoOhINL1Z9s4lO36qFXB5JsYF7Np+FtRomcZpU0Q==
   dependencies:
     lodash.merge "^4.6.0"
+
+unpartial@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/unpartial/-/unpartial-0.5.0.tgz#cac838d3046ee4ea06fe24d4f5d4b9244d2145e8"
+  integrity sha512-tJ/eRbNpm00VlQdMi344Q9tM30BACC203HFRT8yksdx+MIXTVS5m9JpAJUOhFWqOU2c/iZzOS3CcEmdc2zh/1Q==
+  dependencies:
+    lodash.merge "^4.6.1"
 
 unset-value@^1.0.0:
   version "1.0.0"
