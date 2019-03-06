@@ -4079,10 +4079,10 @@ tersify@^1.2.6:
   dependencies:
     unpartial "^0.4.1"
 
-tersify@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/tersify/-/tersify-2.0.1.tgz#2e75b7cb3c7b3bc1db2685f1e2522fdc47d087b2"
-  integrity sha512-riw/ukXRLMkLnyrYe9De0Xb7CaCoYJnfAYriVyPO/jhs85rh3NkmnJiKb0MnzvOoIchHW/xhQuAXQViRm/HbUA==
+tersify@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tersify/-/tersify-2.0.2.tgz#2f644deffc3ca040443881325f2fb84306f16b8a"
+  integrity sha512-XKEDtyDG4JhHsWuV1PUed6XZ1R/0jrN95fPv+fvh3cB9kQJCS3ApcrGgbZ55lC5Vxh4+tVWmydyJ4X8af46/kQ==
   dependencies:
     acorn "^6.1.1"
     acorn-bigint "^0.3.1"

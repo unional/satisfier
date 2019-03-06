@@ -210,13 +210,13 @@ describe('regex', () => {
     const expected = /foo/
     const s = createSatisfier(expected)
 
-    // expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
-    // expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
-    // expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
-    // expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
-    // expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
-    // expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
-    // expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
     expect(s.exec(/foo/)).toBeUndefined()
     expect(s.exec('foo')).toBeUndefined()
     expect(s.exec(/boo/)).toEqual([{ path: [], expected, actual: /boo/ }])
@@ -226,8 +226,17 @@ describe('regex', () => {
     expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
   })
 
-  test('will not match number', () => {
+  test('will not match non string and regex', () => {
     expect(createSatisfier(/1/).exec(1)).toEqual([{ path: [], expected: /1/, actual: 1 }])
+    expect(createSatisfier(/true/).exec(true)).toEqual([{ path: [], expected: /true/, actual: true }])
+    expect(createSatisfier(/undefined/).exec(undefined)).toEqual([{ path: [], expected: /undefined/, actual: undefined }])
+    expect(createSatisfier(/null/).exec(null)).toEqual([{ path: [], expected: /null/, actual: null }])
+    expect(createSatisfier(/{}/).exec({})).toEqual([{ path: [], expected: /{}/, actual: {} }])
+    expect(createSatisfier(/foo/).exec(['foo'])).toEqual([{ path: [], expected: /foo/, actual: ['foo'] }])
+  })
+
+  test('missing property gets undefined', () => {
+    expect(createSatisfier({ f: /1/ }).exec({})).toEqual([{ path: ['f'], expected: /1/, actual: undefined }])
   })
 })
 
@@ -274,6 +283,36 @@ describe('object', () => {
       { path: [1, 'a', 'b', 'c'], expected: /foo/, actual: undefined },
       { path: [2, 'a', 'b', 'c'], expected: /foo/, actual: 'boo' }
     ])
+  })
+
+  test('undefined does not satisfy empty object property', () => {
+    expect(createSatisfier({ a: {} }).exec({})).toEqual([{ actual: undefined, expected: {}, path: ['a'] }])
+  })
+
+  test('against each element in array in deep level', () => {
+    expect(createSatisfier({ a: { b: { c: /foo/ } } }).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }]))
+      .toEqual([
+        { actual: undefined, expected: { c: /foo/ }, path: [0, 'a', 'b'] },
+        { actual: undefined, expected: /foo/, path: [1, 'a', 'b', 'c'] },
+        { actual: 'boo', expected: /foo/, path: [2, 'a', 'b', 'c'] },
+      ])
+  })
+
+  test('check against parent property', () => {
+    class Foo {
+      foo = 'foo'
+    }
+    class Boo extends Foo {
+      boo = 'boo'
+    }
+    const boo = new Boo()
+    expect(createSatisfier({ foo: 'foo' }).exec(boo)).toBeUndefined()
+  })
+
+  test('check exactly on property array', () => {
+    const s = createSatisfier({ a: [1, true, 'a'] })
+    expect(s.exec({ a: [1, true, 'a'] })).toBeUndefined()
+    expect(s.exec({ a: [1, true, 'b'] })).toEqual([{ actual: 'b', expected: 'a', path: ['a', 2] }])
   })
 })
 
@@ -336,7 +375,6 @@ describe('predicate function', () => {
     expect(createSatisfier({ a: (v, path) => ([{ path, expected: 1, actual: 2 }]) }).exec({ a: 3 }))
       .toEqual([{ path: ['a'], expected: 1, actual: 2 }])
   })
-
 
   test('apply property predicate to array', () => {
     const s = createSatisfier({ data: v => v === 1 });
