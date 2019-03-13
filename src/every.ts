@@ -13,5 +13,12 @@ import { createSatisfier } from './createSatisfier'
  */
 export function every(expectation: any) {
   const s = createSatisfier(expectation)
-  return tersible((e: any) => e && Array.isArray(e) && e.every(v => s.test(v)), () => `every(${tersify(expectation)})`)
+  return tersible((e: any) => e && Array.isArray(e) && e.reduce((p, v, i) => {
+    const d = s.exec(v)
+    if (d) p.push(...d.map(d => {
+      d.path.unshift(i)
+      return d
+    }))
+    return p
+  }, []), () => `every(${tersify(expectation)})`)
 }

@@ -4,35 +4,35 @@ workflows:
   all:
     jobs:
       - node-latest
-      - node10:
-          requires:
-            - node-latest
-      - node9:
-          requires:
-            - node-latest
-      - node8:
-          requires:
-            - node-latest
-      - node6:
-          requires:
-            - node-latest
+      # - node10:
+      #     requires:
+      #       - node-latest
+      # - node9:
+      #     requires:
+      #       - node-latest
+      # - node8:
+      #     requires:
+      #       - node-latest
+      # - node6:
+      #     requires:
+      #       - node-latest
       - release:
           filters:
             branches:
               only: master
           requires:
             - node-latest
-            - node10
-            - node9
-            - node8
-            - node6
+            # - node10
+            # - node9
+            # - node8
+            # - node6
 jobs:
   local:
     docker:
       - image: circleci/node:11
     steps:
       - checkout
-      - run: npm run verify
+      - run: yarn verify
   node-latest:
     docker:
       - image: circleci/node:11
@@ -45,8 +45,7 @@ jobs:
           name: Install Dependencies
           command: |
             if [ ! -d node_modules ]; then
-              npm ci
-              npm i --no-save jest-junit
+              yarn install
             fi
       - save_cache:
           name: Save node modules cache
@@ -57,8 +56,8 @@ jobs:
           root: '.'
           paths:
             - node_modules
-      - run: npm run verify
-      - run: npx codecov
+      - run: yarn verify
+      - run: yarn codecov
       - store_test_results:
           path: .reports/junit
   node10:
@@ -68,7 +67,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run: npm run verify
+      - run: yarn verify
       - store_test_results:
           path: .reports/junit
   node9:
@@ -78,7 +77,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run: npm run verify
+      - run: yarn verify
       - store_test_results:
           path: .reports/junit
   node8:
@@ -88,7 +87,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run: npm run verify
+      - run: yarn verify
       - store_test_results:
           path: .reports/junit
   node6:
@@ -98,7 +97,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run: npm run verify
+      - run: yarn verify
       - store_test_results:
           path: .reports/junit
   release:
@@ -108,5 +107,5 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run: npm run clean && npm run build
+      - run: yarn clean && yarn build
       - run: npx semantic-release

@@ -1,203 +1,291 @@
-import t from 'assert';
-import a from 'assertron';
-import { createSatisfier } from './index';
-import { assertExec, assertRegExp } from './testUtil';
+import { tryAssign, typeAssert } from 'type-plus';
+import { anything, createSatisfier } from '.';
 
-test('support generics', () => {
-  const s = createSatisfier<{ a: number }>({ a: 1 })
-  t(s.test({ a: 1 }))
-  a.false(s.test({ a: 2 }))
+const testSymbol = Symbol()
+const testArrow = () => true
+const testFn = function () { return true }
+describe('anything', () => {
+  test('matches against anything', () => {
+    const s = createSatisfier(anything)
+    expect(s.exec(undefined)).toBeUndefined()
+    expect(s.exec(null)).toBeUndefined()
+    expect(s.exec(false)).toBeUndefined()
+    expect(s.exec(1)).toBeUndefined()
+    expect(s.exec(1n)).toBeUndefined()
+    expect(s.exec('a')).toBeUndefined()
+    expect(s.exec(Symbol())).toBeUndefined()
+    expect(s.exec({})).toBeUndefined()
+    expect(s.exec([])).toBeUndefined()
+    expect(s.exec(testFn)).toBeUndefined()
+    expect(s.exec(testArrow)).toBeUndefined()
+  })
 })
 
-test('Expecter can be specify partial of the data structure', () => {
-  createSatisfier<{ a: number, b: string }>({ a: 1 })
-  createSatisfier<{ a: number, b: string }>([{ a: 1 }])
-  createSatisfier<{ a: { c: number, d: string }, b: string }>({ a: {} })
-  createSatisfier<{ a: { c: number, d: string }, b: string }>([{ a: {} }, { b: /a/ }, { a: { c: 1 } }])
+describe('undefined', () => {
+  test('matches only undefined', () => {
+    const s = createSatisfier(undefined)
+    expect(s.exec(undefined)).toBeUndefined()
+
+    expect(s.exec(null)).toEqual([{ path: [], expected: undefined, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected: undefined, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected: undefined, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected: undefined, actual: 1n }])
+    expect(s.exec('a')).toEqual([{ path: [], expected: undefined, actual: 'a' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected: undefined, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected: undefined, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected: undefined, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected: undefined, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected: undefined, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected: undefined, actual: testArrow }])
+  })
 })
 
-test('nested {} checks for non undefined', () => {
-  const s = createSatisfier<{ a: { c: number, d: string }, b: string }>({ a: {} })
-  const actual = s.exec({} as any)!
-  t.strictEqual(actual.length, 1)
-  assertExec(actual[0], ['a'], {}, undefined)
+describe('null', () => {
+  test('matches only null', () => {
+    const s = createSatisfier(null)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected: null, actual: undefined }])
+    expect(s.exec(null)).toBeUndefined()
+    expect(s.exec(true)).toEqual([{ path: [], expected: null, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected: null, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected: null, actual: 1n }])
+    expect(s.exec('a')).toEqual([{ path: [], expected: null, actual: 'a' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected: null, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected: null, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected: null, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected: null, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected: null, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected: null, actual: testArrow }])
+  })
 })
 
-test('actual should be a complete struct', () => {
-  const s = createSatisfier<{ a: number, b: string }>({ a: 1, b: 'b' })
+describe('boolean', () => {
+  test.each([true, false])('%p matches only itself', (expected: boolean) => {
+    const s = createSatisfier(expected)
 
-  // missing `b`
-  // t.true(s.test({ a: 1 }))
-  t(s.test({ a: 1, b: 'b' }))
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec(!expected)).toEqual([{ path: [], expected, actual: !expected }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('a')).toEqual([{ path: [], expected, actual: 'a' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
 })
 
-test('expect array and test against non-array', () => {
-  const s = createSatisfier([1])
-  a.false(s.test(null))
-  a.false(s.test(1))
-  a.false(s.test('a'))
-  a.false(s.test(true))
-  a.false(s.test(undefined as any))
+describe('number', () => {
+  test.each([-1, 0, 1])('%d matches exact number', (expected: number) => {
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec(expected - 1)).toEqual([{ path: [], expected, actual: expected - 1 }])
+    expect(s.exec(expected + 1)).toEqual([{ path: [], expected, actual: expected + 1 }])
+    expect(s.exec(String(expected))).toEqual([{ path: [], expected, actual: String(expected) }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec(String(expected))).toEqual([{ path: [], expected, actual: String(expected) }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
+
+  test('NaN matches only NaN', () => {
+    const s = createSatisfier(NaN)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected: NaN, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected: NaN, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected: NaN, actual: true }])
+    expect(s.exec(NaN)).toBeUndefined()
+    expect(s.exec(1)).toEqual([{ path: [], expected: NaN, actual: 1 }])
+    expect(s.exec(0)).toEqual([{ path: [], expected: NaN, actual: 0 }])
+    expect(s.exec(-1)).toEqual([{ path: [], expected: NaN, actual: -1 }])
+    expect(s.exec(String(NaN))).toEqual([{ path: [], expected: NaN, actual: String(NaN) }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected: NaN, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected: NaN, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected: NaN, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected: NaN, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected: NaN, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected: NaN, actual: testArrow }])
+  })
+
+  test('Infinity only matches Infinity', () => {
+    const s = createSatisfier(Infinity)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected: Infinity, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected: Infinity, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected: Infinity, actual: true }])
+    expect(s.exec(Infinity)).toBeUndefined()
+    expect(s.exec(1)).toEqual([{ path: [], expected: Infinity, actual: 1 }])
+    expect(s.exec(0)).toEqual([{ path: [], expected: Infinity, actual: 0 }])
+    expect(s.exec(-1)).toEqual([{ path: [], expected: Infinity, actual: -1 }])
+    expect(s.exec(String(Infinity))).toEqual([{ path: [], expected: Infinity, actual: String(Infinity) }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected: Infinity, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected: Infinity, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected: Infinity, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected: Infinity, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected: Infinity, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected: Infinity, actual: testArrow }])
+  })
 })
 
-test('array with number', () => {
-  t(createSatisfier([1, 2]).test([1, 2]))
+describe('bigint', () => {
+  test.each([-1n, 0n, 1n])('%d matches exact bigint', expected => {
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec(expected - 1n)).toEqual([{ path: [], expected, actual: expected - 1n }])
+    expect(s.exec(expected + 1n)).toEqual([{ path: [], expected, actual: expected + 1n }])
+    expect(s.exec(0)).toEqual([{ path: [], expected, actual: 0 }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(-1)).toEqual([{ path: [], expected, actual: -1 }])
+    expect(s.exec(String(expected))).toEqual([{ path: [], expected, actual: String(expected) }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
 })
 
-test('array with null', () => {
-  t(createSatisfier([null]).test([null]))
-  a.false(createSatisfier([null]).test([1]))
+describe('string', () => {
+  test('matches only the same string', () => {
+    const expected = 'foo'
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
 })
 
-test('NaN satisfies NaN', () => {
-  t(createSatisfier(NaN).test(NaN))
+describe('symbol', () => {
+  test('matches only the same symbol', () => {
+    const expected = Symbol()
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(expected)).toBeUndefined()
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toEqual([{ path: [], expected, actual: /foo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
 })
 
-test('NaN not satisfies others', () => {
-  a.false(createSatisfier(NaN).test(`a`))
-  a.false(createSatisfier(NaN).test(true))
-  a.false(createSatisfier(NaN).test(1))
-  a.false(createSatisfier(NaN).test([]))
-  a.false(createSatisfier(NaN).test({}))
+describe('regex', () => {
+  test('matches itself and strings that matches it', () => {
+    const expected = /foo/
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/foo/)).toBeUndefined()
+    expect(s.exec('foo')).toBeUndefined()
+    expect(s.exec(/boo/)).toEqual([{ path: [], expected, actual: /boo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec([])).toEqual([{ path: [], expected, actual: [] }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
+  })
+
+  test('will not match non string and regex', () => {
+    expect(createSatisfier(/1/).exec(1)).toEqual([{ path: [], expected: /1/, actual: 1 }])
+    expect(createSatisfier(/true/).exec(true)).toEqual([{ path: [], expected: /true/, actual: true }])
+    expect(createSatisfier(/undefined/).exec(undefined)).toEqual([{ path: [], expected: /undefined/, actual: undefined }])
+    expect(createSatisfier(/null/).exec(null)).toEqual([{ path: [], expected: /null/, actual: null }])
+    expect(createSatisfier(/{}/).exec({})).toEqual([{ path: [], expected: /{}/, actual: {} }])
+    expect(createSatisfier(/foo/).exec(['foo'])).toEqual([{ path: [], expected: /foo/, actual: ['foo'] }])
+  })
+
+  test('missing property gets undefined', () => {
+    expect(createSatisfier({ f: /1/ }).exec({})).toEqual([{ path: ['f'], expected: /1/, actual: undefined }])
+  })
 })
 
-test('array with NaN', () => {
-  t(createSatisfier([NaN]).test([NaN]))
-  a.false(createSatisfier([NaN]).test([1]))
-})
+describe('object', () => {
+  test('does not match non-object', () => {
+    const expected = {}
+    const s = createSatisfier(expected)
 
-describe('exec', () => {
-  test('undefined should match anything', () => {
-    t.strictEqual(createSatisfier(undefined).exec(undefined), undefined)
-    t.strictEqual(createSatisfier(undefined).exec({}), undefined)
-    t.strictEqual(createSatisfier({ a: undefined }).exec({}), undefined)
-    t.strictEqual(createSatisfier([undefined]).exec([]), undefined)
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/boo/)).toEqual([{ path: [], expected, actual: /boo/ }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
   })
 
-  test('primitive types without specifing generic will work without issue.', () => {
-    t.strictEqual(createSatisfier(1).exec(1), undefined)
-    t.strictEqual(createSatisfier(true).exec(true), undefined)
-    t.strictEqual(createSatisfier('a').exec('a'), undefined)
+  test('empty object matches object with any properties', () => {
+    const expected = {}
+    const s = createSatisfier(expected)
+
+    expect(s.exec({})).toBeUndefined()
+    expect(s.exec({ a: 1 })).toBeUndefined()
   })
 
-  test('can use generic to specify the data structure', () => {
-    t.strictEqual(createSatisfier<number>(1).exec(1), undefined)
-    t.strictEqual(createSatisfier<{ a: number }>({ a: /1/ }).exec({ a: 1 }), undefined)
+  test('diff mismatched properties with proper path', () => {
+    expect(createSatisfier({ a: 1 }).exec({ a: 2 })).toEqual([{ actual: 2, expected: 1, path: ['a'] }])
+    expect(createSatisfier({ a: undefined }).exec({ a: 2 })).toEqual([{ actual: 2, expected: undefined, path: ['a'] }])
+    expect(createSatisfier({ a: { b: 1 } }).exec({ a: 2 })).toEqual([{ actual: 2, expected: { b: 1 }, path: ['a'] }])
+    expect(createSatisfier({ a: { b: 1 } }).exec({ a: { b: 3 } })).toEqual([{ actual: 3, expected: 1, path: ['a', 'b'] }])
   })
 
-  test('empty object expectation passes all objects', () => {
-    t.strictEqual(createSatisfier({}).exec({}), undefined)
-    t.strictEqual(createSatisfier({}).exec({ a: 1 }), undefined)
-    t.strictEqual(createSatisfier({}).exec({ a: { b: 'a' } }), undefined)
-    t.strictEqual(createSatisfier({}).exec({ a: true }), undefined)
-    t.strictEqual(createSatisfier({}).exec({ a: [1] }), undefined)
+  test('missing property is detected', () => {
+    expect(createSatisfier({ a: {} }).exec({})).toEqual([{ actual: undefined, expected: {}, path: ['a'] }])
   })
 
-  test('empty object expectation fails primitive', () => {
-    assertExec(createSatisfier({}).exec(1)![0], [], {}, 1)
-    assertExec(createSatisfier({}).exec(true)![0], [], {}, true)
-    assertExec(createSatisfier({}).exec('a')![0], [], {}, 'a')
+  test('will not match array', () => {
+    expect(createSatisfier({ a: 1 }).exec([{ a: 1 }, { b: 1, a: 1 }])).toEqual([{ 'actual': [{ 'a': 1 }, { 'a': 1, 'b': 1 }], 'expected': { 'a': 1 }, 'path': [] }])
   })
 
-  test('mismatch value gets path, expected, and actual', () => {
-    const actual = createSatisfier({ a: 1 }).exec({ a: 2 })!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], 1, 2)
+
+  test('drill down and compare each property', () => {
+    expect(createSatisfier({ a: { b: { c: /foo/ } } }).exec({ a: { b: { c: 'boo' } } }))
+      .toEqual([{ actual: 'boo', expected: /foo/, path: ['a', 'b', 'c'] }])
   })
 
-  test('missing property get actual as undefined', () => {
-    const actual = createSatisfier({ a: 1 }).exec({})!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], 1, undefined)
-  })
-
-  test('missing property get deeper level', () => {
-    const actual = createSatisfier({ a: { b: 1 } }).exec({ a: {} })!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', 'b'], 1, undefined)
-  })
-
-  test('passing regex gets undefined', () => {
-    t.strictEqual(createSatisfier({ foo: /foo/ }).exec({ foo: 'foo' }), undefined)
-  })
-
-  test('failed regex will be in expected property', () => {
-    const actual = createSatisfier({ foo: /foo/ }).exec({ foo: 'boo' })!
-    assertRegExp(actual, ['foo'], /foo/, 'boo')
-  })
-
-  test('regex on missing property gets actual as undefined', () => {
-    const actual = createSatisfier({ foo: /foo/ }).exec({})!
-    assertRegExp(actual, ['foo'], /foo/, undefined)
-  })
-
-  test('regex on non-string will fail as normal', () => {
-    let actual = createSatisfier({ foo: /foo/ }).exec({ foo: 1 })!
-    assertRegExp(actual, ['foo'], /foo/, 1)
-
-    actual = createSatisfier({ foo: /foo/ }).exec({ foo: true })!
-    assertRegExp(actual, ['foo'], /foo/, true)
-
-    actual = createSatisfier({ foo: /foo/ }).exec({ foo: [1, true, 'a'] })!
-    assertRegExp(actual, ['foo'], /foo/, [1, true, 'a'])
-
-    actual = createSatisfier({ foo: /foo/ }).exec({ foo: { a: 1 } })!
-    assertRegExp(actual, ['foo'], /foo/, { a: 1 })
-  })
-
-  test('predicate receives actual value', () => {
-    t.strictEqual(createSatisfier({ a: (a: any) => a === 1 }).exec({ a: 1 }), undefined)
-  })
-
-  test('passing predicate gets undefined', () => {
-    t.strictEqual(createSatisfier({ a: () => true }).exec({}), undefined)
-    t.strictEqual(createSatisfier({ a: () => true }).exec({ a: 1 }), undefined)
-  })
-
-  test('failing predicate', () => {
-    const actual = createSatisfier({ a: /*istanbul ignore next*/function () { return false } }).exec({ a: 1 })!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a'], /*istanbul ignore next*/function () { return false; }, 1)
-  })
-
-  test('against each element in array', () => {
-    t.strictEqual(createSatisfier({ a: 1 }).exec([{ a: 1 }, { b: 1, a: 1 }]), undefined)
-  })
-
-  test('against each element in array in deep level', () => {
-    const actual = createSatisfier({ a: { b: { c: /foo/ } } }).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }])!
-    t.strictEqual(actual.length, 3)
-    assertExec(actual[0], ['[0]', 'a', 'b'], { c: /foo/ }, undefined)
-    assertExec(actual[1], ['[1]', 'a', 'b', 'c'], /foo/, undefined)
-    assertExec(actual[2], ['[2]', 'a', 'b', 'c'], /foo/, 'boo')
-  })
-
-  test('when apply against array, will have indices in the path', () => {
-    const actual = createSatisfier({ a: 1 }).exec([{ a: 1 }, {}])!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['[1]', 'a'], 1, undefined)
-  })
-
-  test('when expectation is an array, apply to each entry in the actual array', () => {
-    t.strictEqual(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 1 }, { b: 2 }, { c: 3 }]), undefined)
-    const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: true }, { b: 'b' }, { c: 3 }])!
-    t.strictEqual(actual.length, 2)
-    assertExec(actual[0], ['[0]', 'a'], 1, true)
-    assertExec(actual[1], ['[1]', 'b'], 2, 'b')
-  })
-
-  test.skip('when expectation is an array and actual is not, the behavior is not defined yet', () => {
-    const actual = createSatisfier([{ a: 1 }, { b: 2 }]).exec({ a: 1 })!
-    t.strictEqual(actual.length, 1)
-  })
-
-  test('deep object checking', () => {
-    const actual = createSatisfier({ a: { b: 1 } }).exec({ a: { b: 2 } })!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', 'b'], 1, 2)
-  })
-
-  test('can check parent property', () => {
+  test('check against property in parent class', () => {
     class Foo {
       foo = 'foo'
     }
@@ -205,108 +293,115 @@ describe('exec', () => {
       boo = 'boo'
     }
     const boo = new Boo()
-    t.strictEqual(createSatisfier({ foo: 'foo' }).exec(boo), undefined)
+    expect(createSatisfier({ foo: 'foo' }).exec(boo)).toBeUndefined()
   })
 
-  test('actual of type any should not have type checking error', () => {
-    let actual: any = { a: 1 }
-    t.strictEqual(createSatisfier({ a: 1 }).exec(actual), undefined)
+  test('check exactly on property array', () => {
+    const s = createSatisfier({ a: [1, true, 'a'] })
+    expect(s.exec({ a: [1, true, 'a'] })).toBeUndefined()
+    expect(s.exec({ a: [1, true, 'b'] })).toEqual([{ actual: 'b', expected: 'a', path: ['a', 2] }])
   })
 
-  test('expect array in hash', () => {
-    t.strictEqual(createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'a'] }), undefined)
-  })
-
-  test('failing array in hash', () => {
-    const actual = createSatisfier({ a: [1, true, 'a'] }).exec({ a: [1, true, 'b'] })!
-    t.strictEqual(actual.length, 1)
-    assertExec(actual[0], ['a', '[2]'], 'a', 'b')
-  })
-
-  test('apply property predicate to array', () => {
-    const satisfier = createSatisfier({
-      data: (e: any) => e && e.every((x: any) => x.login)
+  test('property predicate receives the whole array in that property', () => {
+    const predicate = (e: any) => e && e.every((x: any) => x.login)
+    const s = createSatisfier({
+      data: predicate
     });
 
-    t.strictEqual(satisfier.exec({ data: [{ login: 'a' }] }), undefined)
-    t.notStrictEqual(satisfier.exec([{ data: [{ foo: 'a' }] }]), undefined)
-    t.notStrictEqual(satisfier.exec([{ foo: 'b' }]), undefined)
+    expect(s.exec({ data: [{ login: 'a' }] })).toBeUndefined()
+    expect(s.exec({ data: [{ login: 'a' }, { login: 'b' }] })).toBeUndefined()
+    expect(s.exec({ data: [{ login: 'a' }, {}] })).toEqual([{ actual: [{ login: 'a' }, {}], expected: predicate, path: ['data'] }])
   })
 })
 
-describe('test', () => {
-  test('empty expecter passes everything but not null or undefined', () => {
-    t(createSatisfier({}).test({}))
-    t(createSatisfier({}).test({ a: 1 }))
-    t(createSatisfier({}).test({ a: true }))
-    t(createSatisfier({}).test({ a: 'a' }))
-    t(createSatisfier({}).test({ a: [1, true, 'a'] }))
-    t(createSatisfier({}).test({ a: { b: 'a' } }))
-    t(createSatisfier({}).test([{}, { a: 1 }]))
-    a.false(createSatisfier({}).test(null))
-    a.false(createSatisfier({}).test(undefined as any))
+describe('array', () => {
+  test('does not match non-array', () => {
+    const expected: any[] = []
+    const s = createSatisfier(expected)
+
+    expect(s.exec(undefined)).toEqual([{ path: [], expected, actual: undefined }])
+    expect(s.exec(null)).toEqual([{ path: [], expected, actual: null }])
+    expect(s.exec(true)).toEqual([{ path: [], expected, actual: true }])
+    expect(s.exec(1)).toEqual([{ path: [], expected, actual: 1 }])
+    expect(s.exec(1n)).toEqual([{ path: [], expected, actual: 1n }])
+    expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
+    expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
+    expect(s.exec(/boo/)).toEqual([{ path: [], expected, actual: /boo/ }])
+    expect(s.exec({})).toEqual([{ path: [], expected, actual: {} }])
+    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
+    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
   })
 
-  test('expect null to pass only null', () => {
-    t(createSatisfier(null).test(null))
-    a.false(createSatisfier(null).test(undefined as any))
-    a.false(createSatisfier(null).test(0))
-    a.false(createSatisfier(null).test(false))
-    a.false(createSatisfier(null).test(''))
+  test('empty array matches only empty array', () => {
+    const expected: any[] = []
+    const s = createSatisfier(expected)
+    expect(s.exec([])).toBeUndefined()
+    expect(s.exec([1])).toEqual([{ path: [0], expected: undefined, actual: 1 }])
   })
 
-  test('mismatch value fails', () => {
-    a.false(createSatisfier({ a: 1 }).test({ a: 2 }))
-    a.false(createSatisfier({ a: true }).test({ a: false }))
-    a.false(createSatisfier({ a: 'a' }).test({ a: 'b' }))
-    a.false(createSatisfier({ a: /foo/ }).test({ a: 'b' }))
-    a.false(createSatisfier({ a: () => false }).test({ a: 'b' }))
-    a.false(createSatisfier([{ a: 1 }, { b: 2 }]).test([{ a: true }, { b: 'b' }, { c: 3 }]))
-    a.false(createSatisfier({ a: [1, true, 'a'] }).test({ a: [1, true, 'b'] }))
-    a.false(createSatisfier({ a: { b: 1 } }).test({ a: { b: 2 } }))
+  test('not match different length', () => {
+    expect(createSatisfier([1]).exec([1, 2])).toEqual([{ path: [1], expected: undefined, actual: 2 }])
   })
 
-  test('undefined expectation are ignored', () => {
-    const s = createSatisfier([undefined, 1])
-    t(s.test([undefined, 1]))
-    t(s.test([null, 1]))
-    t(s.test([1, 1]))
-    t(s.test(['a', 1]))
-    t(s.test([true, 1]))
-    t(s.test([{ a: 1 }, 1]))
-    t(s.test([[1, 2], 1]))
+  test('match each entry', () => {
+    expect(createSatisfier([{ a: 1 }, { b: 2 }]).exec([{ a: 2 }, {}])).toEqual([
+      { path: [0, 'a'], expected: 1, actual: 2 },
+      { path: [1, 'b'], expected: 2, actual: undefined }
+    ])
+  })
+})
+
+describe('predicate function', () => {
+  test('consider match when predicate returns true', () => {
+    const s = createSatisfier(v => v === 1)
+
+    expect(s.exec(1)).toBeUndefined()
   })
 
-  test('undefined expectation are ignored', () => {
-    const s = createSatisfier({ a: [undefined, 1] })
-    t(s.test({ a: [undefined, 1] }))
-    t(s.test({ a: [null, 1] }))
-    t(s.test({ a: [1, 1] }))
-    t(s.test({ a: ['a', 1] }))
-    t(s.test({ a: [true, 1] }))
-    t(s.test({ a: [{ a: 1 }, 1] }))
-    t(s.test({ a: [[1, 2], 1] }))
+  test('consider not match when predicate returns false', () => {
+    const s = createSatisfier(v => v === 1)
+
+    expect(s.exec(2)).toEqual([{ path: [], expected: s.expected, actual: 2 }])
   })
 
-  test('predicate receives array', () => {
-    t(createSatisfier((e: any) => {
-      return e[0] === 'a' && e[1] === 'b'
-    }).test(['a', 'b']))
+  test('returns diff result from predicate', () => {
+    expect(createSatisfier(v => ([{ path: [], expected: 1, actual: 2 }])).exec(9))
+      .toEqual([{ path: [], expected: 1, actual: 2 }])
   })
 
-  test('primitive predicate will check against element in array', () => {
-    t(createSatisfier(1).test([1, 1]))
-    a.false(createSatisfier(1).test([1, 2]))
-    t(createSatisfier(false).test([false, false]))
-    a.false(createSatisfier(false).test([false, true]))
-    t(createSatisfier('a').test(['a', 'a']))
-    a.false(createSatisfier('a').test(['a', 'b']))
+  test('receives path in the second parameter', () => {
+    expect(createSatisfier({ a: (v, path) => ([{ path, expected: 1, actual: 2 }]) }).exec({ a: 3 }))
+      .toEqual([{ path: ['a'], expected: 1, actual: 2 }])
   })
 
+  test('apply property predicate', () => {
+    const s = createSatisfier({ data: v => v === 1 });
 
-  test('object predicate will check against element in array', () => {
-    t(createSatisfier({ a: 1 }).test([{ a: 1 }, { a: 1 }]))
-    t(createSatisfier({ a: (e: any) => typeof e === 'string' })
-      .test([{ a: 'a' }, { a: 'b' }]))
+    expect(s.exec({ data: 1 })).toBeUndefined()
+    expect(s.exec({ data: 2 })).toEqual([{ path: ['data'], expected: s.expected.data, actual: 2 }])
+    expect(s.exec({ foo: 'b' })).toEqual([{ path: ['data'], expected: s.expected.data, actual: undefined }])
+  })
+})
+
+test('use generic to lock in the type of the input', () => {
+  const s = createSatisfier<{ a: number }>(undefined)
+  let y: Parameters<typeof s.exec> = {} as any
+
+  typeAssert.isNever(tryAssign(undefined, y[0]))
+})
+
+describe('test()', () => {
+  test('return true if exec() returns undefined', () => {
+    const s = createSatisfier(anything)
+    s.exec = () => undefined
+
+    expect(s.test(undefined)).toBe(true)
+  })
+
+  test('returns false if exec() returns diffs', () => {
+    const s = createSatisfier(anything)
+    s.exec = () => []
+
+    expect(s.test(undefined)).toBe(false)
   })
 })

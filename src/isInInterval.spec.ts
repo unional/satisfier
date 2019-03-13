@@ -1,14 +1,6 @@
-import t from 'assert'
-import a from 'assertron'
-
-import {
-  createSatisfier,
-  isInClosedInterval,
-  isInLeftClosedInterval,
-  isInOpenInterval,
-  isInRightClosedInterval
-} from './index'
-
+import t from 'assert';
+import a from 'assertron';
+import { createSatisfier, isInClosedInterval, isInLeftClosedInterval, isInOpenInterval, isInRightClosedInterval } from '.';
 
 test('open interval', () => {
   a.false(createSatisfier(isInOpenInterval(1, 3)).test(1))

@@ -1,7 +1,6 @@
-import t from 'assert'
-import a from 'assertron'
-
-import { createSatisfier, has } from './index'
+import t from 'assert';
+import a from 'assertron';
+import { createSatisfier, has } from '.';
 
 test('non array returns false', () => {
   a.false(createSatisfier(has(1)).test(undefined))
@@ -47,6 +46,10 @@ test('pass when the matched entry is in between others', () => {
 
 test('pass when there are unmatched entry between matched one', () => {
   t(createSatisfier(has(1, 3)).test([1, 2, 3]))
+})
+
+test('fails when not all entries are matched', () => {
+  t(!createSatisfier(has(1, 4)).test([1, 2, 3]))
 })
 
 test('tersify()', () => {
