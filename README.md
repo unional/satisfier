@@ -14,7 +14,13 @@
 [![Visual Studio Code][vscode-image]][vscode-url]
 [![Wallaby.js][wallaby-image]][wallaby-url]
 
-Manage and generate artifacts to test data across boundaries.
+A purposely loose comparison tool.
+
+## Version 5 breaking changes
+
+- exact check on array
+- no spread on array, use `has()/some()` or `every()`
+- `undefined` now checks against `undefined` instead of a placeholder for anything. Use `anything` for the previous behavior.
 
 ## createSatisfier(expectation)
 

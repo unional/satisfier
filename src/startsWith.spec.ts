@@ -1,5 +1,5 @@
 import { createSatisfier } from 'satisfier';
-import { startsWith } from './startsWith';
+import { startsWith } from '.';
 
 test('non array returns false', () => {
   expect(createSatisfier(startsWith([{ a: 1 }])).test(undefined)).toBe(false)
@@ -33,4 +33,3 @@ test('array property inside entry is tested with exact logic', () => {
   expect(satisfier.test([{ a: [1, 2] }, 2])).toBe(true)
   expect(satisfier.test([{ a: [1, 2, 3] }, 2])).toBe(false)
 })
-

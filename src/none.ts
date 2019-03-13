@@ -5,7 +5,7 @@ import {
   Tersible
 } from 'tersify'
 
-import { createSatisfier } from './createSatisfier2'
+import { createSatisfier } from './createSatisfier'
 
 /**
  * Check if an array have no entry satisfying the expectation.

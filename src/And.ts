@@ -1,4 +1,4 @@
-import { createSatisfier } from './createSatisfier2';
+import { createSatisfier } from './createSatisfier';
 import { Diff } from './interfaces';
 
 /**

@@ -1,8 +1,8 @@
-import t from 'assert'
+import t from 'assert';
+import { createSatisfier } from '.';
+import { and } from './and';
+import { assertDiff } from './testUtil';
 
-import { createSatisfier } from '.'
-import { and } from './and'
-import { assertDiff } from './testUtil'
 
 test.skip('fail when not passing any expectations', () => {
   const s = createSatisfier([and({ a: 1 }, { b: 2 })])

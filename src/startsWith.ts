@@ -5,7 +5,7 @@ import {
   Tersify
 } from 'tersify'
 
-import { createSatisfier } from './createSatisfier2'
+import { createSatisfier } from './createSatisfier'
 
 /**
  * Check if an array has the first n entries satisfying the specifiec expectations.
