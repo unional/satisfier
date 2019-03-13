@@ -33,3 +33,7 @@ test('array property inside entry is tested with exact logic', () => {
   expect(satisfier.test([{ a: [1, 2] }, 2])).toBe(true)
   expect(satisfier.test([{ a: [1, 2, 3] }, 2])).toBe(false)
 })
+
+test('tersify()', () => {
+  expect(startsWith([{ a: 1 }, { b: 2 }]).tersify()).toBe('startsWith([{ a: 1 }, { b: 2 }])')
+})

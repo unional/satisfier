@@ -1,11 +1,6 @@
-import {
-  tersible,
-  tersify,
-  // @ts-ignore
-  Tersify
-} from 'tersify'
+import { tersible, tersify } from 'tersify';
+import { createSatisfier } from './createSatisfier';
 
-import { createSatisfier } from './createSatisfier'
 
 /**
  * Check if an array has the first n entries satisfying the specifiec expectations.
@@ -18,5 +13,5 @@ export function startsWith(expectations: any[]) {
       const a = value[i]
       return createSatisfier(e).test(a)
     })
-  }, () => `startsWith(${expectations.map(e => tersify(e)).join(', ')})`)
+  }, () => `startsWith([${expectations.map(e => tersify(e)).join(', ')}])`)
 }
