@@ -4,28 +4,28 @@ workflows:
   all:
     jobs:
       - node-latest
-      - node10:
-          requires:
-            - node-latest
-      - node9:
-          requires:
-            - node-latest
-      - node8:
-          requires:
-            - node-latest
-      - node6:
-          requires:
-            - node-latest
+      # - node10:
+      #     requires:
+      #       - node-latest
+      # - node9:
+      #     requires:
+      #       - node-latest
+      # - node8:
+      #     requires:
+      #       - node-latest
+      # - node6:
+      #     requires:
+      #       - node-latest
       - release:
           filters:
             branches:
               only: master
           requires:
             - node-latest
-            - node10
-            - node9
-            - node8
-            - node6
+            # - node10
+            # - node9
+            # - node8
+            # - node6
 jobs:
   local:
     docker:
