@@ -595,17 +595,17 @@ assertion-error@^1.1.0:
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.1.0.tgz#e60b6b0e8f301bd97e5375215bda406c85118c0b"
   integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
 
-assertron@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/assertron/-/assertron-6.1.0.tgz#0930c5218ea95183cafe9c4589f35d1a59707b4f"
-  integrity sha512-/obpEDVhtU4znjhKn8kG6gPZ3n9DMG2XSmroQQmAbOHvZ9yfCtLKIS0vGxYxa3iAM32agRKQjqzuZO6L+dwRYg==
+assertron@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/assertron/-/assertron-7.0.0.tgz#01739e541bb5e325639de6f68887235205f4ef72"
+  integrity sha512-nLJGi9xi11KofsSJSULKjQbVRpAw3CX4cYX5wcPi69Yqeg7X/cuDHgpWFhE4Hs+WbL717Qu5tMxrZ7jw4HKVaQ==
   dependencies:
     assertion-error "^1.1.0"
     is-node "^1.0.2"
     is-promise "^2.1.0"
     path-equal "^1.1.1"
-    satisfier "^4.5.1"
-    tersify "^1.2.6"
+    satisfier "^5.0.0"
+    tersify "^2.0.3"
 
 assign-symbols@^1.0.0:
   version "1.0.0"
@@ -3925,12 +3925,12 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-satisfier@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/satisfier/-/satisfier-4.5.1.tgz#4cab4e08b3a9b74a417db8f5aba938e7fb3ccbb3"
-  integrity sha512-JrwJ/Ilrukrrnu5cYAzZOp/SqOCyU07WPr0UNJzPy9eL86XoU2Rx/BzvdVanku1Klj2NwhxTIa4g7S56yY7yqQ==
+satisfier@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/satisfier/-/satisfier-5.0.0.tgz#9ec3215d15a10ebca5c76d320ad1d9468bbdb7b6"
+  integrity sha512-t/U6r9+3FZgXWZx5T0r719aSDgcfYgCYqwadcgvI++WgqojnpWPHkg1dpXlEY44iekewsUqHoSzHloRF+ZxAQQ==
   dependencies:
-    tersify "^1.2.6"
+    tersify "^2.0.2"
 
 sax@^1.2.4:
   version "1.2.4"
@@ -4290,17 +4290,19 @@ teeny-request@^3.7.0:
     node-fetch "^2.2.0"
     uuid "^3.3.2"
 
-tersify@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/tersify/-/tersify-1.2.6.tgz#05788b03504b78198a329119cbb14d02fd248f80"
-  integrity sha512-MU0uxPzyD+Syo4PLMB8IiaGroQdfk3iFGvoYS6fceKeD4Wj+UsNEmvJoGupP1nB19/HtWAE1AbNI0mZaU7eyKg==
-  dependencies:
-    unpartial "^0.4.1"
-
 tersify@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/tersify/-/tersify-2.0.2.tgz#2f644deffc3ca040443881325f2fb84306f16b8a"
   integrity sha512-XKEDtyDG4JhHsWuV1PUed6XZ1R/0jrN95fPv+fvh3cB9kQJCS3ApcrGgbZ55lC5Vxh4+tVWmydyJ4X8af46/kQ==
+  dependencies:
+    acorn "^6.1.1"
+    acorn-bigint "^0.3.1"
+    unpartial "^0.5.0"
+
+tersify@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tersify/-/tersify-2.0.3.tgz#a4255ca98beb2a8b61cdf3fc7a98afb491a9884b"
+  integrity sha512-0QAS1DFJqC9EuisCw+G/VOu7c1Iz8xurXARF38RnisTjR/VrMQgppornBF56mIsknHObSy9sVfl4Qvy+oVn5+Q==
   dependencies:
     acorn "^6.1.1"
     acorn-bigint "^0.3.1"
