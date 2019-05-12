@@ -36,7 +36,7 @@
     "watch:type": "tsc --watch"
   },
   "dependencies": {
-    "tersify": "^2.0.2"
+    "tersify": "^3.0.0"
   },
   "devDependencies": {
     "@unional/devpkg-node": "^1.2.5",
