@@ -33,16 +33,18 @@
     "test": "jest --reporters=default",
     "verify": "yarn lint && yarn build && yarn dependency-check && jest --coverage --reporters=default",
     "watch": "jest --watch",
-    "watch:type": "tsc --watch"
+    "watch:type": "tsc --watch",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "tersify": "^2.0.2"
+    "tersify": "^3.0.0"
   },
   "devDependencies": {
-    "@unional/devpkg-node": "^1.2.5",
-    "assertron": "^7.0.0",
-    "codecov": "^3.2.0",
-    "jest-junit": "^6.3.0",
-    "type-plus": "^1.15.1"
+    "@unional/devpkg-node": "^1.3.0",
+    "assertron": "^7.0.1",
+    "codecov": "^3.4.0",
+    "jest-junit": "^6.4.0",
+    "type-plus": "^1.18.0",
+    "semantic-release": "^15.13.12"
   }
 }
