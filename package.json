@@ -37,7 +37,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "tersify": "^3.0.2"
+    "tersify": "^3.0.3"
   },
   "devDependencies": {
     "@unional/devpkg-node": "^1.3.0",
