@@ -6868,10 +6868,10 @@ tersify@^2.0.3:
     acorn-bigint "^0.3.1"
     unpartial "^0.5.0"
 
-tersify@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/tersify/-/tersify-3.0.2.tgz#bca349af82f23af2dd58b0ab33ba7b8c1a7afd68"
-  integrity sha512-q93IHyWUXzZa9bCA9yYNuuVFBZOjRgo4kLQTp+9muQInPV/c+SDzpnhARHGLDJl1thmTsdTqnviN6aAfXNXHng==
+tersify@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/tersify/-/tersify-3.0.3.tgz#9a02d25206c3aba6edaa9eafe9e3556f6b0fd258"
+  integrity sha512-TDmxvBXHje5u4dOjsEzdGoPr+R9WDSMLCkEyaefeBcogMoJp4Qjfjs7weTpp46mKPvhsTH1fi7tKZfi9Bh4K8g==
   dependencies:
     acorn "^6.1.1"
     acorn-bigint "^0.4.0"
