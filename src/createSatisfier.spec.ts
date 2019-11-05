@@ -365,7 +365,7 @@ describe('predicate function', () => {
   })
 
   test('returns diff result from predicate', () => {
-    expect(createSatisfier(v => ([{ path: [], expected: 1, actual: 2 }])).exec(9))
+    expect(createSatisfier(() => ([{ path: [], expected: 1, actual: 2 }])).exec(9))
       .toEqual([{ path: [], expected: 1, actual: 2 }])
   })
 
@@ -385,7 +385,7 @@ describe('predicate function', () => {
 
 test('use generic to lock in the type of the input', () => {
   const s = createSatisfier<{ a: number }>(undefined)
-  let y: Parameters<typeof s.exec> = {} as any
+  const y: Parameters<typeof s.exec> = {} as any
 
   typeAssert.isNever(tryAssign(undefined, y[0]))
 })

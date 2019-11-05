@@ -1,10 +1,4 @@
-import {
-  tersible,
-  // @ts-ignore
-  Tersify,
-  // @ts-ignore
-  TersifyOptions
-} from 'tersify'
+import { tersible } from 'tersify'
 
 export function isTypeOf(x: 'number' | 'boolean' | 'string') {
   return tersible(

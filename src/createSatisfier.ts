@@ -4,6 +4,7 @@ import { Diff, Predicate, Satisfier } from './interfaces';
 // Workaround for https://github.com/Microsoft/TypeScript/issues/6230
 export interface ExpectationObject { [key: string]: Expectation }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ExpectionArray extends Array<Expectation> { }
 
 export type Expectation = symbol | undefined | null | boolean | number | bigint |
@@ -23,7 +24,7 @@ export function createSatisfier<T = any>(expected: Expectation): Satisfier<T> {
 }
 
 const nodiff: Diff[] = []
-function diff(expected: any, actual: any, path: Diff['path'] = [], index?: number): Diff[] {
+function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: number): Diff[] {
   if (expected === anything) {
     return nodiff
   }

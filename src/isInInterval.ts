@@ -1,10 +1,4 @@
-import {
-  tersible,
-  // @ts-ignore
-  Tersify,
-  // @ts-ignore
-  TersifyOptions
-} from 'tersify'
+import { tersible } from 'tersify'
 
 export function isInOpenInterval(start: number, end: number) {
   return tersible((a: any) => a > start && (a < end), () => `(${start}...${end})`)

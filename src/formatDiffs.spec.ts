@@ -4,7 +4,7 @@ test('index is wrapped with []', () => {
   const diffs = createSatisfier(every({ a: { b: { c: /foo/ } } })).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }])
   const actual = formatDiffs(diffs)
   expect(actual).toEqual(
-`expect '[0].a.b' to satisfy { c: /foo/ }, but received undefined
+    `expect '[0].a.b' to satisfy { c: /foo/ }, but received undefined
 expect '[1].a.b.c' to satisfy /foo/, but received undefined
 expect '[2].a.b.c' to satisfy /foo/, but received 'boo'`
   )

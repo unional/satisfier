@@ -1,10 +1,4 @@
-import {
-  tersible,
-  tersify,
-  // @ts-ignore
-  Tersible
-} from 'tersify'
-
+import { tersible, tersify } from 'tersify'
 import { createSatisfier } from './createSatisfier'
 
 /**
