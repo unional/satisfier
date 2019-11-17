@@ -8,5 +8,6 @@ export * from './isInInterval';
 export * from './isInRange';
 export * from './isTypeOf';
 export * from './none';
+export * from './satisfies';
 export * from './some';
 export * from './startsWith';

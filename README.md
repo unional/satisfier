@@ -22,6 +22,20 @@ A purposely loose comparison tool.
 - no spread on array, use `has()/some()` or `every()`
 - `undefined` now checks against `undefined` instead of a placeholder for anything. Use `anything` for the previous behavior.
 
+## satisfies(actual, expected)
+
+The simplest way to use `satisfier`.
+
+```ts
+import { satisfies } from 'satisfier'
+
+satisfies(1, 1)  // true
+satisfies({ a: 1 }, { a: v => v === 1}) // true
+satisfies([{ a: { b: 'b' }}], [{ a: { b: v => v === 'b' } }]) // true
+```
+
+Code completion is available to help you quickly creating your expectation.
+
 ## createSatisfier(expectation)
 
 Each property in `expectation` can be a value, a `RegExp`, or a predicate function.

@@ -1,6 +1,6 @@
 import { Tersible } from 'tersify'
 
-export type Predicate = (value: any, path: (string | number)[]) => boolean | Diff[]
+export type Predicate<V = any> = (value: V, path: (string | number)[]) => boolean | Diff[]
 
 export type TersiblePredicate = Tersible<Predicate>
 
