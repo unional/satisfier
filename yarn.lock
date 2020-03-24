@@ -625,7 +625,7 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
-"@unional/devpkg-node@1.4.2":
+"@unional/devpkg-node@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@unional/devpkg-node/-/devpkg-node-1.4.2.tgz#f93876900f9fc84d4ba8ccdf982bc170704ae19f"
   integrity sha512-3U8LehOUhQMe+MchaMtHxyr5QlGbA/FTJ1V+1PcNYUdbIhMEXhPCsaTFCdv5Rr5MlbbVkbppBCYXSwjviQ/HvQ==
@@ -3721,6 +3721,17 @@ jest-jasmine2@^24.9.0:
     jest-util "^24.9.0"
     pretty-format "^24.9.0"
     throat "^4.0.0"
+
+jest-junit@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-10.0.0.tgz#c94b91c24920a327c9d2a075e897b2dba4af494b"
+  integrity sha512-dbOVRyxHprdSpwSAR9/YshLwmnwf+RSl5hf0kCGlhAcEeZY9aRqo4oNmaT0tLC16Zy9D0zekDjWkjHGjXlglaQ==
+  dependencies:
+    jest-validate "^24.9.0"
+    mkdirp "^0.5.1"
+    strip-ansi "^5.2.0"
+    uuid "^3.3.3"
+    xml "^1.0.1"
 
 jest-junit@^9.0.0:
   version "9.0.0"
