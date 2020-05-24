@@ -45,7 +45,7 @@
     "codecov": "^3.6.1",
     "eslint-plugin-harmony": "^3.0.0",
     "jest-junit": "^10.0.0",
-    "semantic-release": "^15.13.30",
+    "semantic-release": "^17.0.8",
     "type-plus": "^1.29.0"
   }
 }
