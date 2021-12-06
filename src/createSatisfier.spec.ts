@@ -1,5 +1,5 @@
-import { tryAssign, typeAssert } from 'type-plus';
-import { anything, createSatisfier } from '.';
+import { assertType } from 'type-plus'
+import { anything, createSatisfier } from '.'
 
 const testSymbol = Symbol()
 const testArrow = () => true
@@ -386,8 +386,7 @@ describe('predicate function', () => {
 test('use generic to lock in the type of the input', () => {
   const s = createSatisfier<{ a: number }>(undefined)
   const y: Parameters<typeof s.exec> = {} as any
-
-  typeAssert.isNever(tryAssign(undefined, y[0]))
+  assertType<{ a: number }>(y[0])
 })
 
 describe('test()', () => {

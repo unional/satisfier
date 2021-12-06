@@ -45,3 +45,5 @@ node_modules
 dist*
 lib*
 out*
+cjs
+esm
