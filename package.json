@@ -15,37 +15,53 @@
     "name": "Homa Wong (unional)",
     "email": "homawong@gmail.com"
   },
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "jsnext:main": "esm/index.js",
+  "typings": "cjs/index.d.ts",
   "files": [
-    "lib",
-    "libm",
+    "cjs",
+    "esm",
     "src"
   ],
-  "main": "lib/index.js",
-  "module": "libm/index.js",
-  "jsnext:main": "libm/index.js",
-  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json",
-    "clean": "rimraf lib libm",
+    "clean": "rimraf lib esm",
     "dc": "yarn dependency-check",
     "dependency-check": "dependency-check . --unused --no-dev && dependency-check . --missing --no-dev",
     "lint": "eslint --ext=js,ts .",
     "test": "jest --reporters=default",
     "verify": "yarn lint && yarn build && yarn dependency-check && jest --coverage --reporters=default",
     "watch": "jest --watch",
-    "watch:type": "tsc --watch",
-    "semantic-release": "semantic-release"
+    "watch:type": "tsc --watch"
   },
   "dependencies": {
-    "tersify": "^3.0.6"
+    "tersify": "^3.7.9"
   },
   "devDependencies": {
-    "@unional/devpkg-node": "^1.4.2",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@types/jest": "^27.0.3",
     "assertron": "^7.1.2",
-    "codecov": "^3.6.1",
-    "eslint-plugin-harmony": "^3.0.0",
-    "jest-junit": "^10.0.0",
-    "semantic-release": "^15.13.30",
-    "type-plus": "^1.29.0"
+    "dependency-check": "^4.1.0",
+    "eslint": "8.4.0",
+    "eslint-plugin-harmony": "^6.0.0",
+    "husky": "^7.0.4",
+    "is-ci": "^3.0.1",
+    "jest": "^27.4.3",
+    "jest-junit": "^13.0.0",
+    "jest-progress-tracker": "^3.0.1",
+    "jest-validate": "^27.4.2",
+    "jest-watch-suspend": "^1.1.2",
+    "jest-watch-toggle-config": "^2.0.1",
+    "jest-watch-typeahead": "^1.0.0",
+    "type-plus": "^3.13.1",
+    "typescript": "^4.5.2"
   }
 }

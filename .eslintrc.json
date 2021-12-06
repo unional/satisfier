@@ -1,18 +1,24 @@
 {
   "env": {
+    "node": true,
     "es6": true,
-    "jest": true,
-    "node": true
+    "jest": true
   },
-  "extends": "plugin:harmony/recommended",
+  "extends": [
+    "plugin:harmony/latest"
+  ],
   "overrides": [
     {
       "extends": "plugin:harmony/ts-recommended",
       "files": [
-        "*.ts",
-        "*.tsx"
-      ]
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": "tsconfig.json"
+      },
+      "rules": {
+        "no-use-before-define": "off"
+      }
     }
-  ],
-  "root": true
+  ]
 }
