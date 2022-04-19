@@ -48,7 +48,7 @@
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@types/jest": "27.4.1",
-    "assertron": "^7.1.2",
+    "assertron": "9.0.5",
     "dependency-check": "^4.1.0",
     "eslint": "8.4.0",
     "eslint-plugin-harmony": "^6.0.0",
