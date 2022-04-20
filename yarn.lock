@@ -4999,15 +4999,6 @@ tersify@^3.7.11:
     is-buffer "^2.0.5"
     unpartial "^0.6.4"
 
-tersify@^3.7.8:
-  version "3.7.9"
-  resolved "https://registry.yarnpkg.com/tersify/-/tersify-3.7.9.tgz#a5e9376252c7fac1a1b6a3105620deed18d4dd83"
-  integrity sha512-RpZaOa+hLvobkClgm0bH+wNeuJjzJkPuVLiIitKTPEMPtA4NDw/Op4V4tCMXzAHwPLHXjllRzObQlZ7PxUFB+A==
-  dependencies:
-    acorn "^8.6.0"
-    is-buffer "^2.0.5"
-    unpartial "^0.6.4"
-
 tersify@^3.8.2:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/tersify/-/tersify-3.8.3.tgz#8f49ffb24c83d92525e2c483f64273fd640cef19"
@@ -5174,15 +5165,7 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-type-plus@^3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-3.13.1.tgz#7a094eff301a0cd8158bc038344e7716a4020fc2"
-  integrity sha512-YHN0ci9srye12zbheLPNlhfF2bW2AgNK1uZAqgYDtp543FWxAK3wNCG6CO8XHUlkTS4JzlT5RhK2GhFSIBqziA==
-  dependencies:
-    tersify "^3.7.8"
-    unpartial "^0.6.3"
-
-type-plus@^4.0.2:
+type-plus@4.9.0, type-plus@^4.0.2:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-4.9.0.tgz#5e6f11cd9e8f12fbda1b5cdebc6762e4443d3eba"
   integrity sha512-MTG+1YG8+/UHS0cIiS2OvXup3AZHUYYTlgnHxwbeglhnyskWOOtuC4Q7iyL0Am3nioqaPGRZR2LddqlHIvRWFw==
@@ -5245,7 +5228,7 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
-unpartial@^0.6.1, unpartial@^0.6.3, unpartial@^0.6.4:
+unpartial@^0.6.1, unpartial@^0.6.4:
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/unpartial/-/unpartial-0.6.4.tgz#9cf878d3c8335919b250cfb3393751ca12cc26a4"
   integrity sha512-t/aGg/x8vW0KCjPB8A6TBB1hd0wnWMze8WD83uUpqSDm99jmhY2ZcHpivlvvSGmPCJ/S5ASZzxeQHga4JTW/4A==
