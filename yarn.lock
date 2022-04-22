@@ -1263,7 +1263,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@commitlint/cli@^15.0.0":
+"@commitlint/cli@15.0.0":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-15.0.0.tgz#8e78e86ee2b6955c1a5d140e734a6c171ce367ee"
   integrity sha512-Y5xmDCweytqzo4N4lOI2YRiuX35xTjcs8n5hUceBH8eyK0YbwtgWX50BJOH2XbkwEmII9blNhlBog6AdQsqicg==
@@ -1278,7 +1278,7 @@
     resolve-global "1.0.0"
     yargs "^17.0.0"
 
-"@commitlint/config-conventional@^15.0.0":
+"@commitlint/config-conventional@15.0.0":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-15.0.0.tgz#3bf1adf319e3b431de12ba82dc399524038b2d8f"
   integrity sha512-eZBRL8Lk3hMNHp1wUMYj0qrZQEsST1ai7KHR8J1IDD9aHgT7L2giciibuQ+Og7vxVhR5WtYDvh9xirXFVPaSkQ==
@@ -2557,7 +2557,7 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-dependency-check@^4.1.0:
+dependency-check@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/dependency-check/-/dependency-check-4.1.0.tgz#d45405cabb50298f8674fe28ab594c8a5530edff"
   integrity sha512-nlw+PvhVQwg0gSNNlVUiuRv0765gah9pZEXdQlIFzeSnD85Eex0uM0bkrAWrHdeTzuMGZnR9daxkup/AqqgqzA==
@@ -2695,7 +2695,7 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-plugin-harmony@^6.0.0:
+eslint-plugin-harmony@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-harmony/-/eslint-plugin-harmony-6.0.0.tgz#2a335015c8c89f49ba8eaf7a59673c1389633011"
   integrity sha512-mmF90kRyBHjv3nX7RnldXLxKNiirPr1CY2t7fpMhKbhsGUZm1qel7+Rjr0B+CYRR5R2LhhweLVSt9zCgh4x4wQ==
@@ -3182,7 +3182,7 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-husky@^7.0.4:
+husky@7.0.4:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
   integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
@@ -3265,7 +3265,7 @@ is-buffer@^2.0.5:
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.5.tgz#ebc252e400d22ff8d77fa09888821a24a658c191"
   integrity sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==
 
-is-ci@^3.0.1:
+is-ci@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-3.0.1.tgz#db6ecbed1bd659c43dac0f45661e7674103d1867"
   integrity sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==
@@ -3597,7 +3597,7 @@ jest-jasmine2@^27.5.1:
     pretty-format "^27.5.1"
     throat "^6.0.1"
 
-jest-junit@^13.0.0:
+jest-junit@13.0.0:
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-13.0.0.tgz#479be347457aad98ae8a5983a23d7c3ec526c9a3"
   integrity sha512-JSHR+Dhb32FGJaiKkqsB7AR3OqWKtldLd6ZH2+FJ8D4tsweb8Id8zEVReU4+OlrRO1ZluqJLQEETm+Q6/KilBg==
@@ -3668,7 +3668,7 @@ jest-pnp-resolver@^1.2.2:
   resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz#b704ac0ae028a89108a4d040b3f919dfddc8e33c"
   integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
 
-jest-progress-tracker@^3.0.1:
+jest-progress-tracker@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/jest-progress-tracker/-/jest-progress-tracker-3.0.1.tgz#9079e5d5463314ca7559040aa93a6d256a36b19f"
   integrity sha512-NyleeXEeo9fO/a3v7WOb3F0qIMoOamFTIZPR2X1dqGkmhoYpjGj4DHYDWAf40z6hWXJ2O4zbTGpZnMVTtBoh+g==
@@ -3840,7 +3840,7 @@ jest-validate@27.5.1, jest-validate@^27.5.1:
     leven "^3.1.0"
     pretty-format "^27.5.1"
 
-jest-watch-suspend@^1.1.2:
+jest-watch-suspend@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/jest-watch-suspend/-/jest-watch-suspend-1.1.2.tgz#23df86243a0abaa4f68c1e384a5e22de0e797b77"
   integrity sha512-sJRE+xj+jBvCdFhjFzJWFh9bg15v1YbSgmpvSCIR5ttg/Cn+608yfRjtLCDQx3ZVcIYlvorgsWIzW+lDFAhMrQ==
@@ -3848,14 +3848,14 @@ jest-watch-suspend@^1.1.2:
     chalk "^2.4.2"
     unpartial "^0.6.1"
 
-jest-watch-toggle-config@^2.0.1:
+jest-watch-toggle-config@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/jest-watch-toggle-config/-/jest-watch-toggle-config-2.0.1.tgz#5e928100c8cf427a2092143556e6862a92886fac"
   integrity sha512-qOOPo8vPlDX/hfHCQbJT5NKUvR+Uah+rsCtt+cCmg8oiMNtUvWUO2sqYW/X5PXmWyaoxwI14D8lVEmFy3w6BwQ==
   dependencies:
     chalk "^4.1.0"
 
-jest-watch-typeahead@^1.0.0:
+jest-watch-typeahead@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/jest-watch-typeahead/-/jest-watch-typeahead-1.0.0.tgz#4de2ca1eb596acb1889752afbab84b74fcd99173"
   integrity sha512-jxoszalAb394WElmiJTFBMzie/RDCF+W7Q29n5LzOPtcoQoHWfdUtHFkbhgf5NwWe8uMOxvKb/g7ea7CshfkTw==
