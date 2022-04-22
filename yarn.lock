@@ -1597,7 +1597,7 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     collect-v8-coverage "^1.0.0"
 
-"@jest/test-result@^27.5.1":
+"@jest/test-result@^27.5.0", "@jest/test-result@^27.5.1":
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-27.5.1.tgz#56a6585fa80f7cdab72b8c5fc2e871d03832f5bb"
   integrity sha512-EW35l2RYFUcUQxFJz5Cv5MTOxlJIQs4I7gxzi2zVU7PJhOwfYq1MdC5nhSmYjX1gmMmLPvB3sIaC+BkcHRBfag==
@@ -3668,15 +3668,15 @@ jest-pnp-resolver@^1.2.2:
   resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz#b704ac0ae028a89108a4d040b3f919dfddc8e33c"
   integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
 
-jest-progress-tracker@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/jest-progress-tracker/-/jest-progress-tracker-3.0.1.tgz#9079e5d5463314ca7559040aa93a6d256a36b19f"
-  integrity sha512-NyleeXEeo9fO/a3v7WOb3F0qIMoOamFTIZPR2X1dqGkmhoYpjGj4DHYDWAf40z6hWXJ2O4zbTGpZnMVTtBoh+g==
+jest-progress-tracker@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/jest-progress-tracker/-/jest-progress-tracker-3.0.4.tgz#a0f59458e6e9268ac5d3a26e4075bba9de4d0aee"
+  integrity sha512-041T9TUfLJ06/Yz7Y4QGRVzaV5xYMehe3c2id11Ie9X2MNQzERo0g4s/d3ghM9/XBJfGsV3H2gvcDymMtkObnA==
   dependencies:
-    "@jest/test-result" "^27.4.2"
+    "@jest/test-result" "^27.5.0"
     istanbul-lib-coverage "^3.2.0"
-    jest-watcher "^27.4.2"
-    test-progress-tracker "^2.0.5"
+    jest-watcher "^27.4.6"
+    test-progress-tracker "^2.0.6"
 
 jest-regex-util@^27.0.0:
   version "27.4.0"
@@ -3868,7 +3868,7 @@ jest-watch-typeahead@^1.0.0:
     string-length "^5.0.1"
     strip-ansi "^7.0.1"
 
-jest-watcher@^27.0.0, jest-watcher@^27.4.2:
+jest-watcher@^27.0.0:
   version "27.4.2"
   resolved "https://registry.yarnpkg.com/jest-watcher/-/jest-watcher-27.4.2.tgz#c9037edfd80354c9fe90de4b6f8b6e2b8e736744"
   integrity sha512-NJvMVyyBeXfDezhWzUOCOYZrUmkSCiatpjpm+nFUid74OZEHk6aMLrZAukIiFDwdbqp6mTM6Ui1w4oc+8EobQg==
@@ -3881,7 +3881,7 @@ jest-watcher@^27.0.0, jest-watcher@^27.4.2:
     jest-util "^27.4.2"
     string-length "^4.0.1"
 
-jest-watcher@^27.5.1:
+jest-watcher@^27.4.6, jest-watcher@^27.5.1:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-watcher/-/jest-watcher-27.5.1.tgz#71bd85fb9bde3a2c2ec4dc353437971c43c642a2"
   integrity sha512-z676SuD6Z8o8qbmEGhoEUFOM1+jfEiL3DXHK/xgEiG2EyNYfFG60jluWcupY6dATjfEsKQuibReS1djInQnoVw==
@@ -5017,10 +5017,10 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-test-progress-tracker@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/test-progress-tracker/-/test-progress-tracker-2.0.5.tgz#90f4d512ba8bf53358566b54bd2d4625d5c57d12"
-  integrity sha512-BgicGRoqT6FSUsokrHYvLPdhSpsRmAbJU1IGZhynDwjpGH15RezV1bEr+LFcFu7S3RqtS3blybKj/b+UpkggUA==
+test-progress-tracker@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/test-progress-tracker/-/test-progress-tracker-2.0.6.tgz#4fdb23cc581ab89a68dfa46cc00a579fb4f91d95"
+  integrity sha512-mcLE8bH7PYeReIfX5HoOQ6htn22n453EkEKkSUSJi84nwAvSiSFdp+SGvmv0x+86w/ed0Czr2ZYrba+rlRG3Gg==
   dependencies:
     chokidar "^3.5.2"
     global-store "^1.0.0-beta.19"
