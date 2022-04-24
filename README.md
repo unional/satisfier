@@ -3,23 +3,19 @@
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
 
-[![Circle CI][circleci-image]][circleci-url]
-[![Travis CI][travis-image]][travis-url]
+[![GitHub NodeJS][github-nodejs]][github-action-url]
 [![Codecov][codecov-image]][codecov-url]
-[![Coveralls Status][coveralls-image]][coveralls-url]
 
-[![Greenkeeper][greenkeeper-image]][greenkeeper-url]
 [![Semantic Release][semantic-release-image]][semantic-release-url]
 
 [![Visual Studio Code][vscode-image]][vscode-url]
-[![Wallaby.js][wallaby-image]][wallaby-url]
 
 A purposely loose comparison tool.
 
 ## Version 5 breaking changes
 
-- exact check on array
-- no spread on array, use `has()/some()` or `every()`
+- Exact check on array
+- No spread on array, use `has()/some()` or `every()`
 - `undefined` now checks against `undefined` instead of a placeholder for anything. Use `anything` for the previous behavior.
 
 ## satisfies(actual, expected)
@@ -42,7 +38,7 @@ Each property in `expectation` can be a value, a `RegExp`, or a predicate functi
 
 ### test(actual)
 
-test `actual` against `expectation`.
+Test `actual` against `expectation`.
 
 ```ts
 import { createSatisfier } from 'satisfier'
@@ -61,7 +57,7 @@ createSatisfier({ a: () => false }).test({ a: 1 })
 
 ### exec(actual)
 
-check `actual` against `expectation` and returns the checking result.
+Check `actual` against `expectation` and returns the checking result.
 If `actual` meets the criteria, returns `null`.
 
 ```ts
@@ -97,11 +93,11 @@ createSatisfier({ a: anything }).test({})
 createSatisfier([anything, 1]).test(['x', 1])
 ```
 
-## test against array
+## Test against array
 
 There are several ways to test against array:
 
-### using array expectation
+### Using array expectation
 
 When you use an array expectation to test against array,
 each entry in the expectation will be used to test against the corresponding entry in the array.
@@ -116,7 +112,7 @@ createSatisfier([anything, 1]).test(['...anything...', 1])
 createSatisfier([e => e === anything, 1]).test([anything, 1])
 ```
 
-### using predicate expectation
+### Using predicate expectation
 
 You can test against the array using a predicate function.
 The predicate function will receive the whole array.
@@ -135,7 +131,7 @@ createSatisfier(
   .test([1, 2])
 ```
 
-### using primitive and object expectation
+### Using primitive and object expectation
 
 When the expectation is a primitive value or an object,
 it will be used to check against each element in the array.
@@ -172,7 +168,7 @@ results[0].expected.tersify()
 tersify(results[0])
 ```
 
-Examples of predicate:  `every`, `has`, `isInInterval`, `isInRange`, `isTypeOf`, `none`, `some`, `startsWith`
+Examples of predicate: `every`, `has`, `isInInterval`, `isInRange`, `isTypeOf`, `none`, `some`, `startsWith`
 
 ## Contribute
 

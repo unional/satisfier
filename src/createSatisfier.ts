@@ -1,14 +1,10 @@
-import { anything } from './anything';
-import { Diff, Predicate, Satisfier } from './interfaces';
+import { anything } from './anything'
+import { Diff, Predicate, Satisfier } from './interfaces'
 
-// Workaround for https://github.com/Microsoft/TypeScript/issues/6230
-export interface ExpectationObject { [key: string]: Expectation }
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ExpectionArray extends Array<Expectation> { }
 
 export type Expectation = symbol | undefined | null | boolean | number | bigint |
-  string | RegExp | ExpectionArray | ExpectationObject | Predicate
+  string | RegExp | ExpectionArray | { [key: string]: Expectation } | Predicate
 
 export function createSatisfier<T = any>(expected: Expectation): Satisfier<T> {
   return {
@@ -23,14 +19,14 @@ export function createSatisfier<T = any>(expected: Expectation): Satisfier<T> {
   }
 }
 
-const nodiff: Diff[] = []
+const noDiff: Diff[] = []
 function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: number): Diff[] {
   if (expected === anything) {
-    return nodiff
+    return noDiff
   }
 
   if (expected === undefined || expected === null) {
-    return actual === expected ? nodiff : [{
+    return actual === expected ? noDiff : [{
       path,
       expected,
       actual
@@ -39,7 +35,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
 
   // tslint:disable-next-line: strict-type-predicates valid-typeof
   if (typeof expected === 'bigint') {
-    return actual === expected ? nodiff : [{
+    return actual === expected ? noDiff : [{
       path,
       expected,
       actual
@@ -50,14 +46,14 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
 
   if (expectedType === 'number') {
     if (isNaN(expected)) {
-      return typeof actual === 'number' && isNaN(actual) ? nodiff : [{
+      return typeof actual === 'number' && isNaN(actual) ? noDiff : [{
         path,
         expected,
         actual
       }]
     }
     else {
-      return actual === expected ? nodiff : [{
+      return actual === expected ? noDiff : [{
         path,
         expected,
         actual
@@ -66,7 +62,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
   }
 
   if (expectedType === 'boolean' || expectedType === 'string' || expectedType === 'symbol') {
-    return actual === expected ? nodiff : [{
+    return actual === expected ? noDiff : [{
       path,
       expected,
       actual
@@ -75,7 +71,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
 
   if (expected instanceof RegExp) {
     if (actual instanceof RegExp) {
-      return expected.test(String(actual)) ? nodiff : [{
+      return expected.test(String(actual)) ? noDiff : [{
         path,
         expected,
         actual
@@ -83,7 +79,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
     }
     else {
       return (typeof actual === 'string') && expected.test(actual) ?
-        nodiff :
+        noDiff :
         [{
           path,
           expected,
@@ -115,7 +111,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
 
   if (expectedType === 'function') {
     const r = (expected as Predicate)(actual, path)
-    if (r === true) return nodiff
+    if (r === true) return noDiff
     return r ? r : [{
       path,
       expected,

@@ -3,7 +3,7 @@ import { createSatisfier } from './createSatisfier';
 
 
 /**
- * Check if an array has the first n entries satisfying the specifiec expectations.
+ * Check if an array has the first n entries satisfying the specified expectations.
  */
 export function startsWith(expectations: any[]) {
   return tersible((value: any) => {
