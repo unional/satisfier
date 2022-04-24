@@ -9,7 +9,7 @@
   ],
   "overrides": [
     {
-      "extends": "plugin:harmony/ts-recommended",
+      "extends": "plugin:harmony/ts-recommended-type-check",
       "files": [
         "*.ts"
       ],
@@ -17,6 +17,11 @@
         "project": "tsconfig.json"
       },
       "rules": {
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
         "no-use-before-define": "off"
       }
     }

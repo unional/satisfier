@@ -21,9 +21,7 @@ module.exports = isCI ? {
   'testMatch': ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
 } : {
   'collectCoverageFrom': [
-    '<rootDir>/src/**/*.[jt]s',
-    '!<rootDir>/src/bin.[jt]s',
-    '!<rootDir>/src/type-checker/*'
+    '<rootDir>/src/**/*.[jt]s'
   ],
   'reporters': [
     'default',

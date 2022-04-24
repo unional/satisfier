@@ -1,7 +1,7 @@
 {
   "name": "satisfier",
   "version": "0.0.0-development",
-  "description": "Manage and generate artifacts to test data across boundaries",
+  "description": "A purposely loose comparison tool.",
   "homepage": "https://github.com/unional/satisfier",
   "bugs": {
     "url": "https://github.com/unional/satisfier/issues"
@@ -36,7 +36,7 @@
     "watch:type": "tsc --watch"
   },
   "dependencies": {
-    "tersify": "^3.7.11"
+    "tersify": "^3.8.3"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
@@ -45,23 +45,23 @@
     "@babel/plugin-proposal-optional-chaining": "7.16.7",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
-    "@commitlint/cli": "^15.0.0",
-    "@commitlint/config-conventional": "^15.0.0",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/jest": "27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
     "assertron": "9.0.5",
     "dependency-check": "^4.1.0",
-    "eslint": "8.4.0",
-    "eslint-plugin-harmony": "^6.0.0",
+    "eslint": "8.14.0",
+    "eslint-plugin-harmony": "^6.0.3",
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
     "jest": "27.5.1",
-    "jest-junit": "^13.0.0",
-    "jest-progress-tracker": "^3.0.1",
+    "jest-junit": "^13.2.0",
     "jest-validate": "27.5.1",
     "jest-watch-suspend": "^1.1.2",
     "jest-watch-toggle-config": "^2.0.1",
     "jest-watch-typeahead": "^1.0.0",
     "type-plus": "4.9.0",
-    "typescript": "4.6.2"
+    "typescript": "4.6.3"
   }
 }

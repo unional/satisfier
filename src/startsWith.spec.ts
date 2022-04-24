@@ -1,5 +1,5 @@
-import { createSatisfier } from 'satisfier';
-import { startsWith } from '.';
+import { createSatisfier } from 'satisfier'
+import { startsWith } from '.'
 
 test('non array returns false', () => {
   expect(createSatisfier(startsWith([{ a: 1 }])).test(undefined)).toBe(false)
