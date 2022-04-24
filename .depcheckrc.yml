@@ -1,0 +1,5 @@
+ignores:
+  - "@commitlint/*"
+  - "@size-limit/*"
+  - "@types/jest"
+  - typedoc*
