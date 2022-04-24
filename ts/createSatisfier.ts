@@ -33,7 +33,6 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
     }]
   }
 
-  // tslint:disable-next-line: strict-type-predicates valid-typeof
   if (typeof expected === 'bigint') {
     return actual === expected ? noDiff : [{
       path,

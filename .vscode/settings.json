@@ -10,6 +10,7 @@
   ],
   "eslint.enable": true,
   "cSpell.words": [
+    "codeql",
     "jsnext",
     "tersible",
     "tersify"

@@ -1,39 +1,13 @@
-const isCI = require('is-ci')
-module.exports = isCI ? {
-  'collectCoverageFrom': [
-    '<rootDir>/src/**/*.[jt]s',
-    '!<rootDir>/src/bin.[jt]s',
-    '!<rootDir>/src/type-checker/*'
+module.exports = {
+  collectCoverageFrom: [
+    '<rootDir>/ts/**/*.[jt]s'
   ],
-  'roots': [
-    '<rootDir>/src',
+  roots: [
+    '<rootDir>/ts',
   ],
-  'reporters': [
-    'default',
-    [
-      'jest-junit',
-      {
-        'output': '.reports/junit/js-test-results.xml',
-      },
-    ],
-  ],
-  'testEnvironment': 'node',
-  'testMatch': ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
-} : {
-  'collectCoverageFrom': [
-    '<rootDir>/src/**/*.[jt]s'
-  ],
-  'reporters': [
-    'default',
-    'jest-progress-tracker',
-    // ['jest-audio-reporter', { volume: 0.3 }],
-  ],
-  'roots': [
-    '<rootDir>/src',
-  ],
-  'testEnvironment': 'node',
-  'testMatch': ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
-  'watchPlugins': [
+  testEnvironment: 'node',
+  testMatch: ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
+  watchPlugins: [
     'jest-watch-suspend',
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

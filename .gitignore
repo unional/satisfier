@@ -42,8 +42,9 @@ node_modules
 .idea
 
 # project folders
-dist*
-lib*
-out*
 cjs
+dist
+docs
 esm
+lib
+out

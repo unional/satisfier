@@ -1,7 +1,18 @@
 {
-  "extends": "./tsconfig.esnext.json",
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
   "include": [
-    "src",
+    "ts",
     "typings"
-  ]
+  ],
+  "typedocOptions": {
+    "customTitle": "A purposely loose comparison tool.",
+    "customTitleLink": "https://github.com/unional/satisfier",
+    "entryPoints": [
+      "src/index.ts"
+    ],
+    "out": "docs"
+  }
 }
