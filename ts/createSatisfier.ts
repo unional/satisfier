@@ -1,10 +1,8 @@
 import { anything } from './anything'
 import { Diff, Predicate, Satisfier } from './interfaces'
 
-export interface ExpectionArray extends Array<Expectation> { }
-
 export type Expectation = symbol | undefined | null | boolean | number | bigint |
-  string | RegExp | ExpectionArray | { [key: string]: Expectation } | Predicate
+  string | RegExp | Array<Expectation> | { [key: string]: Expectation } | Predicate
 
 export function createSatisfier<T = any>(expected: Expectation): Satisfier<T> {
   return {

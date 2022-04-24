@@ -1,7 +1,7 @@
 import t from 'assert'
 import a from 'assertron'
 
-import { createSatisfier, some } from '.'
+import { createSatisfier, satisfies, some } from '.'
 
 test('non array returns false', () => {
   a.false(createSatisfier(some({ a: 1 })).test(true))
@@ -29,5 +29,5 @@ test('tersify()', () => {
 })
 
 test('match second', () => {
-  a.satisfies(['first', 'second'], some('second'))
+  satisfies(['first', 'second'], some('second'))
 })

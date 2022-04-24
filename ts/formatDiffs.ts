@@ -1,5 +1,5 @@
-import { tersify } from 'tersify';
-import { Diff } from './interfaces';
+import { tersify } from 'tersify'
+import { Diff } from './interfaces'
 
 export function formatDiffs(diffs: Diff[] | undefined) {
   if (!diffs) return ''
