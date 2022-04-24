@@ -47,4 +47,4 @@ describe('when actual is array', () => {
   test('expected entry can be predicate', () => {
     expect(satisfies([{ a: 1 }], [v => v.a === 1])).toBe(true)
   })
-});
+})

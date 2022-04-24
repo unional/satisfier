@@ -1,25 +1,6 @@
-import { assertType } from 'type-plus'
+import { isType } from 'type-plus'
 import { anything, createSatisfier } from '.'
-
-const testSymbol = Symbol()
-const testArrow = () => true
-const testFn = function () { return true }
-describe('anything', () => {
-  test('matches against anything', () => {
-    const s = createSatisfier(anything)
-    expect(s.exec(undefined)).toBeUndefined()
-    expect(s.exec(null)).toBeUndefined()
-    expect(s.exec(false)).toBeUndefined()
-    expect(s.exec(1)).toBeUndefined()
-    expect(s.exec(1n)).toBeUndefined()
-    expect(s.exec('a')).toBeUndefined()
-    expect(s.exec(Symbol())).toBeUndefined()
-    expect(s.exec({})).toBeUndefined()
-    expect(s.exec([])).toBeUndefined()
-    expect(s.exec(testFn)).toBeUndefined()
-    expect(s.exec(testArrow)).toBeUndefined()
-  })
-})
+import { testArrow, testFn, testSymbol } from './testPredicates'
 
 describe('undefined', () => {
   test('matches only undefined', () => {
@@ -306,7 +287,7 @@ describe('object', () => {
     const predicate = (e: any) => e && e.every((x: any) => x.login)
     const s = createSatisfier({
       data: predicate
-    });
+    })
 
     expect(s.exec({ data: [{ login: 'a' }] })).toBeUndefined()
     expect(s.exec({ data: [{ login: 'a' }, { login: 'b' }] })).toBeUndefined()
@@ -375,7 +356,7 @@ describe('predicate function', () => {
   })
 
   test('apply property predicate', () => {
-    const s = createSatisfier({ data: v => v === 1 });
+    const s = createSatisfier({ data: v => v === 1 })
 
     expect(s.exec({ data: 1 })).toBeUndefined()
     expect(s.exec({ data: 2 })).toEqual([{ path: ['data'], expected: s.expected.data, actual: 2 }])
@@ -386,7 +367,7 @@ describe('predicate function', () => {
 test('use generic to lock in the type of the input', () => {
   const s = createSatisfier<{ a: number }>(undefined)
   const y: Parameters<typeof s.exec> = {} as any
-  assertType<{ a: number }>(y[0])
+  isType.equal<true, { a: number }, typeof y[0]>()
 })
 
 describe('test()', () => {

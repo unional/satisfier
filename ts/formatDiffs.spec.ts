@@ -1,4 +1,4 @@
-import { createSatisfier, every, formatDiffs, has } from '.';
+import { createSatisfier, every, formatDiffs, has } from '.'
 
 test('index is wrapped with []', () => {
   const diffs = createSatisfier(every({ a: { b: { c: /foo/ } } })).exec([{ a: {} }, { a: { b: {} } }, { a: { b: { c: 'boo' } } }])
