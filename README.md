@@ -187,24 +187,15 @@ git push
 # create PR
 ```
 
-[circleci-image]: https://circleci.com/gh/unional/satisfier/tree/master.svg?style=shield
-[circleci-url]: https://circleci.com/gh/unional/satisfier/tree/master
 [codecov-image]: https://codecov.io/gh/unional/satisfier/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/unional/satisfier
-[coveralls-image]: https://coveralls.io/repos/github/unional/satisfier/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/unional/satisfier?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/satisfier.svg?style=flat
 [downloads-url]: https://npmjs.org/package/satisfier
-[greenkeeper-image]: https://badges.greenkeeper.io/unional/satisfier.svg
-[greenkeeper-url]: https://greenkeeper.io/
+[github-action-url]: https://github.com/unional/satisfier/actions
+[github-nodejs]: https://github.com/unional/satisfier/workflows/nodejs/badge.svg
 [npm-image]: https://img.shields.io/npm/v/satisfier.svg?style=flat
 [npm-url]: https://npmjs.org/package/satisfier
 [semantic-release-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
-[travis-image]: https://img.shields.io/travis/unional/satisfier/master.svg?style=flat
-[travis-url]: https://travis-ci.org/unional/satisfier?branch=master
-[unstable-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
 [vscode-image]: https://img.shields.io/badge/vscode-ready-green.svg
 [vscode-url]: https://code.visualstudio.com/
-[wallaby-image]: https://img.shields.io/badge/wallaby.js-configured-green.svg
-[wallaby-url]: https://wallabyjs.com
