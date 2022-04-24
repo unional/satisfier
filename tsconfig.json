@@ -11,7 +11,7 @@
     "customTitle": "A purposely loose comparison tool.",
     "customTitleLink": "https://github.com/unional/satisfier",
     "entryPoints": [
-      "src/index.ts"
+      "ts/index.ts"
     ],
     "out": "docs"
   }
