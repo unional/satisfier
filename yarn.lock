@@ -2198,10 +2198,10 @@ arrify@^2.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-2.0.1.tgz#c9655e9331e0abcd588d2a7cad7e9956f66701fa"
   integrity sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==
 
-assertron@9.0.5:
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/assertron/-/assertron-9.0.5.tgz#87655581d2ccb8b9e94da26f93a232be3b00ba53"
-  integrity sha512-8DWxw6wZOR7VAhTRBJ0hS0/9+2ucDCQKT77aLvxJbRc8ZHs+p1J/cBMa7X/+oKKBfTtbQvTrVAhGwVqELD2R1Q==
+assertron@9.0.6:
+  version "9.0.6"
+  resolved "https://registry.yarnpkg.com/assertron/-/assertron-9.0.6.tgz#110fb4f10be15e6c8be5b1f7871387546882ab04"
+  integrity sha512-RI7/hB+5Mxr9XDPKmOpHi5PaFOIjA0yRZBdo9HqAloogSx9mbqrFPVZHP5Jmuot5sfApmmMn7ellKAQ845904Q==
   dependencies:
     is-node "^1.0.2"
     is-promise "^4.0.0"
@@ -2210,7 +2210,7 @@ assertron@9.0.5:
     satisfier "^5.1.2"
     tersify "^3.8.2"
     tslib "^2.3.1"
-    type-plus "^4.0.2"
+    type-plus "^4.8.0"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -5836,7 +5836,7 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-type-plus@4.9.0, type-plus@^4.0.2:
+type-plus@4.9.0, type-plus@^4.8.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-4.9.0.tgz#5e6f11cd9e8f12fbda1b5cdebc6762e4443d3eba"
   integrity sha512-MTG+1YG8+/UHS0cIiS2OvXup3AZHUYYTlgnHxwbeglhnyskWOOtuC4Q7iyL0Am3nioqaPGRZR2LddqlHIvRWFw==
