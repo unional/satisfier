@@ -1,11 +1,10 @@
-import { Tersible, tersible, tersify } from 'tersify'
+import { tersible, tersify } from 'tersify'
 import { createSatisfier } from './createSatisfier'
-import { Predicate } from './interfaces'
 
 /**
  * Check if an array has entries satisfy the expectations in order.
  */
-export function has(...expectations: any[]): Tersible<Predicate> {
+export function has(...expectations: any[]) {
   return tersible((arr: any) => {
     if (!Array.isArray(arr)) return false
     let index = 0
