@@ -1,7 +1,6 @@
 import { tersible, tersify } from 'tersify'
 import { createSatisfier } from './createSatisfier'
 
-
 /**
  * Check if an array has the first n entries satisfying the specified expectations.
  */

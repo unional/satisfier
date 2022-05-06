@@ -1,6 +1,5 @@
-import { Tersible, tersible } from 'tersify'
-import { Predicate } from './interfaces'
+import { tersible } from 'tersify'
 
-export function isInRange(start: number, end: number): Tersible<Predicate> {
+export function isInRange(start: number, end: number) {
   return tersible((a: any) => a >= start && a <= end, () => `[${start}...${end}]`)
 }
