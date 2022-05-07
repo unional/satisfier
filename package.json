@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "assertron": "9.0.6",
     "depcheck": "^1.4.3",
-    "eslint": "8.14.0",
+    "eslint": "8.15.0",
     "eslint-plugin-harmony": "^6.0.3",
     "husky": "^7.0.4",
     "jest": "28.0.3",
