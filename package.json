@@ -50,7 +50,7 @@
     "@size-limit/preset-small-lib": "^7.0.8",
     "@types/jest": "27.5.0",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "assertron": "9.0.8",
+    "assertron": "9.0.9",
     "depcheck": "^1.4.3",
     "eslint": "8.15.0",
     "eslint-plugin-harmony": "^6.0.3",
