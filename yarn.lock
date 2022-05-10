@@ -2242,17 +2242,17 @@ arrify@^2.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-2.0.1.tgz#c9655e9331e0abcd588d2a7cad7e9956f66701fa"
   integrity sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==
 
-assertron@9.0.8:
-  version "9.0.8"
-  resolved "https://registry.yarnpkg.com/assertron/-/assertron-9.0.8.tgz#8b7427439f82af17f5d4edf837e4049c3d15aafb"
-  integrity sha512-dOg+pPrN7Yui5DjrdNyeZGtmap3/sbibz+DNpi7ykbaTjB7zIWVTm9Y4mERB4IdNL7ySHJg2wEOHzqpvYavmTQ==
+assertron@9.0.9:
+  version "9.0.9"
+  resolved "https://registry.yarnpkg.com/assertron/-/assertron-9.0.9.tgz#002213300a1bd802a550c4aa242c7cc486d59202"
+  integrity sha512-D7A/JIU2MbGoMkFTE/EdLsoRsapZBWbRSrCtm+jnPwmEIcSXbYr+2x/GsRDJQBiCvuoU8kVZJqt9QxZZIpJ7ag==
   dependencies:
     is-node "^1.0.2"
     is-promise "^4.0.0"
     iso-error "^4.1.2"
     path-equal "^1.1.3"
     satisfier "^5.1.4"
-    tersify "^3.8.2"
+    tersify "^3.8.3"
     tslib "^2.3.1"
     type-plus "^4.8.0"
 
