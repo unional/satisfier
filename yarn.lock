@@ -5662,7 +5662,15 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-type-plus@4.9.0, type-plus@^4.8.0:
+type-plus@4.9.1:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-4.9.1.tgz#1cc14226916ee7e217f0f05e82ba4eaceeae49c8"
+  integrity sha512-fzDcbdbQj+SLhJWbNZl7uy1sqcPOEo8Glm5ijoeRn7wbY/dwahakHpXG66mmNv3pIJrgor6tF10GuornuJwSsg==
+  dependencies:
+    tersify "^3.8.2"
+    unpartial "^0.6.4"
+
+type-plus@^4.8.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/type-plus/-/type-plus-4.9.0.tgz#5e6f11cd9e8f12fbda1b5cdebc6762e4443d3eba"
   integrity sha512-MTG+1YG8+/UHS0cIiS2OvXup3AZHUYYTlgnHxwbeglhnyskWOOtuC4Q7iyL0Am3nioqaPGRZR2LddqlHIvRWFw==
