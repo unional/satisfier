@@ -9,17 +9,14 @@
       "ES2020",
       "ES2021.Promise"
     ],
-    "module": "CommonJS",
-    "moduleResolution": "node",
     "newLine": "LF",
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "outDir": "lib",
+    "removeComments": false,
+    "rootDir": "ts",
     "sourceMap": true,
-    "inlineSources": true,
     "strict": true,
     "stripInternal": true,
-    "target": "ES2020",
     "useDefineForClassFields": true
   },
   "include": [

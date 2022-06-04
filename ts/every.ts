@@ -1,5 +1,5 @@
 import { tersible, tersify } from 'tersify'
-import { createSatisfier } from './createSatisfier'
+import { createSatisfier } from './createSatisfier.js'
 
 /**
  * Check if every entry in the array satisfies the expectation.

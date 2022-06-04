@@ -1,7 +1,7 @@
 import t from 'assert'
 import a from 'assertron'
 
-import { createSatisfier, isInRange } from '.'
+import { createSatisfier, isInRange } from './index.js'
 
 test('check number in range', () => {
   a.false(createSatisfier(isInRange(1, 3)).test(0))

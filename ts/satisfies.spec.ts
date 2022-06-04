@@ -1,4 +1,4 @@
-import { satisfies } from '.'
+import { satisfies } from './index.js'
 
 test('expected can be value', () => {
   expect(satisfies(false, false)).toBe(true)

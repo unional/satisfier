@@ -1,7 +1,7 @@
 import t from 'assert'
 import a from 'assertron'
 
-import { createSatisfier, isTypeOf } from '.'
+import { createSatisfier, isTypeOf } from './index.js'
 
 test('check type of property', () => {
   t(createSatisfier({ a: isTypeOf('number') }).test({ a: 1 }))

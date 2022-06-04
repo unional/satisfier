@@ -1,4 +1,4 @@
-import { createSatisfier, startsWith } from '.'
+import { createSatisfier, startsWith } from './index.js'
 
 test('non array returns false', () => {
   expect(createSatisfier(startsWith([{ a: 1 }])).test(undefined)).toBe(false)

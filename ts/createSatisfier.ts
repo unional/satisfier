@@ -1,5 +1,5 @@
-import { anything } from './anything'
-import { Diff, Predicate, Satisfier } from './interfaces'
+import { anything } from './anything.js'
+import { Diff, Predicate, Satisfier } from './interfaces.js'
 
 export type Expectation = symbol | undefined | null | boolean | number | bigint |
   string | RegExp | Array<Expectation> | { [key: string]: Expectation } | Predicate
