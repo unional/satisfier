@@ -1,6 +1,6 @@
-import { anything } from './anything'
-import { createSatisfier } from './createSatisfier'
-import { testArrow, testFn, testSymbol } from './testPredicates'
+import { anything } from './anything.js'
+import { createSatisfier } from './createSatisfier.js'
+import { testArrow, testFn, testSymbol } from './testPredicates.js'
 
 
 test('matches against anything', () => {

@@ -1,11 +1,20 @@
-module.exports = {
+export default {
+  preset: 'ts-jest/presets/default-esm',
+  globals: {
+    'ts-jest': {
+      isolatedModule: true,
+      useESM: true,
+    },
+  },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
   collectCoverageFrom: [
     '<rootDir>/ts/**/*.[jt]s'
   ],
   roots: [
     '<rootDir>/ts',
   ],
-  testEnvironment: 'node',
   testMatch: ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
   watchPlugins: [
     'jest-watch-suspend',

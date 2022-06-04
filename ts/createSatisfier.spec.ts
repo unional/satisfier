@@ -1,6 +1,6 @@
 import { isType } from 'type-plus'
-import { anything, createSatisfier } from '.'
-import { testArrow, testFn, testSymbol } from './testPredicates'
+import { anything, createSatisfier } from './index.js'
+import { testArrow, testFn, testSymbol } from './testPredicates.js'
 
 describe('undefined', () => {
   test('matches only undefined', () => {

@@ -1,5 +1,5 @@
-import { createSatisfier } from './createSatisfier'
-import { Predicate } from './interfaces'
+import { createSatisfier } from './createSatisfier.js'
+import { Predicate } from './interfaces.js'
 
 export type TargetedExpectation<T = any> = (
   T extends Array<infer R> ? Array<TargetedExpectation<R>> :

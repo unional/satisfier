@@ -3,5 +3,7 @@ ignores:
   - '@semantic-release/*'
   - "@size-limit/*"
   - "@types/jest"
+  - jest-*
   - semantic-release
+  - ts-jest
   - typedoc*

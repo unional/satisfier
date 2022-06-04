@@ -1,6 +1,6 @@
 import t from 'assert'
 import a from 'assertron'
-import { createSatisfier, has } from '.'
+import { createSatisfier, has } from './index.js'
 
 test('non array returns false', () => {
   a.false(createSatisfier(has(1)).test(undefined))
