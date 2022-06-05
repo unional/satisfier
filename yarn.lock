@@ -2639,18 +2639,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assertron@npm:9.2.2":
-  version: 9.2.2
-  resolution: "assertron@npm:9.2.2"
+"assertron@npm:9.2.3":
+  version: 9.2.3
+  resolution: "assertron@npm:9.2.3"
   dependencies:
     is-node: ^1.0.2
     is-promise: ^4.0.0
     iso-error: ^4.3.3
-    path-equal: ^1.1.3
-    satisfier: ^5.1.4
-    tersify: ^3.8.4
+    path-equal: ^1.2.1
+    satisfier: ^5.2.0
+    tersify: ^3.10.0
     type-plus: ^4.9.1
-  checksum: d6b8495689f57f2d233eb32e57f87c1c7d81c6db3607f87cbaca318293b8e10a946d49572a6df4b8a5c94390b45331dde28765ca4787eedf66fa906d0804c0c4
+  checksum: 405e0552256c8f5cdaeecfae6cdc042da851c7879482ac59c34b5dc26c6eebebf911a79688e94d8c9c32e8005a5fe4b576ecfdd2e6f0495e7834464eb0b9e3e7
   languageName: node
   linkType: hard
 
@@ -7501,10 +7501,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-equal@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "path-equal@npm:1.1.3"
-  checksum: bdb5b6162cd3998e93a6c6a4ab6da05f3d29d048765ce5151d7cc0d75cf432495b46ce227c8f227908bea2cfd8ab933c4afb747a783fb8a28abd6b89f09ecf90
+"path-equal@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "path-equal@npm:1.2.1"
+  checksum: 3273d38ebbe6324b640791f91058297ac9df1cb1c610e37e71f8737a66060d72da5d16e385ea6f36de8bdbc99694bc65bb5a7a6393254ccc07be0e6adad88d71
   languageName: node
   linkType: hard
 
@@ -8166,12 +8166,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"satisfier@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "satisfier@npm:5.1.4"
+"satisfier@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "satisfier@npm:5.2.0"
   dependencies:
-    tersify: ^3.8.3
-  checksum: 81d3adf614d1f532580ab0afd542782091853d34f4b19277331a761bf177acec186b842aa3f05dfe1481ee84e8d382eda41df719a957cf32a516813f73422d24
+    tersify: ^3.10.0
+  checksum: bc73bddf1d15d9f6c85ba600fc3bd2b821470c71ea46f17c5b874deaca714e8c018c9d2e92ea967e77e28cc18fc8630177e12d0e0e28783e340363027c12c9ac
   languageName: node
   linkType: hard
 
@@ -8188,7 +8188,7 @@ __metadata:
     "@size-limit/preset-small-lib": ^7.0.8
     "@types/jest": 28.1.1
     "@typescript-eslint/eslint-plugin": ^5.27.0
-    assertron: 9.2.2
+    assertron: 9.2.3
     depcheck: ^1.4.3
     eslint: 8.17.0
     eslint-plugin-harmony: ^7.1.0
@@ -8873,7 +8873,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tersify@npm:^3.10.0, tersify@npm:^3.8.4":
+"tersify@npm:^3.10.0":
   version: 3.10.0
   resolution: "tersify@npm:3.10.0"
   dependencies:
@@ -8884,7 +8884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tersify@npm:^3.8.2, tersify@npm:^3.8.3":
+"tersify@npm:^3.8.2":
   version: 3.8.3
   resolution: "tersify@npm:3.8.3"
   dependencies:
