@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.esm.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    // for bigint usage during tests
+    "target": "ES2020"
   },
   "include": [
     "ts",
