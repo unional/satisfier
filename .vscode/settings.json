@@ -1,5 +1,12 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "codeql",
+    "jsnext",
+    "pinst",
+    "tersible",
+    "tersify"
+  ],
+  "eslint.enable": true,
   "json.schemas": [
     {
       "fileMatch": [
@@ -8,12 +15,5 @@
       "url": "http://json.schemastore.org/tsconfig"
     }
   ],
-  "eslint.enable": true,
-  "cSpell.words": [
-    "codeql",
-    "jsnext",
-    "pinst",
-    "tersible",
-    "tersify"
-  ]
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
