@@ -1,3 +1,10 @@
+## [5.2.2](https://github.com/unional/satisfier/compare/v5.2.1...v5.2.2) (2022-06-12)
+
+
+### Bug Fixes
+
+* add cjs/package.json ([e152c94](https://github.com/unional/satisfier/commit/e152c948700f323c1212ffcf90be94a9d5d5a322))
+
 ## [5.2.1](https://github.com/unional/satisfier/compare/v5.2.0...v5.2.1) (2022-06-10)
 
 
