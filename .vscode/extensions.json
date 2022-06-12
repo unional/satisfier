@@ -7,6 +7,7 @@
     "drknoxy.eslint-disable-snippets",
     "editorconfig.editorconfig",
     "yzhang.markdown-all-in-one",
-    "valentjn.vscode-ltex"
+    "valentjn.vscode-ltex",
+    "redhat.vscode-yaml"
   ]
 }

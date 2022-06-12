@@ -6,4 +6,5 @@ ignores:
   - jest-*
   - semantic-release
   - ts-jest
+  - tslib
   - typedoc*

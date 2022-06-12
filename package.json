@@ -31,11 +31,12 @@
     "!ts/testPredicates.ts"
   ],
   "scripts": {
-    "build": "run-p build:cjs build:esm",
+    "build": "run-p build:cjs build:esm build:tslib",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
+    "build:tslib": "tsc -p tsconfig.tslib.json",
     "build:doc": "typedoc",
-    "clean": "rimraf cjs lib esm coverage || true",
+    "clean": "rimraf cjs coverage esm lib && mkdir cjs && echo '{\"type\":\"commonjs\"}' > cjs/package.json || true",
     "coverage": "jest --coverage",
     "depcheck": "depcheck",
     "lint": "eslint --ext=js,ts .",
@@ -51,7 +52,7 @@
     "watch:type": "tsc --watch"
   },
   "dependencies": {
-    "tersify": "^3.10.0"
+    "tersify": "^3.10.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
@@ -62,7 +63,7 @@
     "@semantic-release/npm": "^9.0.1",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@types/jest": "28.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
     "assertron": "9.2.4",
     "depcheck": "^1.4.3",
     "eslint": "8.17.0",
@@ -76,9 +77,10 @@
     "npm-run-all": "^4.1.5",
     "pinst": "^3.0.0",
     "rimraf": "^3.0.2",
-    "semantic-release": "^19.0.2",
+    "semantic-release": "^19.0.3",
     "size-limit": "^7.0.8",
     "ts-jest": "^28.0.4",
+    "tslib": "^2.4.0",
     "type-plus": "4.10.1",
     "typedoc": "^0.22.17",
     "typedoc-plugin-extras": "^2.2.3",
@@ -88,11 +90,15 @@
   "size-limit": [
     {
       "path": "./cjs/index.js",
-      "limit": "10 kb"
+      "limit": "10 kB"
     },
     {
       "path": "./esm/index.js",
-      "limit": "10 kb"
+      "limit": "10 kB"
+    },
+    {
+      "path": "./tslib/index.js",
+      "limit": "10 kB"
     }
   ]
 }
