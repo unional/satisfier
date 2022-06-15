@@ -2450,7 +2450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.4.1, acorn@npm:^8.7.0":
+"acorn@npm:^8.4.1":
   version: 8.7.0
   resolution: "acorn@npm:8.7.0"
   bin:
@@ -8307,7 +8307,7 @@ __metadata:
     tersify: ^3.10.2
     ts-jest: ^28.0.4
     tslib: ^2.4.0
-    type-plus: 4.10.1
+    type-plus: 4.10.2
     typedoc: ^0.22.17
     typedoc-plugin-extras: ^2.2.3
     typescript: 4.7.3
@@ -8975,17 +8975,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tersify@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "tersify@npm:3.10.0"
-  dependencies:
-    acorn: ^8.7.0
-    is-buffer: ^2.0.5
-    unpartial: ^0.7.3
-  checksum: a7e545b83ccac8636db56ff9bc912ba3382064158f6d12ccd1fceb51fe17166da917032c4a98d2960a708a0a9622a8b8b508a758ab4bd929471ad77ca6da6f6d
-  languageName: node
-  linkType: hard
-
 "tersify@npm:^3.10.2":
   version: 3.10.2
   resolution: "tersify@npm:3.10.2"
@@ -9271,17 +9260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:4.10.1":
-  version: 4.10.1
-  resolution: "type-plus@npm:4.10.1"
-  dependencies:
-    tersify: ^3.10.0
-    unpartial: ^0.7.4
-  checksum: 12da096c634892b1906b76c6107e6a30c573eaac61b0028767639425ccf59ffd7efdc745f7cf764078442e6fb870b9335fc30cc4ba195e077a3231c2037769cb
-  languageName: node
-  linkType: hard
-
-"type-plus@npm:^4.10.1":
+"type-plus@npm:4.10.2, type-plus@npm:^4.10.1":
   version: 4.10.2
   resolution: "type-plus@npm:4.10.2"
   dependencies:
@@ -9423,13 +9402,6 @@ __metadata:
   version: 0.6.4
   resolution: "unpartial@npm:0.6.4"
   checksum: 34a9d765d97f54ec36036c8d0bd8087874e2b7c4ff2b71a3168687b867d4db2f3a7dd7bc15b50371df9488d280723a1ba8f726b1fdfb5537d293785eee647ec2
-  languageName: node
-  linkType: hard
-
-"unpartial@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "unpartial@npm:0.7.3"
-  checksum: 92b1acb408af2c9efb470f09a57938cd14d62f22e056df91a5a0e47cc35e51452a797803c19f0596d24539de2d3ea8e5adc0a60e39b67debf6a58a79f1ad4dcb
   languageName: node
   linkType: hard
 
