@@ -1371,6 +1371,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/types@npm:^29.0.3":
+  version: 29.0.3
+  resolution: "@jest/types@npm:29.0.3"
+  dependencies:
+    "@jest/schemas": ^29.0.0
+    "@types/istanbul-lib-coverage": ^2.0.0
+    "@types/istanbul-reports": ^3.0.0
+    "@types/node": "*"
+    "@types/yargs": ^17.0.8
+    chalk: ^4.0.0
+  checksum: 3bd33e64d87a5421b860396ac7f7b9b8d5abbf0f300f4379bb20c8e3a6169fbbd078933ce0649827cd63e23330c4effeb6b222fa94e8dd0df638dfff6c1fed41
+  languageName: node
+  linkType: hard
+
 "@jridgewell/gen-mapping@npm:^0.1.0":
   version: 0.1.1
   resolution: "@jridgewell/gen-mapping@npm:0.1.1"
@@ -6023,7 +6037,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-validate@npm:29.0.2, jest-validate@npm:^29.0.2":
+"jest-validate@npm:29.0.3":
+  version: 29.0.3
+  resolution: "jest-validate@npm:29.0.3"
+  dependencies:
+    "@jest/types": ^29.0.3
+    camelcase: ^6.2.0
+    chalk: ^4.0.0
+    jest-get-type: ^29.0.0
+    leven: ^3.1.0
+    pretty-format: ^29.0.3
+  checksum: 096df6a77837155d9b65cd7ff9198489317c53903eb74a7f207e053c0b56204c18b6a8047e168eced291eb550b792ef4ab322b05c7da348af76cd78ea3556b4e
+  languageName: node
+  linkType: hard
+
+"jest-validate@npm:^29.0.2":
   version: 29.0.2
   resolution: "jest-validate@npm:29.0.2"
   dependencies:
@@ -7906,6 +7934,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pretty-format@npm:^29.0.3":
+  version: 29.0.3
+  resolution: "pretty-format@npm:29.0.3"
+  dependencies:
+    "@jest/schemas": ^29.0.0
+    ansi-styles: ^5.0.0
+    react-is: ^18.0.0
+  checksum: 239aa73b09919b195353e62530908b43883af66e3ba8ecb5fda77578b20f297fd774fcf53abbedcb6cfff72521e8a220052a49e6a0e29418082d06386da27bac
+  languageName: node
+  linkType: hard
+
 "proc-log@npm:^2.0.0, proc-log@npm:^2.0.1":
   version: 2.0.1
   resolution: "proc-log@npm:2.0.1"
@@ -8393,7 +8432,7 @@ __metadata:
     eslint-plugin-harmony: ^7.1.0
     husky: ^8.0.1
     jest: 29.0.2
-    jest-validate: 29.0.2
+    jest-validate: 29.0.3
     jest-watch-suspend: ^1.1.2
     jest-watch-toggle-config: ^2.0.1
     jest-watch-typeahead: ^2.0.0
