@@ -8440,7 +8440,7 @@ __metadata:
     tersify: ^3.10.2
     ts-jest: ^29.0.0
     tslib: ^2.4.0
-    type-plus: 4.12.0
+    type-plus: 4.12.1
     typedoc: ^0.23.0
     typedoc-plugin-extras: ^2.2.3
     typescript: 4.8.3
@@ -9389,13 +9389,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:4.12.0":
-  version: 4.12.0
-  resolution: "type-plus@npm:4.12.0"
+"type-plus@npm:4.12.1":
+  version: 4.12.1
+  resolution: "type-plus@npm:4.12.1"
   dependencies:
     tersify: ^3.10.2
-    unpartial: ^1.0.1
-  checksum: 00509537a73977c2be6d00e26d0fdef2beacc9b92392009c13d77e69effaf15fffc4b947f36373edfd930308fe64b2154ccb51fface70cade60337f07d5055f9
+    unpartial: ^1.0.3
+  checksum: 7fdd686b8e594e0d65f178a0f74f6ffe37803f50a163a169c9f8157e64e2769813d199159fc8fe13c6c0933567a36d7cc53599f08d4b9e83852c51043f3f221e
   languageName: node
   linkType: hard
 
@@ -9557,10 +9557,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unpartial@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "unpartial@npm:1.0.1"
-  checksum: 3a1b71a868c76f0d840e1e89f641be5cf7b744828913194ac6afa21f52a4a56ee43392b8a1ac880ec24369c9b4d53e70bef9456f8910670dd61999d9a1003f27
+"unpartial@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "unpartial@npm:1.0.3"
+  checksum: fcd2284bbcc2538b4973f9d1421b3b0e022e00126c6a120495a650c08aacf51ae6d51fb9beaf5a583af45676022f7611930da7f6f71a83075e07a28070fd139f
   languageName: node
   linkType: hard
 
