@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/unional/satisfier/compare/v5.2.2...v5.3.0) (2022-10-03)
+
+
+### Features
+
+* add `hasAll()` ([c330a0a](https://github.com/unional/satisfier/commit/c330a0aeb856a02f9446f1386cb1b441e1eda6d7))
+
 ## [5.2.2](https://github.com/unional/satisfier/compare/v5.2.1...v5.2.2) (2022-06-12)
 
 
