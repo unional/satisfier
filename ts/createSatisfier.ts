@@ -85,6 +85,23 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
     }
   }
 
+  if (expected instanceof Date) {
+    if (!(actual instanceof Date)) {
+      return [{
+        path,
+        expected,
+        actual
+      }]
+    }
+    else {
+      return expected.toISOString() === actual.toISOString() ? noDiff : [{
+        path,
+        expected,
+        actual
+      }]
+    }
+  }
+
   if (Array.isArray(expected)) {
     if (!Array.isArray(actual)) {
       return [{
