@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/unional/satisfier/compare/v5.3.0...v5.4.0) (2022-10-05)
+
+
+### Features
+
+* support date ([8f92d34](https://github.com/unional/satisfier/commit/8f92d3426456233f3207947789f08e6546205156))
+
 # [5.3.0](https://github.com/unional/satisfier/compare/v5.2.2...v5.3.0) (2022-10-03)
 
 
