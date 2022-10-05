@@ -15,3 +15,7 @@ test('uses tersify function when available', () => {
   const actual = formatDiffs(diffs)
   expect(actual).toEqual(`expect subject to satisfy has(1), but received [2, 3]`)
 })
+
+it('returns empty string if no diff', () => {
+  expect(formatDiffs(undefined)).toEqual('')
+})
