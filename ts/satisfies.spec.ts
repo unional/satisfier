@@ -9,6 +9,8 @@ test('expected can be value', () => {
 it('can compare date', () => {
   expect(satisfies(new Date(1,2,3), new Date(1,2,3))).toBe(true)
   expect(satisfies(new Date(1,2,3), new Date(1,2,4))).toBe(false)
+  expect(satisfies(new Date(2022,1,1).toISOString(), '2022-02-01T08:00:00.000Z')).toBe(true)
+  expect(satisfies(new Date(2022,1,1), '2022-02-01T08:00:00.000Z')).toBe(false)
 })
 
 test('expected can be predicate', () => {
