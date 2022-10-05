@@ -24,91 +24,52 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
   }
 
   if (expected === undefined || expected === null) {
-    return actual === expected ? noDiff : [{
-      path,
-      expected,
-      actual
-    }]
+    return actual === expected ? noDiff : [{ path, expected, actual }]
   }
 
   if (typeof expected === 'bigint') {
-    return actual === expected ? noDiff : [{
-      path,
-      expected,
-      actual
-    }]
+    return actual === expected ? noDiff : [{ path, expected, actual }]
   }
 
   const expectedType = typeof expected
 
   if (expectedType === 'number') {
     if (isNaN(expected)) {
-      return typeof actual === 'number' && isNaN(actual) ? noDiff : [{
-        path,
-        expected,
-        actual
-      }]
+      return typeof actual === 'number' && isNaN(actual) ? noDiff : [{ path, expected, actual }]
     }
     else {
-      return actual === expected ? noDiff : [{
-        path,
-        expected,
-        actual
-      }]
+      return actual === expected ? noDiff : [{ path, expected, actual }]
     }
   }
 
   if (expectedType === 'boolean' || expectedType === 'string' || expectedType === 'symbol') {
-    return actual === expected ? noDiff : [{
-      path,
-      expected,
-      actual
-    }]
+    return actual === expected ? noDiff : [{ path, expected, actual }]
   }
 
   if (expected instanceof RegExp) {
     if (actual instanceof RegExp) {
-      return expected.test(String(actual)) ? noDiff : [{
-        path,
-        expected,
-        actual
-      }]
+      return expected.test(String(actual)) ? noDiff : [{ path, expected, actual }]
     }
     else {
       return (typeof actual === 'string') && expected.test(actual) ?
         noDiff :
-        [{
-          path,
-          expected,
-          actual
-        }]
+        [{ path, expected, actual }]
     }
   }
 
   if (expected instanceof Date) {
     if (!(actual instanceof Date)) {
-      return [{
-        path,
-        expected,
-        actual
-      }]
+      return [{ path, expected, actual }]
     }
     else {
-      return expected.toISOString() === actual.toISOString() ? noDiff : [{
-        path,
-        expected,
-        actual
-      }]
+      return expected.toISOString() === actual.toISOString()
+        ? noDiff : [{ path, expected, actual }]
     }
   }
 
   if (Array.isArray(expected)) {
     if (!Array.isArray(actual)) {
-      return [{
-        path,
-        expected,
-        actual
-      }]
+      return [{ path, expected, actual }]
     }
     else {
       const max = Math.max(expected.length, actual.length)
@@ -126,20 +87,12 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
   if (expectedType === 'function') {
     const r = (expected as Predicate)(actual, path)
     if (r === true) return noDiff
-    return r ? r : [{
-      path,
-      expected,
-      actual
-    }]
+    return r ? r : [{ path, expected, actual }]
   }
 
   // expected is an object
   if (actual === undefined || actual === null) {
-    return [{
-      path,
-      expected,
-      actual
-    }]
+    return [{ path, expected, actual }]
   }
   const actualType = typeof actual
   if (actualType === 'boolean' ||
@@ -149,18 +102,10 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
     actualType === 'symbol' ||
     actualType === 'function' ||
     actual instanceof RegExp) {
-    return [{
-      path,
-      expected,
-      actual
-    }]
+    return [{ path, expected, actual }]
   }
   else if (Array.isArray(actual)) {
-    return [{
-      path,
-      expected,
-      actual
-    }]
+    return [{ path, expected, actual }]
     // return actual.reduce((p, v, i) => {
     //   p.push(...diff(expected, v, path.concat([i])))
     //   return p
