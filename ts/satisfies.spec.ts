@@ -6,6 +6,11 @@ test('expected can be value', () => {
   expect(satisfies('a', 'a')).toBe(true)
 })
 
+it('can compare date', () => {
+  expect(satisfies(new Date(1,2,3), new Date(1,2,3))).toBe(true)
+  expect(satisfies(new Date(1,2,3), new Date(1,2,4))).toBe(false)
+})
+
 test('expected can be predicate', () => {
   expect(satisfies(1, v => v === 1)).toBe(true)
 })
