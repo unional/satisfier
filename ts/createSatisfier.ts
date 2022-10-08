@@ -18,7 +18,7 @@ export function createSatisfier<T = any>(expected: Expectation): Satisfier<T> {
 }
 
 const noDiff: Diff[] = []
-function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: number): Diff[] {
+function diff(expected: any, actual: any, path: Diff['path'] = []): Diff[] {
   if (expected === anything) {
     return noDiff
   }
@@ -86,7 +86,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
 
   if (expectedType === 'function') {
     if (Object.keys(expected).length > 0) {
-      const ro = diffObject(expected, actual, path, _index)
+      const ro = diffObject(expected, actual, path)
       if (ro.length === 0) return ro
     }
     const r = (expected as Predicate)(actual, path)
@@ -95,10 +95,10 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
   }
 
   // expected is an object
-  return diffObject(expected, actual, path, _index)
+  return diffObject(expected, actual, path)
 }
 
-function diffObject(expected: any, actual: any, path: Diff['path'] = [], _index?: number): Diff[] {
+function diffObject(expected: any, actual: any, path: Diff['path'] = []): Diff[] {
   if (actual === undefined || actual === null) {
     return [{ path, expected, actual }]
   }
