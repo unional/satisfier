@@ -85,10 +85,6 @@ function diff(expected: any, actual: any, path: Diff['path'] = []): Diff[] {
   }
 
   if (expectedType === 'function') {
-    if (Object.keys(expected).length > 0) {
-      const ro = diffObject(expected, actual, path)
-      if (ro.length === 0) return ro
-    }
     const r = (expected as Predicate)(actual, path)
     if (r === true) return noDiff
     return r ? r : [{ path, expected, actual }]
@@ -108,7 +104,6 @@ function diffObject(expected: any, actual: any, path: Diff['path']): Diff[] {
     actualType === 'number' ||
     actualType === 'bigint' ||
     actualType === 'symbol' ||
-    actualType === 'function' ||
     actual instanceof RegExp) {
     return [{ path, expected, actual }]
   }
@@ -120,6 +115,10 @@ function diffObject(expected: any, actual: any, path: Diff['path']): Diff[] {
     // }, [] as Diff[])
   }
   else {
+    // if (Object.keys(expected).length > 0) {
+    //   const ro = diffObject(expected, actual, path)
+    //   if (ro.length === 0) return ro
+    // }
     return Object.keys(expected).reduce((p, key: string) => {
       p.push(...diff(expected[key], actual[key], path.concat([key])))
       return p
