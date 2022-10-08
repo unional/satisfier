@@ -43,7 +43,7 @@ describe('when actual is object', () => {
   })
 
   it('works with function-object', () => {
-    expect(satisfies({ a: 1 }, Object.assign(() => { }, { a: 1 }))).toBe(true)
+    expect(satisfies(Object.assign(() => { }, { a: 1 }), { a: 1 })).toBe(true)
   })
 })
 

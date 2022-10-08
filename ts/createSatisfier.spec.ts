@@ -221,7 +221,7 @@ describe('regex', () => {
 })
 
 describe('object', () => {
-  test('does not match non-object', () => {
+  test('does not match non-object (except function)', () => {
     const expected = {}
     const s = createSatisfier(expected)
 
@@ -233,8 +233,6 @@ describe('object', () => {
     expect(s.exec('boo')).toEqual([{ path: [], expected, actual: 'boo' }])
     expect(s.exec(testSymbol)).toEqual([{ path: [], expected, actual: testSymbol }])
     expect(s.exec(/boo/)).toEqual([{ path: [], expected, actual: /boo/ }])
-    expect(s.exec(testFn)).toEqual([{ path: [], expected, actual: testFn }])
-    expect(s.exec(testArrow)).toEqual([{ path: [], expected, actual: testArrow }])
   })
 
   test('empty object matches object with any properties', () => {
@@ -243,6 +241,15 @@ describe('object', () => {
 
     expect(s.exec({})).toBeUndefined()
     expect(s.exec({ a: 1 })).toBeUndefined()
+  })
+
+  test('empty object matches funcion', () => {
+    // as function is object
+    const expected = {}
+    const s = createSatisfier(expected)
+
+    expect(s.exec(testFn)).toBeUndefined()
+    expect(s.exec(testArrow)).toBeUndefined()
   })
 
   test('diff mismatched properties with proper path', () => {
