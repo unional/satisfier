@@ -1,3 +1,10 @@
+## [5.4.2](https://github.com/unional/satisfier/compare/v5.4.1...v5.4.2) (2022-10-08)
+
+
+### Bug Fixes
+
+* function-object implementation ([1750ab3](https://github.com/unional/satisfier/commit/1750ab3d7953b0c54453c859203084a94f8bb6e6))
+
 ## [5.4.1](https://github.com/unional/satisfier/compare/v5.4.0...v5.4.1) (2022-10-08)
 
 
