@@ -85,12 +85,20 @@ function diff(expected: any, actual: any, path: Diff['path'] = [], _index?: numb
   }
 
   if (expectedType === 'function') {
+    if (Object.keys(expected).length > 0) {
+      const ro = diffObject(expected, actual, path, _index)
+      if (ro.length === 0) return ro
+    }
     const r = (expected as Predicate)(actual, path)
     if (r === true) return noDiff
     return r ? r : [{ path, expected, actual }]
   }
 
   // expected is an object
+  return diffObject(expected, actual, path, _index)
+}
+
+function diffObject(expected: any, actual: any, path: Diff['path'] = [], _index?: number): Diff[] {
   if (actual === undefined || actual === null) {
     return [{ path, expected, actual }]
   }
