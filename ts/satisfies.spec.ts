@@ -6,7 +6,7 @@ test('expected can be value', () => {
   expect(satisfies('a', 'a')).toBe(true)
 })
 
-it('can compare date', () => {
+test('can compare date', () => {
   expect(satisfies(new Date(1, 2, 3), new Date(1, 2, 3))).toBe(true)
   expect(satisfies(new Date(1, 2, 4), new Date(1, 2, 3))).toBe(false)
   // new Date(2022, 1, 1) === '2022-02-01T08:00:00.000Z' in UTC+8
@@ -40,7 +40,7 @@ describe('when actual is object', () => {
     expect(satisfies({ a: { b: 'foo' } }, { a: { b: v => v === 'foo' } })).toBe(true)
   })
 
-  it.only('works with function-object', () => {
+  it('works with function-object', () => {
     expect(satisfies({ a: 1 }, Object.assign(() => { }, { a: 1 }))).toBe(true)
   })
 })
