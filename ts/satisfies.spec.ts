@@ -39,6 +39,10 @@ describe('when actual is object', () => {
   test('deep expected property can be predicate', () => {
     expect(satisfies({ a: { b: 'foo' } }, { a: { b: v => v === 'foo' } })).toBe(true)
   })
+
+  it.only('works with function-object', () => {
+    expect(satisfies({ a: 1 }, Object.assign(() => { }, { a: 1 }))).toBe(true)
+  })
 })
 
 describe('when actual is array', () => {
