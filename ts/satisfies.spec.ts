@@ -21,6 +21,8 @@ describe('when actual is object', () => {
   test('expected can be object', () => {
     expect(satisfies({ a: 1 }, { a: 1 })).toBe(true)
     expect(satisfies({ a: 1 }, {})).toBe(true)
+    expect(satisfies(undefined as any, {})).toBe(false)
+    expect(satisfies(null as any, {})).toBe(false)
   })
 
   test('expected can be predicate', () => {

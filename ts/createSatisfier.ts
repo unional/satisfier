@@ -98,7 +98,7 @@ function diff(expected: any, actual: any, path: Diff['path'] = []): Diff[] {
   return diffObject(expected, actual, path)
 }
 
-function diffObject(expected: any, actual: any, path: Diff['path'] = []): Diff[] {
+function diffObject(expected: any, actual: any, path: Diff['path']): Diff[] {
   if (actual === undefined || actual === null) {
     return [{ path, expected, actual }]
   }
