@@ -8434,7 +8434,7 @@ __metadata:
     tersify: ^3.10.2
     ts-jest: ^29.0.0
     tslib: ^2.4.0
-    type-plus: 4.13.1
+    type-plus: 4.13.2
     typedoc: ^0.23.0
     typedoc-plugin-extras: ^2.2.3
     typescript: 4.8.4
@@ -9383,13 +9383,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:4.13.1":
-  version: 4.13.1
-  resolution: "type-plus@npm:4.13.1"
+"type-plus@npm:4.13.2":
+  version: 4.13.2
+  resolution: "type-plus@npm:4.13.2"
   dependencies:
     tersify: ^3.10.2
     unpartial: ^1.0.3
-  checksum: 0d304fe079c0f4f643f0134f8e8edfb66e70a3c41a466119eb40ca69c28ff2e2226c29286bbd0d0d979dab65bda8fa1b5878ca8470cf0c898b412180bfe7628c
+  checksum: cfce3200aac6a3a97342fca32102fda5bad4d4d7b9eaabc668781e50bcac95daff3da5653bdec12c623f447ade75744b7d93c2f743369a1111e455ddb020560d
   languageName: node
   linkType: hard
 
