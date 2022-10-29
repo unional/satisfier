@@ -1,5 +1,5 @@
 import t from 'assert'
-import a from 'assertron'
+import { a } from 'assertron'
 
 import { createSatisfier, isTypeOf } from './index.js'
 

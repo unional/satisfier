@@ -1,5 +1,5 @@
 import t from 'assert'
-import a from 'assertron'
+import { a } from 'assertron'
 import { createSatisfier, hasAll } from './index.js'
 
 test('non array returns false', () => {
