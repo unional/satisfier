@@ -1809,6 +1809,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@repobuddy/jest@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@repobuddy/jest@npm:1.3.0"
+  dependencies:
+    satisfier: ^5.4.2
+    uni-require: ^0.0.1
+  peerDependencies:
+    "@kayahr/jest-electron-runner": ^29
+    jest: ^29
+    jest-watch-suspend: ^1
+    jest-watch-toggle-config: ^2
+    jest-watch-typeahead: ^2
+    ts-jest: ^29
+  peerDependenciesMeta:
+    "@kayahr/jest-electron-runner":
+      optional: true
+    jest-watch-suspend:
+      optional: true
+    jest-watch-toggle-config:
+      optional: true
+    jest-watch-typeahead:
+      optional: true
+    ts-jest:
+      optional: true
+  checksum: 007374235b3f734d85ce47a99e5c87211ebfe71528da6f698b4a5691d6d9b3a381b07cfb3a54d30a465b7cd7a3c473624329660550b17871a28b8e77b526a00f
+  languageName: node
+  linkType: hard
+
 "@semantic-release/changelog@npm:^6.0.1":
   version: 6.0.1
   resolution: "@semantic-release/changelog@npm:6.0.1"
@@ -8406,12 +8434,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"satisfier@npm:^5.4.2":
+  version: 5.4.2
+  resolution: "satisfier@npm:5.4.2"
+  dependencies:
+    tersify: ^3.10.2
+  checksum: 60f3e0f9e7f2a538e3160d8866f7fa494611b284c7e708f38b4ddd0f0ef1699fc3f8a514e2a6d6e01d784cdc09bd49532c8d4892c6186db9900b4f357ceb3739
+  languageName: node
+  linkType: hard
+
 "satisfier@workspace:.":
   version: 0.0.0-use.local
   resolution: "satisfier@workspace:."
   dependencies:
     "@commitlint/cli": ^17.0.2
     "@commitlint/config-conventional": ^17.0.2
+    "@repobuddy/jest": ^1.3.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
     "@semantic-release/github": ^8.0.4
@@ -9479,6 +9517,15 @@ __metadata:
     has-symbols: ^1.0.2
     which-boxed-primitive: ^1.0.2
   checksum: 89d950e18fb45672bc6b3c961f1e72c07beb9640c7ceed847b571ba6f7d2af570ae1a2584cfee268b9d9ea1e3293f7e33e0bc29eaeb9f8e8a0bab057ff9e6bba
+  languageName: node
+  linkType: hard
+
+"uni-require@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "uni-require@npm:0.0.1"
+  peerDependencies:
+    "@types/node": "*"
+  checksum: b95e11ef1e64a3a95039fedbfad9a946441b009bdb16a2471a69c1540231819357afcf1a618867c9dccad339981783896a79378b597b6dc4d724f426686e3d26
   languageName: node
   linkType: hard
 
