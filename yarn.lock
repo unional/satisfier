@@ -1809,17 +1809,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@repobuddy/jest@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@repobuddy/jest@npm:1.3.0"
+"@repobuddy/jest@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "@repobuddy/jest@npm:2.1.0"
   dependencies:
+    jest-resolve: ^29.3.1
+    read-pkg-up: ^7.0.1
+    resolve.imports: ^1.2.3
     satisfier: ^5.4.2
-    uni-require: ^0.0.1
+    type-plus: ^4.18.1
   peerDependencies:
     "@kayahr/jest-electron-runner": ^29
     jest: ^29
     jest-watch-suspend: ^1
-    jest-watch-toggle-config: ^2
+    jest-watch-toggle-config-2: ^2
     jest-watch-typeahead: ^2
     ts-jest: ^29
   peerDependenciesMeta:
@@ -1827,13 +1830,13 @@ __metadata:
       optional: true
     jest-watch-suspend:
       optional: true
-    jest-watch-toggle-config:
+    jest-watch-toggle-config-2:
       optional: true
     jest-watch-typeahead:
       optional: true
     ts-jest:
       optional: true
-  checksum: 007374235b3f734d85ce47a99e5c87211ebfe71528da6f698b4a5691d6d9b3a381b07cfb3a54d30a465b7cd7a3c473624329660550b17871a28b8e77b526a00f
+  checksum: 89a271114779faadbd897a7d423cefc635456347a6d62fb77428957a2e0252399890a17f65f0c020bbe0a53f403a35cfdc42772f6d0c7120af079d1e34f43710
   languageName: node
   linkType: hard
 
@@ -8304,6 +8307,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve.imports@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "resolve.imports@npm:1.2.3"
+  checksum: ae1a4b54203335f1232e36d52189eb62b435fb970d1dc4006190bc1e71cd6d76a9d315c09af9bac972c07caf2385095f31aa524b1628258ab1d6a4658ba23cc7
+  languageName: node
+  linkType: hard
+
 "resolve@npm:^1.10.0, resolve@npm:^1.20.0":
   version: 1.20.0
   resolution: "resolve@npm:1.20.0"
@@ -8449,7 +8459,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.0.2
     "@commitlint/config-conventional": ^17.0.2
-    "@repobuddy/jest": ^1.3.0
+    "@repobuddy/jest": ^2.0.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
     "@semantic-release/github": ^8.0.4
@@ -9414,7 +9424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:4.18.1":
+"type-plus@npm:4.18.1, type-plus@npm:^4.18.1":
   version: 4.18.1
   resolution: "type-plus@npm:4.18.1"
   dependencies:
@@ -9517,15 +9527,6 @@ __metadata:
     has-symbols: ^1.0.2
     which-boxed-primitive: ^1.0.2
   checksum: 89d950e18fb45672bc6b3c961f1e72c07beb9640c7ceed847b571ba6f7d2af570ae1a2584cfee268b9d9ea1e3293f7e33e0bc29eaeb9f8e8a0bab057ff9e6bba
-  languageName: node
-  linkType: hard
-
-"uni-require@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "uni-require@npm:0.0.1"
-  peerDependencies:
-    "@types/node": "*"
-  checksum: b95e11ef1e64a3a95039fedbfad9a946441b009bdb16a2471a69c1540231819357afcf1a618867c9dccad339981783896a79378b597b6dc4d724f426686e3d26
   languageName: node
   linkType: hard
 
