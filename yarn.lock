@@ -1809,7 +1809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@repobuddy/jest@npm:^2.0.0":
+"@repobuddy/jest@npm:^2.1.0":
   version: 2.1.0
   resolution: "@repobuddy/jest@npm:2.1.0"
   dependencies:
@@ -6122,15 +6122,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-watch-toggle-config@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "jest-watch-toggle-config@npm:2.0.1"
+"jest-watch-toggle-config-2@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "jest-watch-toggle-config-2@npm:2.1.0"
   dependencies:
     chalk: ^4.1.0
   peerDependencies:
     jest: ">= 23.4.1"
-    jest-validate: ">= 23.4.0"
-  checksum: 619897199baa40ec85ceba3916b2f9c4caad9e41c4edd06072ede7100901cba59523c2535588d09b08ce6ab84213eec4cad04906a689e27bad50bfd1fe40c212
+  checksum: 11ded8aa2d5d0d1a7720ca752b4bb39a79c3e500f99930bdc5d8df99ef4ea527502f4c4acc735ea51dbae7b7251b762c4a340964ad07e6cbad5c3920d0c9338d
   languageName: node
   linkType: hard
 
@@ -8459,7 +8458,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.0.2
     "@commitlint/config-conventional": ^17.0.2
-    "@repobuddy/jest": ^2.0.0
+    "@repobuddy/jest": ^2.1.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
     "@semantic-release/github": ^8.0.4
@@ -8475,7 +8474,7 @@ __metadata:
     jest: 29.3.1
     jest-validate: 29.3.1
     jest-watch-suspend: ^1.1.2
-    jest-watch-toggle-config: ^2.0.1
+    jest-watch-toggle-config-2: ^2.1.0
     jest-watch-typeahead: ^2.0.0
     npm-run-all: ^4.1.5
     pinst: ^3.0.0

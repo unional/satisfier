@@ -1,3 +1,3 @@
 export default {
-  preset: '@repobuddy/jest/presets/ts-esm'
+  preset: '@repobuddy/jest/presets/ts-esm-watch'
 }
