@@ -1832,18 +1832,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@repobuddy/jest@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@repobuddy/jest@npm:2.1.0"
+"@repobuddy/jest@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@repobuddy/jest@npm:3.0.0"
   dependencies:
     jest-resolve: ^29.3.1
     read-pkg-up: ^7.0.1
-    resolve.imports: ^1.2.3
+    resolve.imports: ^2.0.0
     satisfier: ^5.4.2
-    type-plus: ^4.18.1
+    type-plus: ^5.0.0
   peerDependencies:
     "@kayahr/jest-electron-runner": ^29
-    jest: ^29
+    jest: ">=29.4.0"
     jest-watch-suspend: ^1
     jest-watch-toggle-config-2: ^2
     jest-watch-typeahead: ^2
@@ -1859,7 +1859,7 @@ __metadata:
       optional: true
     ts-jest:
       optional: true
-  checksum: 89a271114779faadbd897a7d423cefc635456347a6d62fb77428957a2e0252399890a17f65f0c020bbe0a53f403a35cfdc42772f6d0c7120af079d1e34f43710
+  checksum: 299fab1640ff27e83d874d8b52ff87f28504f7f80284b5091ad81cfbda410d53eca95e554ae40f04e3ee6c8bb3662f859780ed3ff1f20ba61455f2fa9df05dd2
   languageName: node
   linkType: hard
 
@@ -8123,6 +8123,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pattern-key-compare@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "pattern-key-compare@npm:2.0.0"
+  checksum: cded15070cddbc5ef7b97c1b91371bcf59ff931f8afe383d2323f935891e6c4517bd76154f5edc2b1ab53c6fbeeb0711b9db43af592064482d0a9ccf03dd507c
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -8635,10 +8642,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve.imports@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "resolve.imports@npm:1.2.3"
-  checksum: ae1a4b54203335f1232e36d52189eb62b435fb970d1dc4006190bc1e71cd6d76a9d315c09af9bac972c07caf2385095f31aa524b1628258ab1d6a4658ba23cc7
+"resolve.imports@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "resolve.imports@npm:2.0.3"
+  dependencies:
+    pattern-key-compare: ^2.0.0
+  checksum: 155ae4a32ccc1da7ad12b88f6c748dd1e038092838e537de1066248c32a197b42489810da6070bb2bd0dd954e8abbe841b09282c0806c5493b2e49e8f7e29632
   languageName: node
   linkType: hard
 
@@ -8787,7 +8796,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.0.2
     "@commitlint/config-conventional": ^17.0.2
-    "@repobuddy/jest": ^2.1.0
+    "@repobuddy/jest": ^3.0.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
     "@semantic-release/github": ^8.0.4
@@ -9777,7 +9786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:5.6.0":
+"type-plus@npm:5.6.0, type-plus@npm:^5.0.0":
   version: 5.6.0
   resolution: "type-plus@npm:5.6.0"
   dependencies:
@@ -9794,16 +9803,6 @@ __metadata:
     tersify: ^3.10.2
     unpartial: ^0.7.5
   checksum: e3638e0add2fb6faaf87070fc853a6a71136a93eb3066070064518276ad1182dc03ccaba1d8f4735024b4070835391b2a4b751077e7b3d9c06635fa2e55574d7
-  languageName: node
-  linkType: hard
-
-"type-plus@npm:^4.18.1":
-  version: 4.18.1
-  resolution: "type-plus@npm:4.18.1"
-  dependencies:
-    tersify: ^3.10.2
-    unpartial: ^1.0.3
-  checksum: 04f1cd501440fc3f925f810d440e36c19c2a716c3b57d93984410a4bf4ce892e450f2930d2909a754274b8c6ce7bda97e58ca79b18af2796c924d93242ba77f2
   languageName: node
   linkType: hard
 
@@ -9959,13 +9958,6 @@ __metadata:
   version: 1.0.4
   resolution: "unpartial@npm:1.0.4"
   checksum: 38fc678290a68f216e1b95207ab62e60b2616d9c3107ad3188df47b19ad5231fda0cd6474de23403e70567eb68b2ed01b7577f27a557092e9046725edc8aac41
-  languageName: node
-  linkType: hard
-
-"unpartial@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "unpartial@npm:1.0.3"
-  checksum: fcd2284bbcc2538b4973f9d1421b3b0e022e00126c6a120495a650c08aacf51ae6d51fb9beaf5a583af45676022f7611930da7f6f71a83075e07a28070fd139f
   languageName: node
   linkType: hard
 
