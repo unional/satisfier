@@ -8854,7 +8854,7 @@ __metadata:
     tersify: ^3.10.2
     ts-jest: ^29.0.0
     tslib: ^2.4.0
-    type-plus: 6.1.0
+    type-plus: 6.2.0
     typedoc: ^0.23.0
     typedoc-plugin-extras: ^2.2.3
     typescript: ^5.0.0
@@ -9818,13 +9818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-plus@npm:6.1.0":
-  version: 6.1.0
-  resolution: "type-plus@npm:6.1.0"
+"type-plus@npm:6.2.0":
+  version: 6.2.0
+  resolution: "type-plus@npm:6.2.0"
   dependencies:
     tersify: ^3.11.1
     unpartial: ^1.0.4
-  checksum: ceff0189a9638a8beab8286d37892331f35f49ee388fafee12412933a8d126b3afc6a8c54d4f00bb29e38b83b7a5e93cced885ee1ed92dea192fde0d05ae4ea2
+  checksum: 0887ee97b2c38c7e0de2fa16d7e25283293f201dcca2803cd1efcdfa245746004324c038226c57a04241ce054d3d53d108b068aac05739d4573a06dca799a1a7
   languageName: node
   linkType: hard
 
