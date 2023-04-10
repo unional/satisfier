@@ -94,8 +94,8 @@ devDependencies:
     specifier: ^2.4.0
     version: 2.4.0
   type-plus:
-    specifier: 6.4.0
-    version: 6.4.0
+    specifier: 6.5.0
+    version: 6.5.0
   typedoc:
     specifier: ^0.24.0
     version: 0.24.0(typescript@5.0.2)
@@ -5724,7 +5724,7 @@ packages:
   /satisfier@5.4.2:
     resolution: {integrity: sha512-K1QPzEPjiC/7FcwiCwRH218SS3OVEWlx56EcHI+tZIf+TaAs+OHwwruAD4ke6xvRk/QniwSPkP98o9Oo84RxGQ==}
     dependencies:
-      tersify: 3.10.2
+      tersify: 3.12.1
     dev: true
 
   /scss-parser@1.0.6:
@@ -6374,7 +6374,7 @@ packages:
   /type-plus@4.18.1:
     resolution: {integrity: sha512-/Dq0K/TUedajerhr2JuXhw44V2tiAniGvyZJL23PqxjUzxrXeASWvfi01Bo8o6mudRXJL/sfBD+KZiHSzrhZ9g==}
     dependencies:
-      tersify: 3.10.2
+      tersify: 3.12.1
       unpartial: 1.0.4
     dev: true
 
@@ -6385,8 +6385,8 @@ packages:
       unpartial: 1.0.4
     dev: true
 
-  /type-plus@6.4.0:
-    resolution: {integrity: sha512-HIdOfIA6ua3sgzKfb07jPEo3PphF7eiRGsW0dJ0aBCOyhzBI8wETe0FiBqC0+Mez8eYFwnUcegTLL3n1ykgdrw==}
+  /type-plus@6.5.0:
+    resolution: {integrity: sha512-N7/MeQNU4dAePO4aWOwA6E/moBX+W/NHLtHnjQ9Qet5LPoq9v3pSIg1ofi/tlRNDdBXBZoEf8URNbvygWVXulA==}
     dependencies:
       tersify: 3.12.1
       unpartial: 1.0.4
