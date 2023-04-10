@@ -18,23 +18,30 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "import": "./esm/index.js",
-    "require": "./cjs/index.js"
+    "import": {
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
+    },
+    "require": {
+      "types": "./cjs/index.d.ts",
+      "default": "./cjs/index.js"
+    }
   },
   "main": "./cjs/index.js",
+  "module": "./esm/index.js",
   "types": "./esm/index.d.ts",
   "files": [
     "cjs",
     "esm",
     "ts",
-    "!ts/**/*.spec.ts",
-    "!ts/testPredicates.ts"
+    "!ts/testPredicates.ts",
+    "!**/*.{spec,test,unit,accept,integrate,system}.*"
   ],
   "scripts": {
     "build": "run-p build:cjs build:esm build:tslib",
-    "build:cjs": "tsc -p tsconfig.cjs.json && echo '{\"type\":\"commonjs\"}' > cjs/package.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && ncp package.cjs.json cjs/package.json",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build:tslib": "tsc -p tsconfig.tslib.json",
+    "build:tslib": "tsc -p tsconfig.tslib.json && ncp package.cjs.json tslib/package.json",
     "build:doc": "typedoc",
     "clean": "rimraf cjs coverage esm lib tslib",
     "coverage": "jest --coverage",
@@ -64,6 +71,7 @@
     "@semantic-release/npm": "^10.0.0",
     "@size-limit/preset-small-lib": "^8.0.0",
     "@types/jest": "29.5.0",
+    "@types/node": "^16.18.23",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "assertron": "^11.0.0",
     "depcheck": "^1.4.3",
@@ -75,6 +83,7 @@
     "jest-watch-suspend": "^1.1.2",
     "jest-watch-toggle-config-2": "^2.1.0",
     "jest-watch-typeahead": "^2.0.0",
+    "ncp": "^2.0.0",
     "npm-run-all": "^4.1.5",
     "pinst": "^3.0.0",
     "rimraf": "^3.0.2",
@@ -87,7 +96,7 @@
     "typedoc-plugin-extras": "^2.2.3",
     "typescript": "^5.0.0"
   },
-  "packageManager": "yarn@3.5.0",
+  "packageManager": "pnpm@8.1.1",
   "size-limit": [
     {
       "path": "./cjs/index.js",
