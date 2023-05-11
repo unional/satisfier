@@ -94,8 +94,8 @@ devDependencies:
     specifier: ^2.4.0
     version: 2.4.0
   type-plus:
-    specifier: 6.8.0
-    version: 6.8.0
+    specifier: 6.8.1
+    version: 6.8.1
   typedoc:
     specifier: ^0.24.0
     version: 0.24.0(typescript@5.0.2)
@@ -6385,8 +6385,8 @@ packages:
       unpartial: 1.0.4
     dev: true
 
-  /type-plus@6.8.0:
-    resolution: {integrity: sha512-6ZBpqBc5pTM9kDjs8AI97w+NkdhFPuDaWdTr1W5iObuTtXA7JqnknKuXiHMGQCfUYDloVqUfulo++Ehwuy0PEg==}
+  /type-plus@6.8.1:
+    resolution: {integrity: sha512-yEv9ZE4Lw7fUGQOUYGtUoRJrC46Uta2U2HnpuvIVnwFVmzMP9oE5on7xOxsT39o0hk2lkFghZqlba9GvmW0/rw==}
     dependencies:
       tersify: 3.12.1
       unpartial: 1.0.4
