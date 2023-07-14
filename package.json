@@ -70,7 +70,7 @@
     "@semantic-release/github": "^9.0.0",
     "@semantic-release/npm": "^10.0.0",
     "@size-limit/preset-small-lib": "^8.0.0",
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.3",
     "@types/node": "^16.18.23",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "assertron": "^11.0.0",
