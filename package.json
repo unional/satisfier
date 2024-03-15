@@ -67,7 +67,7 @@
     "@repobuddy/jest": "^3.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.0.0",
+    "@semantic-release/github": "^10.0.0",
     "@semantic-release/npm": "^11.0.0",
     "@size-limit/preset-small-lib": "^9.0.0",
     "@types/jest": "29.5.12",
