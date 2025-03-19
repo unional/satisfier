@@ -93,7 +93,7 @@
     "tslib": "^2.4.0",
     "type-plus": "7.6.2",
     "typedoc": "^0.28.0",
-    "typedoc-plugin-extras": "^3.0.0",
+    "typedoc-plugin-extras": "^4.0.0",
     "typescript": "^5.0.0"
   },
   "packageManager": "pnpm@10.6.5",
