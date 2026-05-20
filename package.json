@@ -65,6 +65,7 @@
 		"tersify": "^3.10.2"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.26.2",
 		"@commitlint/cli": "^20.0.0",
 		"@commitlint/config-conventional": "^20.0.0",
 		"@repobuddy/jest": "^5.0.0",
