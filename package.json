@@ -62,7 +62,7 @@
 		"cs": "changeset"
 	},
 	"dependencies": {
-		"tersify": "^4.0.0"
+		"tersify": "^4.0.1"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.2",
